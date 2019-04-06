@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 import * as routes from './constants/routes';
 import SignIn from './SignIn';
-
+import Dashboard from './Component/Dashboard/Dashboard'
 
 import { firebase, auth } from './firebase';
 
@@ -29,6 +29,8 @@ const AuthenticatedHomeContent = ({ authUser }) => {
   return (
     <p>
       Welcome back, {authUser.email}!
+      <Dashboard></Dashboard>
+
     </p>
   );
 };
