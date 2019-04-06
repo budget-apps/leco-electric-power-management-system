@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { State } from 'react-powerplug';
 import { auth } from './firebase';
 import * as routes from './constants/routes';
-
+import {  MDBBtn } from 'mdbreact';
 class SignIn extends React.Component {
   handleSubmit = ({ email, password }) => {
     return auth
@@ -62,14 +62,29 @@ class SignIn extends React.Component {
                   onChange={onPasswordChange}
                 />
 
-                <button type="submit">Sign In</button>
+                <MDBBtn type="submit" size="sm">Sign In</MDBBtn>
               </form>
+              
+
+
+
+      
+
+
+
             </div>
+           
           );
+          
         }}
       </State>
     );
   }
 }
+
+
+
+
+
 
 export default withRouter(SignIn);
