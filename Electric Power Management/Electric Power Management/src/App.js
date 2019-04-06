@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -28,9 +27,8 @@ const UnauthenticatedHomeContent = () => {
 const AuthenticatedHomeContent = ({ authUser }) => {
   return (
     <p>
-      Welcome back, {authUser.email}!
+      {/*Welcome back, {authUser.email}!*/}
       <Dashboard></Dashboard>
-
     </p>
   );
 };
@@ -40,8 +38,8 @@ class Home extends React.Component {
     return (
       <AuthContext.Consumer>
         {({ authUser }) =>
-          <div>
-            <h1>Home</h1>
+          <div className="container-fluid" style={{alignItems: "center",padding: 0}}>
+            {/*<h1>Home</h1>*/}
             {!authUser && <UnauthenticatedHomeContent />}
             {authUser && <AuthenticatedHomeContent authUser={authUser} />}
           </div>}
@@ -88,7 +86,7 @@ const AuthenticatedNavigation = () => {
 const UnauthenticatedNavigation = () => {
   return (
     <React.Fragment>
-      
+
       <li>
         <Link to={routes.SIGN_IN_PATH}>Sign In</Link>
       </li>
