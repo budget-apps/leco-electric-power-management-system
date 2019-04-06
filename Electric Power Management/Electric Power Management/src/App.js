@@ -141,10 +141,7 @@ class App extends Component {
       <AuthProvider>
         <Router>
           <div className="App">
-            <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              
-            </header>
+            
             <Navigation />
             <Switch>
               <Route exact path={routes.HOME_PATH} component={Home} />
