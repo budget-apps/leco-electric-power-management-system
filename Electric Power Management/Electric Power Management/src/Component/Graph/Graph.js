@@ -18,7 +18,7 @@ class Graph{
     }
 }
 
-graph = new Graph(start)
-graph.addVertertices([start,node1,node2])
+//graph = new Graph(start)
+//graph.addVertertices([start,node1,node2])
 
 

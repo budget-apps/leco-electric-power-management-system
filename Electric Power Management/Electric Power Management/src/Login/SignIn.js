@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { State } from 'react-powerplug';
+import { auth } from '../firebase';
+import * as routes from '../constants/routes';
+import {  MDBBtn } from 'mdbreact';
 import {
   BrowserRouter as Router,
   Link,
@@ -7,11 +11,8 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import * as routes from './constants/routes';
-import SignIn from './Login/SignIn';
-import Dashboard from './Component/Dashboard/Dashboard'
-
-import { firebase, auth } from './firebase';
+import Dashboard from '../Component/Dashboard/Dashboard'
+import { firebase } from '../firebase';
 
 const UnauthenticatedHomeContent = () => {
   return (
@@ -134,25 +135,91 @@ class AuthProvider extends React.Component {
     );
   }
 }
+class SignIn extends React.Component {
+  handleSubmit = ({ email, password }) => {
+    return auth
+      .doSignInWithEmailAndPassword(email, password)
+      .then(response => {
+        console.log('Successful Sign In', response);
+        this.props.history.push(routes.HOME_PATH);
+      })
+      .catch(err => {
+        console.log('Failed Sign In', err);
+        throw err;
+      });
+  };
 
-class App extends Component {
   render() {
     return (
-      <AuthProvider>
-        <Router>
-          <div className="App">
-            
-            <Navigation />
-            <Switch>
-              <Route exact path={routes.HOME_PATH} component={Home} />
-              <Route exact path={routes.SIGN_IN_PATH} component={SignIn} />
-              <Route exact path={routes.SIGN_OUT_PATH} component={SignOut} />
-            </Switch>
-          </div>
-        </Router>
-      </AuthProvider>
+      <State initial={{ email: '', password: '', error: null }}>
+        {({ state, setState }) => {
+          const onEmailChange = e => {
+            setState({ email: e.target.value });
+          };
+          const onPasswordChange = e => {
+            setState({ password: e.target.value });
+          };
+          const onSubmit = e => {
+            e.preventDefault();
+            this.handleSubmit({
+              email: state.email,
+              password: state.password,
+            }).catch(err => {
+              setState({ error: err.message });
+            });
+          };
+
+          return (
+            <div className="container-fluid" style={{width: "40%"}}>
+              <h1>Sign In</h1>
+              <form className="form-group" onSubmit={onSubmit}>
+                
+                <label htmlFor="email">Email</label>
+                <input
+                    className="form-control"
+                    style={{width: "100%"}}
+                    type="text"
+                    name="email"
+                    value={state.email}
+                    onChange={onEmailChange}
+                />
+
+                <label htmlFor="password">Password</label>
+                <input
+                    className="form-control"
+                    type="password"
+                    name="password"
+                    value={state.password}
+                    onChange={onPasswordChange}
+                />
+                {state.error &&
+                  <p style={{ color: 'red' }}>
+                    {state.error}
+                  </p>}
+
+                <MDBBtn className="btn btn-primary" type="submit" size="sm">Sign In</MDBBtn>
+              </form>
+              
+
+
+
+      
+
+
+
+            </div>
+           
+          );
+          
+        }}
+      </State>
     );
   }
 }
 
-export default App;
+
+
+
+
+
+export default withRouter(SignIn);
