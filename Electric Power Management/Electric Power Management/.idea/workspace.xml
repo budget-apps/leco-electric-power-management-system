@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4ce1685-1dd9-4c37-b1e1-d7d49b8cdd98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Login/SignIn.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Button/AddExelSheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Button/AddExelSheet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Button/AddFaults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Button/AddFaults.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Graph/Graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Graph/Graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Map/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Map/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Node/Node.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Node/Node.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Path/Path.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Path/Path.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SignIn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SignUp.js" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -118,7 +115,7 @@
         <entry file="file://$PROJECT_DIR$/node_modules/gojs/samples/orgChartExtras.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
-              <caret line="95" column="26" lean-forward="true" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="26" />
+              <caret line="95" column="26" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -214,13 +211,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Component" type="462c0819:PsiDirectoryNode" />
               <item name="Dashboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Electric Power Management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Electric Power Management" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Component" type="462c0819:PsiDirectoryNode" />
-              <item name="GoJs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Electric Power Management" type="b2602c69:ProjectViewProjectNode" />
@@ -334,20 +324,19 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33091000" />
+    <option name="totallyTimeSpent" value="33684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.24983476" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="TypeScript" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.3297587" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.3297587" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="2" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="2" visible="true" weight="0.3297587" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.3297587" />
@@ -483,7 +472,7 @@
     <entry file="file://$PROJECT_DIR$/node_modules/gojs/samples/orgChartExtras.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
-          <caret line="95" column="26" lean-forward="true" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="26" />
+          <caret line="95" column="26" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="26" />
         </state>
       </provider>
     </entry>
