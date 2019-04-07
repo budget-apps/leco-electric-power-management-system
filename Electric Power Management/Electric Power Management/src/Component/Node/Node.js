@@ -57,15 +57,15 @@ class Node{
     }
 }
 
-const node1=new Node(23,345,"Primary", 900,"Closed")
-const node2=new Node(63,346, "Switch", 200,"Closed")
-const start=new Node(0,0,"Start",0,"None")
-start.setAdjacent(node1,0)
-start.setAdjacent(node2,0)
-node1.setAdjacent(node2,400)
-
-
-console.log(node1.getNodeId())
-console.log(node1.isAdjacent(node2))
-
+// node1=new Node(23,345,"Primary", 900,"Closed")
+// node2=new Node(63,346, "Switch", 200,"Closed")
+// start=new Node(0,0,"Start",0,"None")
+// start.setAdjacent(node1,0)
+// start.setAdjacent(node2,0)
+// node1.setAdjacent(node2,400)
+//
+//
+// console.log(node1.getNodeId())
+// console.log(node1.isAdjacent(node2))
+//
 module.exports = Node
