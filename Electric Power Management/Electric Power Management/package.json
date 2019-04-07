@@ -6,6 +6,7 @@
     "@antv/g6": "^3.0.1",
     "bootstrap": "^4.3.1",
     "firebase": "^5.0.4",
+    "gojs": "^2.0.7",
     "mdbreact": "^4.12.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
