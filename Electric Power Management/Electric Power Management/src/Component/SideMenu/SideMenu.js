@@ -5,12 +5,12 @@ const sideMenu = () => {
         <div className="bg-light border-right" id="sidebar-wrapper">
             <div className="sidebar-heading">LECO</div>
             <div className="list-group list-group-flush">
-                <a href="#" className="list-group-item list-group-item-action bg-light">Dashboard</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Shortcuts</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Overview</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Events</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Profile</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Status</a>
+                <a href="#" className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"margin-bottom": 0}}>Dashboard</label></a>
+                <a href="#" className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"margin-bottom": 0}}>Shortcuts</label></a>
+                <a href="#" className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"margin-bottom": 0}}>Overview</label></a>
+                <a href="#" className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"margin-bottom": 0}}>Events</label></a>
+                <a href="#" className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"margin-bottom": 0}}>Profile</label></a>
+                <a href="#" className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"margin-bottom": 0}}>Status</label></a>
             </div>
         </div>
     )
