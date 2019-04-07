@@ -1,6 +1,6 @@
 import React from 'react'
 
-const addExelSheet = () => {
+const AddExelSheet = () => {
     return (
         <div className="container-fluid">
             <input className="btn btn-primary" type="file" style={{"padding":"10px",width: "100%"}} />
@@ -9,4 +9,4 @@ const addExelSheet = () => {
     )
 }
 
-export default addExelSheet
+export default AddExelSheet
