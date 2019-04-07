@@ -39,30 +39,33 @@ class SignIn extends React.Component {
           };
 
           return (
-            <div>
+            <div className="container-fluid" style={{width: "40%"}}>
               <h1>Sign In</h1>
-              <form onSubmit={onSubmit}>
+              <form className="form-group" onSubmit={onSubmit}>
                 {state.error &&
                   <p style={{ color: 'red' }}>
                     {state.error}
                   </p>}
                 <label htmlFor="email">Email</label>
                 <input
-                  type="text"
-                  name="email"
-                  value={state.email}
-                  onChange={onEmailChange}
+                    className="form-control"
+                    style={{width: "100%"}}
+                    type="text"
+                    name="email"
+                    value={state.email}
+                    onChange={onEmailChange}
                 />
 
                 <label htmlFor="password">Password</label>
                 <input
-                  type="password"
-                  name="password"
-                  value={state.password}
-                  onChange={onPasswordChange}
+                    className="form-control"
+                    type="password"
+                    name="password"
+                    value={state.password}
+                    onChange={onPasswordChange}
                 />
 
-                <MDBBtn type="submit" size="sm">Sign In</MDBBtn>
+                <MDBBtn className="btn btn-primary" type="submit" size="sm">Sign In</MDBBtn>
               </form>
               
 

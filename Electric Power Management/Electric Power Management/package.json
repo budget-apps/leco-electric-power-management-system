@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@antv/g6": "^3.0.1",
+    "bootstrap": "^4.3.1",
     "firebase": "^5.0.4",
     "mdbreact": "^4.12.0",
     "react": "^16.4.0",
