@@ -7,6 +7,7 @@ class Node{
         this.type=type;
         this.capacity=capacity;
         this.status=status;
+        this.faultCurrent=false;
     };
     getStatus(){
         return this.status
