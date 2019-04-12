@@ -1,23 +1,26 @@
 class Node{
-    constructor(current,id,type,capacity,status)
+    constructor(id,type,currentPower,capacity,switchType)
     {
-        this.cuurent = current;
+        this.cuurentPower = currentPower;
         this.id = id;
         this.adjacent = [];
         this.type=type;
         this.capacity=capacity;
-        this.status=status;
+        this.switchType=switchType;
+        this.isTripped=false;
+        this.hasPower=true;
         this.faultCurrent=false;
     };
-    getStatus(){
-        return this.status
+
+    getSwitchType(){
+        return this.switchType
     }
 
-    setStatus(status){
-        this.status=status
+    setSwitchType(switchType){
+        this.switchType=switchType
     }
-    getType(){
-        return this.type
+    getNodeType(){
+        return this.type;
     }
 
     setType(type){
@@ -35,8 +38,8 @@ class Node{
     getNodeId(){
         return this.id;
     }
-    getCurrent(){
-        return this.cuurent
+    getCurrentPower(){
+        return this.cuurentPower
     }
     setAdjacent(node,weight){
         this.adjacent.push([node,weight])
