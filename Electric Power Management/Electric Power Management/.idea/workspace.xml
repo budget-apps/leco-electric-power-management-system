@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c4ce1685-1dd9-4c37-b1e1-d7d49b8cdd98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Node/Node.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Node/Node.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -313,7 +312,7 @@
       <workItem from="1554554993351" duration="20887000" />
       <workItem from="1554611384950" duration="3807000" />
       <workItem from="1554663849553" duration="996000" />
-      <workItem from="1554733583254" duration="9192000" />
+      <workItem from="1554733583254" duration="10538000" />
     </task>
     <task id="LOCAL-00001" summary="UI changes&#10;Implement Graph and Vertex classes&#10;Add Header,SideMenu,Map,Path components">
       <created>1554589607704</created>
@@ -357,11 +356,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554744950348</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Changed Graph">
+      <created>1554750635983</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554750635983</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44153000" />
+    <option name="totallyTimeSpent" value="45499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
