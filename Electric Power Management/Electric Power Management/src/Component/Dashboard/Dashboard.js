@@ -13,23 +13,6 @@ import './Dashboard.css'
 
 
 class Dashboard extends Component {
-
-    state = {
-        faultSwitch: "247",
-    }
-
-    faultSwitchInputHandler = () => {
-        return (<Map></Map>);
-    }
-
-    faultSwitchInputChangeHandler = (event) => {
-        this.setState(
-            {
-                faultSwitch: event.target.value
-            }
-        )
-    }
-
     render() {
         return (
             <div className="d-flex" id="wrapper">
@@ -46,30 +29,17 @@ class Dashboard extends Component {
                             {/*<AddFaults/>*/}
                         </div>
                         <div className="col-md-3">
-                            <input
-                                type="text"
-                                className="form-control"
-                                style={{padding: "5px", margin: "10px", display: "inline", width: "50%"}}
-                                placeholder="enter fault switch"
-                                value={this.state.faultSwitch}
-                                onChange={(event) => this.faultSwitchInputChangeHandler(event)}
-                            />
-                            <input
-                                className="btn btn-primary"
-                                type="submit"
-                                value="Find"
-                                onClick={this.faultSwitchInputHandler}
-                            />
+
                         </div>
                         <div className="col-md-3">
                             <SelectMap/>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-8" style={{width: "100%"}}>
-                            <Map faultSwitchID={this.state.faultSwitch}/>
+                        <div className="col-md-9" style={{width: "100%"}}>
+                            <Map/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                             <FaultEdge changed={this.faultSwitchInputHandler}/>
                             <Path/>
                         </div>
