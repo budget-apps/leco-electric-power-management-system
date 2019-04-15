@@ -4,6 +4,8 @@ import GoJs from "../GoJs/GoJs";
 const Graph = require('../Graph/Graph')
 const Node = require('../Node/Node')
 
+
+
 const map = () => {
 
     const isMapUdated = false;
@@ -33,8 +35,8 @@ const map = () => {
         { "from": 7, "to": 8, "text": "Capacity" },
         ]
     return (
-        <div className="container-fluid" style={{width: "100%",padding: 0}}>
-            <h1 className="mt-4">Negambo Devision Electric Map</h1>
+        <div className="container-fluid btn-success" style={{width: "100%",padding: 0,backgroundColor: "cyan",margin: "20px",borderRadius: "10px"}}>
+            <h1 className="mt-4 btn-default" style={{padding: "10px"}}>Negambo Devision</h1>
             <GoJs nodes={nodeDataArray} links={linkDataArray} mapStatus={isMapUdated}/>
         </div>
     )
