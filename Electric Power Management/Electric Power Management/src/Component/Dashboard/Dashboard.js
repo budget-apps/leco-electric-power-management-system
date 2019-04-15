@@ -6,7 +6,7 @@ import Path from '../Path/Path'
 import AddExelSheet from '../Button/AddExelSheet'
 import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
-import FaultPath from '../FaultEdge/FaultEdge'
+import FaultEdge from '../FaultEdge/FaultEdge'
 
 import './Dashboard.css'
 
@@ -15,11 +15,11 @@ import './Dashboard.css'
 class Dashboard extends Component {
 
     state = {
-        faultSwitch: "",
+        faultSwitch: "247",
     }
 
     faultSwitchInputHandler = () => {
-        console.log(this.state.faultSwitch)
+        return (<Map></Map>);
     }
 
     faultSwitchInputChangeHandler = (event) => {
@@ -67,18 +67,13 @@ class Dashboard extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-8" style={{width: "100%"}}>
-                            <Map/>
+                            <Map faultSwitchID={this.state.faultSwitch}/>
                         </div>
                         <div className="col-md-4">
-                            <FaultPath/>
+                            <FaultEdge changed={this.faultSwitchInputHandler}/>
+                            <Path/>
                         </div>
-
                     </div>
-                    <div className="row">
-                        <Path/>
-                    </div>
-
-
                 </div>
 
             </div>

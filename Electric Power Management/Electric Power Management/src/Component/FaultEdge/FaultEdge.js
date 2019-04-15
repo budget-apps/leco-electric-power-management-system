@@ -1,10 +1,14 @@
 import React from 'react'
 
-const faultEdge = () => {
+const faultEdge = (props) => {
     return (
-        <div className="container-fluid">
-            <h1 className="mt-4">Fault Path</h1>
-            <p>Path should goes here</p>
+        <div className="container-fluid btn-danger" style={{margin: "22px",borderRadius: "10px"}}>
+            {props.changed?
+                <h2 style={{padding: "5px"}}>No faults detected!!!</h2>
+                :
+                <h2 style={{padding: "5px"}}>Faults detected!!!</h2>
+            }
+
         </div>
     )
 }
