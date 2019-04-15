@@ -10,7 +10,25 @@ import FaultPath from '../FaultEdge/FaultEdge'
 
 import './Dashboard.css'
 
+
+
 class Dashboard extends Component {
+
+    state = {
+        faultSwitch: "",
+    }
+
+    faultSwitchInputHandler = () => {
+        console.log(this.state.faultSwitch)
+    }
+
+    faultSwitchInputChangeHandler = (event) => {
+        this.setState(
+            {
+                faultSwitch: event.target.value
+            }
+        )
+    }
 
     render() {
         return (
@@ -19,22 +37,35 @@ class Dashboard extends Component {
                 <div id="page-content-wrapper" style={{padding: "0"}}>
 
                     <Header/>
-                    <div className="row" style={{padding: "0",margin: 0,width: "100%"}}>
+                    <div className="row" style={{padding: "0", margin: 0, width: "100%"}}>
 
                         <div className="col-md-3">
                             <AddExelSheet/>
                         </div>
                         <div className="col-md-3">
-                            <AddFaults/>
+                            {/*<AddFaults/>*/}
                         </div>
                         <div className="col-md-3">
-
+                            <input
+                                type="text"
+                                className="form-control"
+                                style={{padding: "5px", margin: "10px", display: "inline", width: "50%"}}
+                                placeholder="enter fault switch"
+                                value={this.state.faultSwitch}
+                                onChange={(event) => this.faultSwitchInputChangeHandler(event)}
+                            />
+                            <input
+                                className="btn btn-primary"
+                                type="submit"
+                                value="Find"
+                                onClick={this.faultSwitchInputHandler}
+                            />
                         </div>
                         <div className="col-md-3">
                             <SelectMap/>
                         </div>
                     </div>
-                    <div className="row" >
+                    <div className="row">
                         <div className="col-md-8" style={{width: "100%"}}>
                             <Map/>
                         </div>
@@ -48,12 +79,10 @@ class Dashboard extends Component {
                     </div>
 
 
-
-
                 </div>
 
             </div>
-        )
+        );
     }
 
 }

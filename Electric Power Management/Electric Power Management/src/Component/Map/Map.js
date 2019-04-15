@@ -4,6 +4,8 @@ import GoJs from "../GoJs/GoJs";
 const Graph = require('../Graph/Graph')
 const Node = require('../Node/Node')
 
+
+
 const map = () => {
 
     const isMapUdated = false;
