@@ -8,7 +8,7 @@ class  AddExelSheet extends React.Component{
     constructor(){
         super()
     this.state={
-        arr:[]
+        arr:{}
     }
     this.uploadfile = this.uploadfile.bind(this)
 }
@@ -23,6 +23,7 @@ class  AddExelSheet extends React.Component{
           const wsname = wb.SheetNames[0];
           const ws = wb.Sheets[wsname];
           const data1 = excel.utils.sheet_to_json(ws);      
+          console.log(data1)
           this.setState({arr : data1})
           
         }
