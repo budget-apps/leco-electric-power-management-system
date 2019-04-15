@@ -1,16 +1,20 @@
 class Node{
     constructor(id,type,currentPower,capacity,switchType)
     {
-        this.cuurentPower = currentPower;
         this.id = id;
         this.adjacent = [];
         this.type=type;
         this.capacity=capacity;
+        this.cuurentPower = currentPower;
         this.switchType=switchType;
         this.isTripped=false;
         this.hasPower=true;
         this.faultCurrent=false;
     };
+
+    hasFaultCurrent(){
+        return this.faultCurrent;
+    }
 
     getSwitchType(){
         return this.switchType

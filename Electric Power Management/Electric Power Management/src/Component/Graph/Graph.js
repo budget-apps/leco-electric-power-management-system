@@ -9,6 +9,7 @@ class Graph{
     addVertertices(vertices){
         for(let i=0;i<vertices.length;i++){
             this.vertices.push(vertices[i])
+            this.order++;
         }
     }
 
@@ -20,54 +21,66 @@ class Graph{
         console.log(this.vertices)
     }
 
-    findAllAdjacent(node){
-        let vertex=node;
-        const allAdjacent=[];
-        let tempAdjacent=vertex.getAdjacent();
-        let tempAdjacentLength=tempAdjacent.length;
-        let counter = 0;
-        while(vertex.getNodeType()!=="End"){
-            for(let i=0;i<tempAdjacentLength;i++){
-                allAdjacent.push(tempAdjacent[i]);
+    getVertex(id){
+        const vertices=this.getVertices();
+        for(let i=0;i<this.order;i++){
+            if(vertices[i].getNodeId()==id){
+                return vertices[i];
             }
-            vertex=allAdjacent[counter];
-            counter++;
+        }
+    }
+
+    findAllAdjacent(node){
+        let allAdjacent=[];
+        let tempAdjacent=node.getAdjacent();
+        let tempNode;
+        while(tempAdjacent.length!=0){
+            tempNode = tempAdjacent.pop();
+            let tempNodeAdjacents = tempNode[0].getAdjacent();
+            allAdjacent.push(tempNode);
+            tempAdjacent=tempAdjacent.concat(tempNodeAdjacents);
         }
         return allAdjacent;
     }
+
     findFaultEdge(faultLocation){
-        let graphLength=this.order;
-        let faultSwitch;
-        for(let i=0;i<graphLength;i++){
-            if(this.vertices[i]==faultLocation){
-                faultSwitch=this.vertices[i];
+        const faultSwitch = this.getVertex(faultLocation);
+        const allAdjacent = this.findAllAdjacent(faultSwitch);
+        console.log(allAdjacent)
+        const allAdjacentLength = allAdjacent.length;
+        for(let i=0; i<allAdjacentLength; i++){
+            let tempNode = allAdjacent[i][0];
+            if(tempNode.getCurrentPower()==0 && !tempNode.hasFaultCurrent()){
+                break;
             }
-        }
-        let adjacentSwitches;
-        let adjacentSwitchesLength=adjacentSwitches.length;
-        let foundFaultEdge = false;
-        let counter=0;
-        while(foundFaultEdge){
-            for(let j=0;j<adjacentSwitchesLength;j++){
+            else if(){
 
             }
         }
-
     }
 }
-const primary1=new Node(345,"Primary", 900)
-const primary2=new Node(63,346, "Switch", 200,"Closed")
-const start=new Node(0,0,"Start",0,"None")
+const primary1=new Node(345,"Primary",900, 900);
+const primary2=new Node(346,"Primary",500, 500);
+const switch1 = new Node(247,"Switch",200,200,"Closed");
+const switch2 = new Node(248,"Switch",200,200,"Closed");
+const switch3 = new Node(249,"Switch",200,200,"Closed");
+const start=new Node(0,"Start",0,0)
+const end=new Node(0,"End",0,0)
+
 start.setAdjacent(primary1,0)
 start.setAdjacent(primary2,0)
-primary1.setAdjacent(start,400)
+primary1.setAdjacent(switch1,40);
+switch1.setAdjacent(switch2,40);
+switch2.setAdjacent(switch3,40);
+switch3.setAdjacent(end,40);
 
 const graph = new Graph(start)
-graph.addVertertices([primary1,primary2])
+graph.addVertertices([primary1,primary2,switch1,switch2,switch3,end])
 //graph.printGraph()
 //console.log(graph.getVertices())
 
-graph.findAllAdjacent(start);
+//console.log(graph.findAllAdjacent(start))
+graph.findFaultEdge(247);
 
 module.exports = Graph
 
