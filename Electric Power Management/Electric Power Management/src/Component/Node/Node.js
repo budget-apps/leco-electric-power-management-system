@@ -1,26 +1,46 @@
 class Node{
-    constructor(current,id,type,capacity,status)
+    constructor(id,type,currentPower,capacity,switchType)
     {
-        this.cuurent = current;
         this.id = id;
         this.adjacent = [];
         this.type=type;
         this.capacity=capacity;
-        this.status=status;
+        this.currentPower = currentPower;
+        this.switchType=switchType;
+        this.isTripped=false;
         this.faultCurrent=false;
+        this.parent = null;
     };
-    getStatus(){
-        return this.status
+
+    setFaultCurrent(val){
+        this.faultCurrent = val;
     }
 
-    setStatus(status){
-        this.status=status
-    }
-    getType(){
-        return this.type
+    getFaultCurrent(){
+        return this.faultCurrent;
     }
 
-    setType(type){
+    getParent(){
+        return this.parent;
+    }
+
+    setParent(node){
+        this.parent = node;
+    }
+
+
+    getSwitchType(){
+        return this.switchType
+    }
+
+    setSwitchType(switchType){
+        this.switchType=switchType
+    }
+    getNodeType(){
+        return this.type;
+    }
+
+    setNodeType(type){
         this.type=type
     }
 
@@ -35,8 +55,11 @@ class Node{
     getNodeId(){
         return this.id;
     }
-    getCurrent(){
-        return this.cuurent
+    getCurrentPower(){
+        return this.currentPower
+    }
+    setCurrentPower(val){
+        this.currentPower = val;
     }
     setAdjacent(node,weight){
         this.adjacent.push([node,weight])
@@ -58,15 +81,4 @@ class Node{
     }
 }
 
-// node1=new Node(23,345,"Primary", 900,"Closed")
-// node2=new Node(63,346, "Switch", 200,"Closed")
-// start=new Node(0,0,"Start",0,"None")
-// start.setAdjacent(node1,0)
-// start.setAdjacent(node2,0)
-// node1.setAdjacent(node2,400)
-//
-//
-// console.log(node1.getNodeId())
-// console.log(node1.isAdjacent(node2))
-//
 module.exports = Node
