@@ -5,33 +5,37 @@ const Graph = require('../Graph/Graph')
 const Node = require('../Node/Node')
 
 const map = () => {
+
+    const isMapUdated = false;
+    const normalFillColor = "#f68c06";
+    const strokeColor = "#4d90fe";
+
     //Vertices set
     const nodeDataArray = [
-        { key: 1, text: "Start", fill: "#f68c06", stroke: "#4d90fe" },
-        { key: 2, text: "Primary 1", fill: "#f68c06", stroke: "#4d90fe"},
-        { key: 4, text: "Switch 1 Closed", fill: "#ccc", stroke: "#4d90fe"},
-        { key: 5, text: "Switch 2 Closed", fill: "#f8f8f8", stroke: "#4d90fe"},
-        { key: 3, text: "Primary 2", fill: "#f68c06", stroke: "#4d90fe"},
-        { key: 6, text: "Switch 3 Closed", fill: "#ccc", stroke: "#4d90fe"},
-        { key: 7, text: "Switch 4 Closed", fill: "#f8f8f8", stroke: "#4d90fe"},
-        { key: 8, text: "Switch 5 Closed", fill: "#ccc", stroke: "#4d90fe"},
-        { key: 9, text: "Switch 2 Closed", fill: "#f8f8f8", stroke: "#4d90fe"},
-        { key: 10, text: "End", fill: "#ccc", stroke: "#4d90fe"},
+        { key: 1, text: "Start","loc": "-300 0"},
+        { key: 2, text: "345\nPrimary","loc": "-100 -200"},
+        { key: 4, text: "247\nSwitch\nClosed"},
+        { key: 5, text: "248\nSwitch\nClosed"},
+        { key: 3, text: "346\nPrimary","loc": "-100 200"},
+        { key: 6, text: "249\nSwitch\nClosed"},
+        { key: 7, text: "250\nSwitch\nClosed"},
+        { key: 8, text: "End"},
         ];
 
     //Link set
     const linkDataArray = [ { "from": 1, "to": 2, "text": "Capacity"},
         { "from": 1, "to": 3, "text": "Capacity"},
         { "from": 2, "to": 4, "text": "Capacity",},
-        { "from": 2, "to": 5, "text": "Capacity"},
-        { "from": 3, "to": 6, "text": "Capacity" },
-        { "from": 3, "to": 7, "text": "Capacity" },
-        { "from": 3, "to": 8, "text": "Capacity" },
+        { "from": 4, "to": 5, "text": "Capacity"},
+        { "from": 5, "to": 6, "text": "Capacity" },
+        { "from": 4, "to": 7, "text": "Capacity" },
+        { "from": 6, "to": 8, "text": "Capacity" },
+        { "from": 7, "to": 8, "text": "Capacity" },
         ]
     return (
         <div className="container-fluid" style={{width: "100%",padding: 0}}>
-            <h1 className="mt-4">Electric Map</h1>
-            <GoJs nodes={nodeDataArray} links={linkDataArray}/>
+            <h1 className="mt-4">Negambo Devision Electric Map</h1>
+            <GoJs nodes={nodeDataArray} links={linkDataArray} mapStatus={isMapUdated}/>
         </div>
     )
 }

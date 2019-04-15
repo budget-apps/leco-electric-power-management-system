@@ -29,18 +29,20 @@ export default class GoJs extends Component {
                 // define the node's outer shape, which will surround the TextBlock
                 goObj(go.Shape, "RoundedRectangle",
                     {
-                        parameter1: 20,  // the corner has a large radius
+                        parameter1: 12,  // the corner has a large radius
                         fill: goObj(go.Brush, "Linear", { 0: "rgb(254, 201, 0)", 1: "rgb(254, 162, 0)" }),
                         stroke: null,
                         portId: "",  // this Shape is the Node's port, not the whole Node
                         fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,
                         toLinkable: true, toLinkableSelfNode: true, toLinkableDuplicates: true,
-                        cursor: "pointer"
+                        cursor: "pointer",
+                        toEndSegmentLength: 50, fromEndSegmentLength: 40,
+
                     }),
                 goObj(go.TextBlock,
                     {
-                        font: "bold 11pt helvetica, bold arial, sans-serif",
-                        editable: true  // editing the text automatically updates the model data
+                        font: "bold 17pt helvetica, bold arial, sans-serif",
+                        editable: true,  // editing the text automatically updates the model data,
                     },
                     new go.Binding("text").makeTwoWay())
             );
@@ -51,7 +53,7 @@ export default class GoJs extends Component {
                 {
                     curve: go.Link.Bezier, adjusting: go.Link.Stretch,
                     reshapable: true, relinkableFrom: true, relinkableTo: true,
-                    toShortLength: 3
+                    toShortLength: 3,
                 },
                 new go.Binding("points").makeTwoWay(),
                 new go.Binding("curviness"),
@@ -77,6 +79,7 @@ export default class GoJs extends Component {
                         new go.Binding("text").makeTwoWay())
                 )
             );
+
 
         this.setState({myModel: model, myDiagram: diagram},
             () => {
@@ -105,7 +108,7 @@ export default class GoJs extends Component {
     }
 
     render () {
-        return <div ref="goJsDiv" style={{'width': '1400px', 'height': '500px', 'backgroundColor': '#00000'}}></div>;
+        return <div ref="goJsDiv" style={{'width': '100%', 'height': '500px', 'backgroundColor': '#00000'}}></div>;
     }
 }
 

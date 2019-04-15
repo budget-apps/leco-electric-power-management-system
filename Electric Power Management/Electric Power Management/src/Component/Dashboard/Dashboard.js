@@ -6,6 +6,7 @@ import Path from '../Path/Path'
 import AddExelSheet from '../Button/AddExelSheet'
 import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
+import FaultPath from '../FaultEdge/FaultEdge'
 
 import './Dashboard.css'
 
@@ -33,9 +34,14 @@ class Dashboard extends Component {
                             <SelectMap/>
                         </div>
                     </div>
-                    <div className="container-fluid row">
+                    <div className="row" >
+                        <div className="col-md-8" style={{width: "100%"}}>
+                            <Map/>
+                        </div>
+                        <div className="col-md-4">
+                            <FaultPath/>
+                        </div>
 
-                        <Map/>
                     </div>
                     <div className="row">
                         <Path/>
