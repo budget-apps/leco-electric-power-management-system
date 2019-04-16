@@ -14,7 +14,6 @@ class faultEdge extends Component{
         linkDataArray: [
             { "from": 5, "to": 6, "text": "Capacity" }
         ],
-        displayHeader: "",
     }
 
     //Vertices set
@@ -29,7 +28,6 @@ class faultEdge extends Component{
         this.setState(
             {
                 hasFaults: true,
-                displayHeader: "none"
             }
         )
     }

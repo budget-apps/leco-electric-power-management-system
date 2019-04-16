@@ -13,6 +13,9 @@ import './Dashboard.css'
 
 
 class Dashboard extends Component {
+    state = {
+        vertices: null,
+    }
     render() {
         return (
             <div className="d-flex" id="wrapper">
@@ -32,7 +35,7 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-                            <SelectMap/>
+                            <SelectMap data={this.state.vertices}/>
                         </div>
                     </div>
                     <div className="row">
