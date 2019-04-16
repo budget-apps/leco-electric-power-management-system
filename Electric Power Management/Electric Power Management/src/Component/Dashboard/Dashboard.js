@@ -16,9 +16,27 @@ import './Dashboard.css'
 class Dashboard extends Component {
     state = {
         data: null,
-        graph: this.generateGraph(),
-        nodeDataArray: this.generateNodeDataArray(),
-        linkDataArray: this.generateLinkDataArray(),
+        graph: null,
+        nodeDataArray: [
+            { key: "1", text: "Start","loc": "-600 0"},
+            { key: 2, text: "345\nPrimary","loc": "-500 -100"},
+            { key: 4, text: "247\nSwitch\nClosed","loc": "-300 -100"},
+            { key: 5, text: "248\nSwitch\nClosed","loc": "-100 -100"},
+            { key: 3, text: "346\nPrimary","loc": "-500 100"},
+            { key: 6, text: "249\nSwitch\nClosed","loc": "100 -100"},
+            { key: 7, text: "250\nSwitch\nClosed","loc": "-300 100"},
+            { key: 8, text: "End","loc": "200 0"},
+        ],
+        linkDataArray: [
+            { "from": "1", "to": 2, "text": "Capacity"},
+            { "from": 1, "to": 3, "text": "Capacity"},
+            { "from": 2, "to": 4, "text": "Capacity",},
+            { "from": 4, "to": 5, "text": "Capacity"},
+            { "from": 5, "to": 6, "text": "Capacity" },
+            { "from": 4, "to": 7, "text": "Capacity" },
+            { "from": 6, "to": 8, "text": "Capacity" },
+            { "from": 7, "to": 8, "text": "Capacity" },
+        ],
     }
 
     generateGraph(){
@@ -48,9 +66,9 @@ class Dashboard extends Component {
         this.setState({
             graph: graph
         })
-        console.log("hello")
+        console.log(this.state.graph)
     }
-    generateNodeDataArray = () => {
+    generateNodeDataArray(){
         this.setState({
             nodeDataArray: [
                 { key: "1", text: "Start","loc": "-600 0"},
@@ -63,9 +81,10 @@ class Dashboard extends Component {
                 { key: 8, text: "End","loc": "200 0"},
             ]
         })
+        console.log(this.state.nodeDataArray)
     }
 
-    generateLinkDataArray = () => {
+    generateLinkDataArray(){
         this.setState({
             linkDataArray: [
                 { "from": "1", "to": 2, "text": "Capacity"},
