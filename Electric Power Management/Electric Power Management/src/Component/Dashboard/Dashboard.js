@@ -112,6 +112,7 @@ class Dashboard extends Component {
     }
 
     selectMapEventHandler=(event)=>{
+
         console.log(event.target.value)
         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
         .once('value')
