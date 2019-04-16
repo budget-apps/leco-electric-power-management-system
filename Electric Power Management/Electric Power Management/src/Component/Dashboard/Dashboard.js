@@ -6,16 +6,26 @@ import Path from '../Path/Path'
 import AddExelSheet from '../Button/AddExelSheet'
 import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
+import FaultPath from '../FaultEdge/FaultEdge'
+
 import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
+
 import './Dashboard.css'
-import * as firebase from "firebase";
+
+
+
+var firebase = require("firebase");
 
 
 
 class Dashboard extends Component {
+
+
+
     state = {
+        electricMap:[],
         data: null,
         graph: null,
         nodeDataArray: [
@@ -108,7 +118,8 @@ class Dashboard extends Component {
         .then((snapshot) => {
             const key = snapshot.key;
             const val = snapshot.val();
-
+            this.setState({electricMap:val})
+            console.log(val)
             // this.generateGraph();
         })
         .catch((e) => {
@@ -119,6 +130,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        const {electricmap} = this.props
         return (
             <div className="d-flex" id="wrapper">
                 <SideMenu/>
@@ -137,9 +149,15 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-                            {/*//Two way binding*/}
-                            <SelectMap changed={this.selectMapEventHandler}/>
+
+                        <select class="browser-default custom-select" onChange={this.selectMapEventHandler}>
+                        <option selected> select branch</option>
+                        <option value="Negambo">Negambo</option>
+                        </select>
+
                         </div>
+
+
                     </div>
                     <div className="row">
                         <div className="col-md-9" style={{width: "100%"}}>
