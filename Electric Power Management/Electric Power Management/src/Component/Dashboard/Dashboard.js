@@ -10,6 +10,7 @@ import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
 import './Dashboard.css'
+import * as firebase from "firebase";
 
 
 
@@ -40,6 +41,7 @@ class Dashboard extends Component {
     }
 
     generateGraph(){
+        console.log(this.state.val)
         const primary1=new Node(345); //,"Primary",900, 900,"",,"Primary",500, 500,"","Switch",200,200,"Closed"
         const primary2=new Node(346); //,"Switch",200,200,"Closed","Switch",200,200,"Closed","Switch",150,200,"Closed"
         const switch1 = new Node(247); //,"Start",0,0,"","End",0,0,""
@@ -99,6 +101,23 @@ class Dashboard extends Component {
         })
     }
 
+    selectMapEventHandler(event){
+        console.log(event.target.value)
+        firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
+        .once('value')
+        .then((snapshot) => {
+            const key = snapshot.key;
+            const val = snapshot.val();
+
+            // this.generateGraph();
+        })
+        .catch((e) => {
+            console.log('Error fetching data', e);
+        });
+
+
+    }
+
     render() {
         return (
             <div className="d-flex" id="wrapper">
@@ -118,8 +137,8 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-                            <SelectMap/>
-
+                            {/*//Two way binding*/}
+                            <SelectMap changed={this.selectMapEventHandler}/>
                         </div>
                     </div>
                     <div className="row">
