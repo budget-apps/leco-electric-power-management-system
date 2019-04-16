@@ -111,20 +111,23 @@ class Dashboard extends Component {
         })
     }
 
-    selectMapEventHandler=event)=>{
+    selectMapEventHandler=(event)=>{
+
         console.log(event.target.value)
         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
         .once('value')
+        
         .then((snapshot) => {
             const key = snapshot.key;
-            const val = snapshot.val();
+            const val = snapshot.val().electricmap;
             this.setState({electricMap:val})
-            console.log(val)
-            // this.generateGraph();
+            console.log(this.state.electricMap)
         })
         .catch((e) => {
-            console.log('Error fetching data', e);
+            alert("nothing found")
         });
+
+       
 
 
     }
