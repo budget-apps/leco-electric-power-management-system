@@ -14,7 +14,7 @@ import './Dashboard.css'
 
 class Dashboard extends Component {
     state = {
-        vertices: null,
+        data: null,
     }
     render() {
         return (
@@ -35,12 +35,13 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-                            <SelectMap data={this.state.vertices}/>
+                            <SelectMap/>
+
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-9" style={{width: "100%"}}>
-                            <Map/>
+                            <Map data={this.state.data}/>
                         </div>
                         <div className="col-md-3">
                             <FaultEdge changed={this.faultSwitchInputHandler}/>

@@ -33,7 +33,6 @@ class map extends Component{
     }
 
     getData(){
-
     }
 
     createMap(){

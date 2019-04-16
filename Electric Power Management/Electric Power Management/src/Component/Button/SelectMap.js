@@ -14,9 +14,10 @@ class selectMap extends React.Component {
             console.log(val);
             this.setState(
                 {
-                    data: val,
+                    dataDB: val,
                 }
             )
+            console.log(this.state.dataDB)
         })
         .catch((e) => {
             console.log('Error fetching data', e);
@@ -31,7 +32,6 @@ class selectMap extends React.Component {
                   <option value="2"></option>
                   <option value="3"></option>
                 </select>
-                <input style={{display: "none"}} value={this.state.data}/>
             </div>
         )
     }
