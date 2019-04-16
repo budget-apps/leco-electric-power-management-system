@@ -14,44 +14,21 @@ import Node from '../Node/Node'
 
 import './Dashboard.css'
 
-
-
 var firebase = require("firebase");
-
-
 
 class Dashboard extends Component {
 
 
 
     state = {
-        electricMap:[],
-        data: null,
-        graph: null,
-        nodeDataArray: [
-            { key: "1", text: "Start","loc": "-600 0"},
-            { key: 2, text: "345\nPrimary","loc": "-500 -100"},
-            { key: 4, text: "247\nSwitch\nClosed","loc": "-300 -100"},
-            { key: 5, text: "248\nSwitch\nClosed","loc": "-100 -100"},
-            { key: 3, text: "346\nPrimary","loc": "-500 100"},
-            { key: 6, text: "249\nSwitch\nClosed","loc": "100 -100"},
-            { key: 7, text: "250\nSwitch\nClosed","loc": "-300 100"},
-            { key: 8, text: "End","loc": "200 0"},
-        ],
-        linkDataArray: [
-            { "from": "1", "to": 2, "text": "Capacity"},
-            { "from": 1, "to": 3, "text": "Capacity"},
-            { "from": 2, "to": 4, "text": "Capacity",},
-            { "from": 4, "to": 5, "text": "Capacity"},
-            { "from": 5, "to": 6, "text": "Capacity" },
-            { "from": 4, "to": 7, "text": "Capacity" },
-            { "from": 6, "to": 8, "text": "Capacity" },
-            { "from": 7, "to": 8, "text": "Capacity" },
-        ],
+        electricMapData:[],
+        graph: new Graph(),
+        nodeDataArray: [],
+        linkDataArray: [],
     }
 
     generateGraph(){
-        console.log(this.state.val)
+
         const primary1=new Node(345); //,"Primary",900, 900,"",,"Primary",500, 500,"","Switch",200,200,"Closed"
         const primary2=new Node(346); //,"Switch",200,200,"Closed","Switch",200,200,"Closed","Switch",150,200,"Closed"
         const switch1 = new Node(247); //,"Start",0,0,"","End",0,0,""
@@ -111,16 +88,17 @@ class Dashboard extends Component {
         })
     }
 
-    selectMapEventHandler=event)=>{
+    selectMapEventHandler=(event)=>{
         console.log(event.target.value)
         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
         .once('value')
         .then((snapshot) => {
             const key = snapshot.key;
             const val = snapshot.val();
-            this.setState({electricMap:val})
-            console.log(val)
-            // this.generateGraph();
+            this.setState({electricMapData:val})
+            this.generateGraph();
+            this.generateNodeDataArray();
+            this.generateLinkDataArray();
         })
         .catch((e) => {
             console.log('Error fetching data', e);
@@ -149,12 +127,11 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-
-                        <select class="browser-default custom-select" onChange={this.selectMapEventHandler}>
-                        <option selected> select branch</option>
-                        <option value="Negambo">Negambo</option>
-                        </select>
-
+                            <SelectMap changed={this.selectMapEventHandler}/>
+                            {/*<select className="browser-default custom-select" onChange={this.selectMapEventHandler}>*/}
+                                {/*<option selected> select branch</option>*/}
+                                {/*<option value="Negambo">Negambo</option>*/}
+                            {/*</select>*/}
                         </div>
 
 
