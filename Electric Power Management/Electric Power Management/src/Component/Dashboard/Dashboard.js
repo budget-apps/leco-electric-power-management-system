@@ -13,6 +13,9 @@ import './Dashboard.css'
 
 
 class Dashboard extends Component {
+    state = {
+        data: null,
+    }
     render() {
         return (
             <div className="d-flex" id="wrapper">
@@ -33,11 +36,12 @@ class Dashboard extends Component {
                         </div>
                         <div className="col-md-3">
                             <SelectMap/>
+
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-md-9" style={{width: "100%"}}>
-                            <Map/>
+                            <Map data={this.state.data}/>
                         </div>
                         <div className="col-md-3">
                             <FaultEdge changed={this.faultSwitchInputHandler}/>

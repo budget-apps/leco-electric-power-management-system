@@ -14,14 +14,19 @@ class faultEdge extends Component{
         linkDataArray: [
             { "from": 5, "to": 6, "text": "Capacity" }
         ],
-        displayHeader: "",
     }
 
     //Vertices set
 
 
     //Link set
-
+    refreshHandler = () => {
+        this.setState(
+            {
+                hasFaults: false
+            }
+        )
+    }
 
     faultSwitchInputHandler = () => {
         console.log(this.state.faultSwitch);
@@ -29,7 +34,6 @@ class faultEdge extends Component{
         this.setState(
             {
                 hasFaults: true,
-                displayHeader: "none"
             }
         )
     }
@@ -46,7 +50,11 @@ class faultEdge extends Component{
             <div className="container-fluid btn-danger" style={{margin: "22px 5px 10px 0", borderRadius: "10px"}}>
                 {
                     (this.state.hasFaults)
-                        ? <GoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
+                        ? <div>
+                            <button style={{float: "right",padding: "2px 5px 2px 5px"}} onClick={this.refreshHandler} className="btn btn-danger">x</button>
+                            <GoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
+
+                        </div>
                         : <div>
                             <input
                                 type="text"
