@@ -3,6 +3,14 @@ import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from
 var firebase = require("firebase");
 
 class selectMap extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={
+
+
+        }
+        
+    }
 
     onchangeDropdown(e){
         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(e.target.value)
@@ -19,8 +27,9 @@ class selectMap extends React.Component {
    
     }
     render(){
+        
     return (
-        <select class="browser-default custom-select" onChange={this.onchangeDropdown}>
+    <select class="browser-default custom-select" onChange={this.onchangeDropdown}>
   <option selected> select branch</option>
   <option value="Negambo">Negambo</option>
   <option value="2"></option>
