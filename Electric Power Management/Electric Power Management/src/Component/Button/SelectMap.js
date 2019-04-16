@@ -1,6 +1,5 @@
 import React from 'react'
-import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-var firebase = require("firebase");
+const firebase = require("firebase");
 
 class selectMap extends React.Component {
     constructor(props){
@@ -23,20 +22,23 @@ class selectMap extends React.Component {
     .catch((e) => {
         console.log('Error fetching data', e);
     });
+}
 
    
-    }
+
+
     render(){
-        
-    return (
-    <select class="browser-default custom-select" onChange={this.onchangeDropdown}>
-  <option selected> select branch</option>
-  <option value="Negambo">Negambo</option>
-  <option value="2"></option>
-  <option value="3"></option>
-</select>
-    )
-}
+        return (
+            <div>
+                <select class="browser-default custom-select btn-primary" style={{margin: "10px",padding: "5px"}} onChange={this.props.changed}>
+                  <option selected> Select branch</option>
+                  <option value="Negambo">Negambo</option>
+                  <option value="2"></option>
+                  <option value="3"></option>
+                </select>
+            </div>
+        )
+    }
 }
 
 export default selectMap
