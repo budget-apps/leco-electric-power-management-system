@@ -16,10 +16,8 @@ class faultEdge extends Component{
         ],
     }
 
-    //Vertices set
 
 
-    //Link set
     refreshHandler = () => {
         this.setState(
             {
@@ -36,6 +34,8 @@ class faultEdge extends Component{
                 hasFaults: true,
             }
         )
+        const graph = this.props.graph;
+
     }
 
     faultSwitchInputChangeHandler = (event) => {
