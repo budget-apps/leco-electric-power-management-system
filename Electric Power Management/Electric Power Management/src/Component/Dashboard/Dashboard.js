@@ -41,6 +41,7 @@ class Dashboard extends Component {
     }
 
     generateGraph(){
+        console.log(this.state.val)
         const primary1=new Node(345); //,"Primary",900, 900,"",,"Primary",500, 500,"","Switch",200,200,"Closed"
         const primary2=new Node(346); //,"Switch",200,200,"Closed","Switch",200,200,"Closed","Switch",150,200,"Closed"
         const switch1 = new Node(247); //,"Start",0,0,"","End",0,0,""
@@ -107,13 +108,8 @@ class Dashboard extends Component {
         .then((snapshot) => {
             const key = snapshot.key;
             const val = snapshot.val();
-            console.log(val);
-            this.setState(
-                {
-                    dataDB: val,
-                }
-            )
-            console.log(this.state.dataDB)
+
+            // this.generateGraph();
         })
         .catch((e) => {
             console.log('Error fetching data', e);
@@ -141,6 +137,7 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
+                            {/*//Two way binding*/}
                             <SelectMap changed={this.selectMapEventHandler}/>
                         </div>
                     </div>
