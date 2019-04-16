@@ -10,6 +10,7 @@ import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
 import './Dashboard.css'
+import * as firebase from "firebase";
 
 
 
@@ -99,6 +100,28 @@ class Dashboard extends Component {
         })
     }
 
+    selectMapEventHandler(event){
+        console.log(event.target.value)
+        firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
+        .once('value')
+        .then((snapshot) => {
+            const key = snapshot.key;
+            const val = snapshot.val();
+            console.log(val);
+            this.setState(
+                {
+                    dataDB: val,
+                }
+            )
+            console.log(this.state.dataDB)
+        })
+        .catch((e) => {
+            console.log('Error fetching data', e);
+        });
+
+
+    }
+
     render() {
         return (
             <div className="d-flex" id="wrapper">
@@ -118,8 +141,7 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-                            <SelectMap/>
-
+                            <SelectMap changed={this.selectMapEventHandler}/>
                         </div>
                     </div>
                     <div className="row">
