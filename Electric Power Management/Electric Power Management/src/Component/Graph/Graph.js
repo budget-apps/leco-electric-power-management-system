@@ -1,9 +1,10 @@
 const Node = require('../Node/Node')
 
 class Graph{
-    constructor(start){
+    constructor(start,end){
         this.start=start;
-        this.vertices=[start];
+        this.end = end
+        this.vertices=[start,end];
         this.order=this.vertices.length;
     }
     addVertertices(vertices){
@@ -11,6 +12,16 @@ class Graph{
             this.vertices.push(vertices[i])
             this.order++;
         }
+    }
+
+    findPrimary(){
+        let primaryArray=[]
+        for(let i=0;i<this.order;i++){
+            if(this.vertices[i].getNodeType()=="Primary"){
+                primaryArray.push(this.vertices[i])
+            }
+        }
+        return primaryArray
     }
 
     getVertices(){

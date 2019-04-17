@@ -2,31 +2,6 @@ import React from 'react'
 const firebase = require("firebase");
 
 class selectMap extends React.Component {
-    constructor(props){
-        super(props)
-        this.state={
-
-
-        }
-        
-    }
-
-    onchangeDropdown(e){
-        firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(e.target.value)
-        .once('value')
-    .then((snapshot) => {
-        const key = snapshot.key;
-        const val = snapshot.val();
-        console.log(val);
-    })
-    .catch((e) => {
-        console.log('Error fetching data', e);
-    });
-}
-
-   
-
-
     render(){
         return (
             <div>
