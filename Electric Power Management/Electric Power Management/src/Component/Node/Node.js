@@ -10,8 +10,19 @@ class Node{
         this.isTripped=false;
         this.faultCurrent=false;
         this.parent = null;
+        this.branch = null;
     };
 
+    setIsTripped(val){
+        this.isTripped = val;
+    }
+    setBranch(branch){
+        this.branch = branch;
+    }
+
+    getBranch(){
+        return this.branch;
+    }
     setFaultCurrent(val){
         this.faultCurrent = val;
     }

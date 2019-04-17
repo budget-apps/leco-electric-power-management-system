@@ -11,14 +11,9 @@ import FaultPath from '../FaultEdge/FaultEdge'
 import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
-
 import './Dashboard.css'
 
-
-
 var firebase = require("firebase");
-
-
 
 class Dashboard extends Component {
 
@@ -26,8 +21,7 @@ class Dashboard extends Component {
 
     state = {
         electricMap:[],
-        data: null,
-        graph: null,
+        graph: new Graph(),
         nodeDataArray: [
             { key: "1", text: "Start","loc": "-600 0"},
             { key: 2, text: "345\nPrimary","loc": "-500 -100"},
@@ -51,30 +45,26 @@ class Dashboard extends Component {
     }
 
     generateGraph(){
-        console.log(this.state.val)
-        const primary1=new Node(345); //,"Primary",900, 900,"",,"Primary",500, 500,"","Switch",200,200,"Closed"
-        const primary2=new Node(346); //,"Switch",200,200,"Closed","Switch",200,200,"Closed","Switch",150,200,"Closed"
-        const switch1 = new Node(247); //,"Start",0,0,"","End",0,0,""
-        const switch2 = new Node(248);
-        const switch3 = new Node(249);
-        const switch4 = new Node(250);
         const start=new Node(0)
         const end=new Node(251)
-
-        start.setAdjacent(primary1,0)
-        start.setAdjacent(primary2,0)
-        primary1.setAdjacent(switch1,40);
-        switch1.setAdjacent(switch2,40);
-        switch2.setAdjacent(switch3,40);
-        switch3.setAdjacent(end,40);
-        switch2.setAdjacent(switch4,20)
-
-        switch2.setFaultCurrent(true);
-        switch3.setFaultCurrent(false);
-        switch3.setCurrentPower(0);
-
         const graph = new Graph(start)
-        graph.addVertertices([primary1,primary2,switch1,switch2,switch3,end])
+
+        const map = this.state.electricMap
+        let dataLength = this.state.electricMap.length;
+        let nodeArray=[]
+        for(let i=0;i<dataLength;i++){
+            let nodeData = map[i];
+            let tempNode = new Node(nodeData.id)
+            tempNode.setCurrentPower(nodeData.currentPower)
+            tempNode.setNodeType(nodeData.type)
+            tempNode.setBranch(nodeData.branch)
+            tempNode.setCapacity(nodeData.capacity)
+            tempNode.setIsTripped(nodeData.isTripped)
+            tempNode.setFaultCurrent(nodeData.faultCurrent)
+            tempNode.setSwitchType(nodeData.switchType)
+            nodeArray.push(tempNode)
+        }
+        graph.addVertertices(nodeArray)
         this.setState({
             graph: graph
         })
@@ -121,14 +111,14 @@ class Dashboard extends Component {
             const key = snapshot.key;
             const val = snapshot.val().electricmap;
             this.setState({electricMap:val})
-            console.log(this.state.electricMap)
+            console.log(this.state.electricMap[0])
+            this.generateGraph()
+            this.generateLinkDataArray()
+            this.generateNodeDataArray()
         })
         .catch((e) => {
             alert("nothing found")
         });
-
-       
-
 
     }
 
@@ -152,11 +142,11 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-
-                        <select class="browser-default custom-select" onChange={this.selectMapEventHandler}>
-                        <option selected> select branch</option>
-                        <option value="Negambo">Negambo</option>
-                        </select>
+                        <SelectMap changed={this.selectMapEventHandler}/>
+                        {/*<select class="browser-default custom-select" onChange={this.selectMapEventHandler}>*/}
+                        {/*<option selected> select branch</option>*/}
+                        {/*<option value="Negambo">Negambo</option>*/}
+                        {/*</select>*/}
 
                         </div>
 
