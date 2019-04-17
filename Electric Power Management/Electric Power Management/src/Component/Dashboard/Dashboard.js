@@ -45,7 +45,7 @@ class Dashboard extends Component {
     }
 
     generateGraph(){
-        let dataLength = electricMap.length;
+        let dataLength = this.state.electricMap.length;
         for(let i=0;i<dataLength;i++){
 
         }
