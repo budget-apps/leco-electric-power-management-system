@@ -18,7 +18,7 @@ const header = () => {
                         <Link className="nav-link" to={routes.HOME_PATH}>Home</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Log Out</a>
+                        <Link className="nav-link"  to={routes.SIGN_OUT_PATH}>Log Out</Link>
                     </li>
                     {/*<li className="nav-item dropdown">*/}
                         {/*<a className="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button"*/}
