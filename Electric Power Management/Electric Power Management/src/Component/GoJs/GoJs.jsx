@@ -97,11 +97,12 @@ export default class GoJs extends Component {
     }
 
     componentWillUpdate (prevProps) {
-        if (this.props.data !== prevProps.data) {
+        if (this.props.nodes !== prevProps.nodes) {
             console.log ('Updating');
             const model = this.state.myModel;
             const diagram = this.state.myDiagram;
-            model.nodeDataArray = this.props.data;
+            model.nodeDataArray = this.props.nodes;
+            model.linkDataArray = this.props.links
             diagram.model = model;
             this.setState({myModel: model, myDiagram: diagram});
         }

@@ -12,6 +12,7 @@ import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
 import './Dashboard.css'
+import GoJs from "../GoJs/GoJs";
 
 var firebase = require("firebase");
 
@@ -22,32 +23,17 @@ class Dashboard extends Component {
     state = {
         electricMap:[],
         graph: new Graph(),
-        nodeDataArray: [
-            { key: "1", text: "Start","loc": "-600 0"},
-            { key: 2, text: "345\nPrimary","loc": "-500 -100"},
-            { key: 4, text: "247\nSwitch\nClosed","loc": "-300 -100"},
-            { key: 5, text: "248\nSwitch\nClosed","loc": "-100 -100"},
-            { key: 3, text: "346\nPrimary","loc": "-500 100"},
-            { key: 6, text: "249\nSwitch\nClosed","loc": "100 -100"},
-            { key: 7, text: "250\nSwitch\nClosed","loc": "-300 100"},
-            { key: 8, text: "End","loc": "200 0"},
-        ],
-        linkDataArray: [
-            { "from": "1", "to": 2, "text": "Capacity"},
-            { "from": 1, "to": 3, "text": "Capacity"},
-            { "from": 2, "to": 4, "text": "Capacity",},
-            { "from": 4, "to": 5, "text": "Capacity"},
-            { "from": 5, "to": 6, "text": "Capacity" },
-            { "from": 4, "to": 7, "text": "Capacity" },
-            { "from": 6, "to": 8, "text": "Capacity" },
-            { "from": 7, "to": 8, "text": "Capacity" },
-        ],
+        nodeDataArray: [],
+        linkDataArray: [],
     }
 
     generateGraph(){
         const start=new Node(0)
-        const end=new Node(251)
-        const graph = new Graph(start)
+        const end=new Node(-1)
+        start.setNodeType("Start")
+        end.setNodeType("End")
+
+        const graph = new Graph(start,end)
 
         const map = this.state.electricMap
         let dataLength = this.state.electricMap.length;
@@ -65,40 +51,114 @@ class Dashboard extends Component {
             nodeArray.push(tempNode)
         }
         graph.addVertertices(nodeArray)
+        let allPrimarys = graph.findPrimary();
+        for(let i=0;i<allPrimarys.length;i++){
+            start.setAdjacent(allPrimarys[i],0)
+        }
+
+        let allVertices=graph.getVertices()
+        for(let i=0;i<dataLength;i++){
+            let nodeData = map[i]
+            let nodeAdjacents = "["+nodeData.adjecent+"]"
+            let nodesJson = JSON.parse(nodeAdjacents)
+            let vertex = allVertices[i+2];
+            for(let j=0;j<nodesJson.length;j++){
+                let nodeID=nodesJson[j][0]
+                let nodeWeight = Number(nodesJson[j][1])
+                let node = graph.getVertex(nodeID)
+                if(node!=undefined && nodeWeight!=NaN){
+                    vertex.setAdjacent(node,nodeWeight)
+                    //console.log(vertex.getNodeId()+","+node.getNodeId())
+                }
+
+            }
+        }
         this.setState({
             graph: graph
         })
-        console.log(this.state.graph)
+        //console.log(this.state.graph)
     }
     generateNodeDataArray(){
+        let allVertices = this.state.graph.getVertices();
+        let nodeData=[];
+        let placex = -400;
+        let placey = 100;
+        let isPrimary = true;
+        let isNormal = true;
+        for(let i=0; i<allVertices.length;i++){
+            let tempNode = allVertices[i];
+            let nodeID= tempNode.getNodeId()
+            let nodeType= tempNode.getNodeType()
+            let switchType = tempNode.getSwitchType()
+            if(!(nodeType=="Start" || nodeType=="End" || nodeType=="Primary") && isNormal){
+                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let nodeDataRow={ key: nodeID, text: text,"loc": placex+" "+placey}
+                placex+=100;
+                placey=100;
+                isNormal = false;
+                nodeData.push(nodeDataRow)
+            }else  if(!(nodeType=="Start" || nodeType=="End" || nodeType=="Primary") && !isNormal){
+                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let nodeDataRow={ key: nodeID, text: text,"loc": (placex-100)+" "+placey}
+                placex+=100;
+                placey=-100;
+                isNormal = true;
+                nodeData.push(nodeDataRow)
+            }else if(nodeType=="Primary" && isPrimary){
+                //console.log("Primary")
+                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let nodeDataRow={ key: nodeID, text: text,"loc": "-500 -100"}
+                placex+=100;
+                placey=100;
+                isPrimary = false;
+                nodeData.push(nodeDataRow)
+            }
+            else if(nodeType=="Primary" && !isPrimary){
+                //console.log("Primary")
+                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let nodeDataRow={ key: nodeID, text: text,"loc": "-500 100"}
+                placex+=100;
+                placey=-100;
+                isPrimary = false;
+                nodeData.push(nodeDataRow)
+            }
+            else if(nodeType=="Start"){
+                //console.log("Start")
+                let nodeDataRow={ key: nodeID, text: nodeType,"loc": "-600 0"}
+                nodeData.push(nodeDataRow)
+            }else if(nodeType=="End"){
+                //console.log("End")
+                let nodeDataRow={ key: nodeID, text: nodeType,"loc": "300 0"}
+                nodeData.push(nodeDataRow)
+            }
+
+        }
         this.setState({
-            nodeDataArray: [
-                { key: "1", text: "Start","loc": "-600 0"},
-                { key: 2, text: "345\nPrimary","loc": "-500 -100"},
-                { key: 4, text: "247\nSwitch\nClosed","loc": "-300 -100"},
-                { key: 5, text: "248\nSwitch\nClosed","loc": "-100 -100"},
-                { key: 3, text: "346\nPrimary","loc": "-500 100"},
-                { key: 6, text: "249\nSwitch\nClosed","loc": "100 -100"},
-                { key: 7, text: "250\nSwitch\nClosed","loc": "-300 100"},
-                { key: 8, text: "End","loc": "200 0"},
-            ]
+            nodeDataArray: nodeData
         })
         console.log(this.state.nodeDataArray)
     }
 
     generateLinkDataArray(){
+        let allVertices = this.state.graph.getVertices();
+        let linkArray=[]
+        for(let i=0;i<allVertices.length;i++){
+            let parentNode = allVertices[i]
+            let parentNodeID = parentNode.getNodeId();
+            for(let j=0;j<allVertices.length;j++){
+                let childNode = allVertices[j]
+                let childNodeID = childNode.getNodeId()
+                if(parentNode.isAdjacent(childNode)){
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "40"};
+                    linkArray.push(linkRows)
+                }
+            }
+        }
         this.setState({
-            linkDataArray: [
-                { "from": "1", "to": 2, "text": "Capacity"},
-                { "from": 1, "to": 3, "text": "Capacity"},
-                { "from": 2, "to": 4, "text": "Capacity",},
-                { "from": 4, "to": 5, "text": "Capacity"},
-                { "from": 5, "to": 6, "text": "Capacity" },
-                { "from": 4, "to": 7, "text": "Capacity" },
-                { "from": 6, "to": 8, "text": "Capacity" },
-                { "from": 7, "to": 8, "text": "Capacity" },
-            ]
+            linkDataArray: linkArray
         })
+        console.log(this.state.linkDataArray)
+        console.log(this.state.graph)
     }
 
     selectMapEventHandler=(event)=>{
@@ -111,13 +171,14 @@ class Dashboard extends Component {
             const key = snapshot.key;
             const val = snapshot.val().electricmap;
             this.setState({electricMap:val})
-            console.log(this.state.electricMap[0])
+            //console.log(this.state.electricMap[0])
             this.generateGraph()
-            this.generateLinkDataArray()
             this.generateNodeDataArray()
+            this.generateLinkDataArray()
+            //GoJs.componentWillUpdate()
         })
         .catch((e) => {
-            alert("nothing found")
+            alert("nothing found"+e)
         });
 
     }
@@ -142,11 +203,7 @@ class Dashboard extends Component {
 
                         </div>
                         <div className="col-md-3">
-                        <SelectMap changed={this.selectMapEventHandler}/>
-                        {/*<select class="browser-default custom-select" onChange={this.selectMapEventHandler}>*/}
-                        {/*<option selected> select branch</option>*/}
-                        {/*<option value="Negambo">Negambo</option>*/}
-                        {/*</select>*/}
+                            <SelectMap changed={this.selectMapEventHandler}/>
 
                         </div>
 
