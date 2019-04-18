@@ -79,16 +79,15 @@ class Node{
         return this.adjacent
     }
     isAdjacent(node){
-        let i;
         const adjacentList = this.getAdjacent();
         const listLen = adjacentList.length
-        for(i=0;i<listLen;i++){
-            if(adjacentList[i][0].getNodeId()===node.getNodeId()){
+        for(let i=0;i<listLen;i++){
+            //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
+            if(adjacentList[i][0].getNodeId()==node.getNodeId()){
                 return true;
-            }else{
-                return false;
             }
         }
+        return false;
     }
 }
 

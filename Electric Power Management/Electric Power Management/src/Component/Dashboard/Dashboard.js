@@ -25,6 +25,7 @@ class Dashboard extends Component {
         graph: new Graph(),
         nodeDataArray: [],
         linkDataArray: [],
+        isSelect: false,
     }
 
     generateGraph(){
@@ -139,6 +140,25 @@ class Dashboard extends Component {
         console.log(this.state.nodeDataArray)
     }
 
+    // generateNodeLocations() {
+    //     let allVertices = this.state.graph.getVertices();
+    //     let locArray = []
+    //     let locX = -600;
+    //     let locY = 0;
+    //     let locCord = locX + " " + locY
+    //
+    //     let tempAdjacent = allVertices[0].getAdjacent();
+    //     let tempNode;
+    //     let locRow = {id: 0, loc: "-600 0"}
+    //
+    //     while (tempAdjacent.length != 0) {
+    //         tempNode = tempAdjacent.pop();
+    //         let tempNodeAdjacents = tempNode[0].getAdjacent();
+    //         allAdjacent.push(tempNode);
+    //         tempAdjacent = tempAdjacent.concat(tempNodeAdjacents);
+    //     }
+    // }
+    //
     generateLinkDataArray(){
         let allVertices = this.state.graph.getVertices();
         let linkArray=[]
@@ -148,8 +168,9 @@ class Dashboard extends Component {
             for(let j=0;j<allVertices.length;j++){
                 let childNode = allVertices[j]
                 let childNodeID = childNode.getNodeId()
+                //console.log("Link data array "+parentNodeID+","+childNodeID+"->"+parentNode.isAdjacent(childNode))
                 if(parentNode.isAdjacent(childNode)){
-                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "40"};
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "Line Capacity\n40"};
                     linkArray.push(linkRows)
                 }
             }
@@ -214,7 +235,7 @@ class Dashboard extends Component {
                             <Map dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                         </div>
                         <div className="col-md-3">
-                            <FaultEdge changed={this.faultSwitchInputHandler} graph={this.state.graph}/>
+                            <FaultEdge graph={this.state.graph}/>
                             <Path/>
                         </div>
                     </div>

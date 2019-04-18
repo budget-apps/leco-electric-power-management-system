@@ -82,12 +82,18 @@ class Graph{
     }
 
     findFaultEdge(faultLocation){
-        const faultSwitchNode = this.getVertex(faultLocation);
-        const faultPathNodes = this.findFaultPath(faultSwitchNode);
-        //console.log(faultPathNodes);
-        const faultNode = faultPathNodes.pop();
-        const parentNode = faultNode.getParent();
-        return [parentNode, faultNode];
+        console.log(faultLocation)
+        try{
+            const faultSwitchNode = this.getVertex(faultLocation);
+            const faultPathNodes = this.findFaultPath(faultSwitchNode);
+            //console.log(faultPathNodes);
+            const faultNode = faultPathNodes.pop();
+            const parentNode = faultNode.getParent();
+            return [parentNode, faultNode];
+        }catch (e) {
+            alert('Error: '+e)
+        }
+
 
     }
 }
