@@ -7,6 +7,7 @@ import AddExelSheet from '../Button/AddExelSheet'
 import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
 import FaultPath from '../FaultEdge/FaultEdge'
+import Card from '../Card/Card'
 
 import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
@@ -23,7 +24,8 @@ class Dashboard extends Component {
     state = {
         electricMap:[],
         graph: new Graph(),
-        nodeDataArray: [{key: 0,"text": "Start"}],
+        branch: "Negambo",
+        nodeDataArray: [],
         linkDataArray: [],
         isSelect: false,
     }
@@ -196,6 +198,7 @@ class Dashboard extends Component {
             this.generateGraph()
             this.generateNodeDataArray()
             this.generateLinkDataArray()
+            this.getSlectedName(event)
             //GoJs.componentWillUpdate()
         })
         .catch((e) => {
@@ -212,6 +215,8 @@ class Dashboard extends Component {
                 <div id="page-content-wrapper" style={{padding: "0"}}>
 
                     <Header/>
+                    <div className="row">
+                    </div>
                     <div className="row" style={{padding: "0", margin: 0, width: "100%"}}>
 
                         <div className="col-md-3">
@@ -225,14 +230,11 @@ class Dashboard extends Component {
                         </div>
                         <div className="col-md-3">
                             <SelectMap changed={this.selectMapEventHandler}/>
-
                         </div>
-
-
                     </div>
                     <div className="row">
                         <div className="col-md-9" style={{width: "100%"}}>
-                            <Map dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
+                            <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                         </div>
                         <div className="col-md-3">
                             <FaultEdge graph={this.state.graph}/>
