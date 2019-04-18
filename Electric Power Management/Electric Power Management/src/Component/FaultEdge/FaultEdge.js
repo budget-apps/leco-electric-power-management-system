@@ -71,7 +71,7 @@ class faultEdge extends Component{
     }
     render() {
         return (
-            <div className="container-fluid btn-danger" style={{margin: "22px 5px 10px 0", borderRadius: "10px"}}>
+            <div className="btn-danger" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
                 {
                     (this.state.hasFaults)
                         ? <div>
