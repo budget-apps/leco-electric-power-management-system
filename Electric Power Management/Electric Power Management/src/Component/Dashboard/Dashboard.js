@@ -23,7 +23,7 @@ class Dashboard extends Component {
     state = {
         electricMap:[],
         graph: new Graph(),
-        nodeDataArray: [],
+        nodeDataArray: [{key: 0,"text": "Start"}],
         linkDataArray: [],
         isSelect: false,
     }

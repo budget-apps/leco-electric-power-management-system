@@ -54,7 +54,8 @@ class faultEdge extends Component{
             console.log(this.state.graph)
             this.findFault()
         }catch (e) {
-            alert("Error: "+e)
+            console.log("error: "+e)
+            alert("No faults detected")
         }
 
 
@@ -74,6 +75,21 @@ class faultEdge extends Component{
                 {
                     (this.state.hasFaults)
                         ? <div>
+                            {/*<input*/}
+                                {/*type="text"*/}
+                                {/*className="form-control"*/}
+                                {/*style={{padding: "5px", margin: "10px", display: "inline", width: "60%"}}*/}
+                                {/*placeholder="Enter fault switch id"*/}
+                                {/*value={this.state.faultSwitch}*/}
+                                {/*onChange={(event) => this.faultSwitchInputChangeHandler(event)}*/}
+                            {/*/>*/}
+                            {/*<input*/}
+                                {/*className="btn btn-primary"*/}
+                                {/*type="submit"*/}
+                                {/*value="Find"*/}
+                                {/*style={{padding: "9px"}}*/}
+                                {/*onClick={this.faultSwitchInputHandler}*/}
+                            {/*/>*/}
                             <GoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
 
                         </div>

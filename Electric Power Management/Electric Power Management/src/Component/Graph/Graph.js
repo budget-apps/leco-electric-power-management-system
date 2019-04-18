@@ -72,9 +72,12 @@ class Graph{
                     faultPathNodes.push(tempNode);
                 }
                 if(tempNode.getCurrentPower() == 0 && !tempNode.getFaultCurrent()){
-                    faultPathNodes.push(tempNode);
-                    found = true;
-                    break;
+                    if(parent.getFaultCurrent()){
+                        faultPathNodes.push(tempNode);
+                        found = true;
+                        break;
+                    }
+
                 }
             }
         }
@@ -89,6 +92,7 @@ class Graph{
             //console.log(faultPathNodes);
             const faultNode = faultPathNodes.pop();
             const parentNode = faultNode.getParent();
+            console.log([parentNode, faultNode]);
             return [parentNode, faultNode];
         }catch (e) {
             alert('Error: '+e)
