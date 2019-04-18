@@ -198,11 +198,11 @@ class Dashboard extends Component {
             this.generateGraph()
             this.generateNodeDataArray()
             this.generateLinkDataArray()
-            this.getSlectedName(event)
             //GoJs.componentWillUpdate()
         })
         .catch((e) => {
-            alert("nothing found"+e)
+            console.log("nothing found"+e)
+            alert("Please select a branch")
         });
 
     }
@@ -215,32 +215,36 @@ class Dashboard extends Component {
                 <div id="page-content-wrapper" style={{padding: "0"}}>
 
                     <Header/>
-                    <div className="row">
-                    </div>
-                    <div className="row" style={{padding: "0", margin: 0, width: "100%"}}>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <h2 style={{margin: "10px 0 10px 40px"}}>Dashboard</h2>
+                        </div>
+                        <div className="row" style={{padding: "0", margin: 0, width: "100%"}}>
 
-                        <div className="col-md-3">
-                            <AddExelSheet/>
-                        </div>
-                        <div className="col-md-3">
-                            {/*<AddFaults/>*/}
-                        </div>
-                        <div className="col-md-3">
+                            <div className="col-md-3">
+                                <AddExelSheet/>
+                            </div>
+                            <div className="col-md-3">
+                                {/*<AddFaults/>*/}
+                            </div>
+                            <div className="col-md-3">
 
+                            </div>
+                            <div className="col-md-3">
+                                <SelectMap changed={this.selectMapEventHandler}/>
+                            </div>
                         </div>
-                        <div className="col-md-3">
-                            <SelectMap changed={this.selectMapEventHandler}/>
+                        <div className="row">
+                            <div className="col-md-9" style={{width: "100%"}}>
+                                <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
+                            </div>
+                            <div className="col-md-3">
+                                <FaultEdge graph={this.state.graph}/>
+                                <Path/>
+                            </div>
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-md-9" style={{width: "100%"}}>
-                            <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
-                        </div>
-                        <div className="col-md-3">
-                            <FaultEdge graph={this.state.graph}/>
-                            <Path/>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
