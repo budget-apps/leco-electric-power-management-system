@@ -72,9 +72,12 @@ class Graph{
                     faultPathNodes.push(tempNode);
                 }
                 if(tempNode.getCurrentPower() == 0 && !tempNode.getFaultCurrent()){
-                    faultPathNodes.push(tempNode);
-                    found = true;
-                    break;
+                    if(parent.getFaultCurrent()){
+                        faultPathNodes.push(tempNode);
+                        found = true;
+                        break;
+                    }
+
                 }
             }
         }
@@ -82,12 +85,19 @@ class Graph{
     }
 
     findFaultEdge(faultLocation){
-        const faultSwitchNode = this.getVertex(faultLocation);
-        const faultPathNodes = this.findFaultPath(faultSwitchNode);
-        //console.log(faultPathNodes);
-        const faultNode = faultPathNodes.pop();
-        const parentNode = faultNode.getParent();
-        return [parentNode, faultNode];
+        console.log(faultLocation)
+        try{
+            const faultSwitchNode = this.getVertex(faultLocation);
+            const faultPathNodes = this.findFaultPath(faultSwitchNode);
+            //console.log(faultPathNodes);
+            const faultNode = faultPathNodes.pop();
+            const parentNode = faultNode.getParent();
+            console.log([parentNode, faultNode]);
+            return [parentNode, faultNode];
+        }catch (e) {
+            alert('Error: '+e)
+        }
+
 
     }
 }

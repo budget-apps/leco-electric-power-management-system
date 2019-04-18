@@ -7,6 +7,7 @@ import AddExelSheet from '../Button/AddExelSheet'
 import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
 import FaultPath from '../FaultEdge/FaultEdge'
+import Card from '../Card/Card'
 
 import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
@@ -23,8 +24,10 @@ class Dashboard extends Component {
     state = {
         electricMap:[],
         graph: new Graph(),
+        branch: "Negambo",
         nodeDataArray: [],
         linkDataArray: [],
+        isSelect: false,
     }
 
     generateGraph(){
@@ -139,6 +142,25 @@ class Dashboard extends Component {
         console.log(this.state.nodeDataArray)
     }
 
+    // generateNodeLocations() {
+    //     let allVertices = this.state.graph.getVertices();
+    //     let locArray = []
+    //     let locX = -600;
+    //     let locY = 0;
+    //     let locCord = locX + " " + locY
+    //
+    //     let tempAdjacent = allVertices[0].getAdjacent();
+    //     let tempNode;
+    //     let locRow = {id: 0, loc: "-600 0"}
+    //
+    //     while (tempAdjacent.length != 0) {
+    //         tempNode = tempAdjacent.pop();
+    //         let tempNodeAdjacents = tempNode[0].getAdjacent();
+    //         allAdjacent.push(tempNode);
+    //         tempAdjacent = tempAdjacent.concat(tempNodeAdjacents);
+    //     }
+    // }
+    //
     generateLinkDataArray(){
         let allVertices = this.state.graph.getVertices();
         let linkArray=[]
@@ -148,8 +170,9 @@ class Dashboard extends Component {
             for(let j=0;j<allVertices.length;j++){
                 let childNode = allVertices[j]
                 let childNodeID = childNode.getNodeId()
+                //console.log("Link data array "+parentNodeID+","+childNodeID+"->"+parentNode.isAdjacent(childNode))
                 if(parentNode.isAdjacent(childNode)){
-                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "40"};
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "Line Capacity\n40"};
                     linkArray.push(linkRows)
                 }
             }
@@ -178,7 +201,8 @@ class Dashboard extends Component {
             //GoJs.componentWillUpdate()
         })
         .catch((e) => {
-            alert("nothing found"+e)
+            console.log("nothing found"+e)
+            alert("Please select a branch")
         });
 
     }
@@ -191,33 +215,36 @@ class Dashboard extends Component {
                 <div id="page-content-wrapper" style={{padding: "0"}}>
 
                     <Header/>
-                    <div className="row" style={{padding: "0", margin: 0, width: "100%"}}>
-
-                        <div className="col-md-3">
-                            <AddExelSheet/>
+                    <div className="container-fluid">
+                        <div className="row btn-info">
+                            <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
-                        <div className="col-md-3">
-                            {/*<AddFaults/>*/}
+                        <div className="row">
+
+                            <div className="col-md-3">
+                                <AddExelSheet/>
+                            </div>
+                            <div className="col-md-3">
+                                {/*<AddFaults/>*/}
+                            </div>
+                            <div className="col-md-3">
+
+                            </div>
+                            <div className="col-md-3">
+                                <SelectMap changed={this.selectMapEventHandler}/>
+                            </div>
                         </div>
-                        <div className="col-md-3">
-
+                        <div className="row">
+                            <div className="col-md-9">
+                                <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
+                            </div>
+                            <div className="col-md-3">
+                                <FaultEdge graph={this.state.graph}/>
+                                <Path/>
+                            </div>
                         </div>
-                        <div className="col-md-3">
-                            <SelectMap changed={this.selectMapEventHandler}/>
-
-                        </div>
-
-
                     </div>
-                    <div className="row">
-                        <div className="col-md-9" style={{width: "100%"}}>
-                            <Map dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
-                        </div>
-                        <div className="col-md-3">
-                            <FaultEdge changed={this.faultSwitchInputHandler} graph={this.state.graph}/>
-                            <Path/>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
