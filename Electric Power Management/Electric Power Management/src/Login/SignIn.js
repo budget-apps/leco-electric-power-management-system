@@ -88,7 +88,7 @@ const UnauthenticatedNavigation = () => {
   return (
     <React.Fragment>
 
-      <li>
+      <li style={{display: "none"}}>
         <Link to={routes.SIGN_IN_PATH}>Sign In</Link>
       </li>
     </React.Fragment>
@@ -99,7 +99,7 @@ const Navigation = () => {
   return (
     <AuthContext.Consumer>
       {({ authUser }) =>
-        <nav>
+        <nav style={{display: "none"}}>
           <ul>
             <li>
               <Link to={routes.HOME_PATH}>Home</Link>
