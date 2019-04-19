@@ -2,6 +2,7 @@ import React from 'react'
 const firebase = require("firebase");
 
 class selectMap extends React.Component {
+
     render(){
         return (
             <div>

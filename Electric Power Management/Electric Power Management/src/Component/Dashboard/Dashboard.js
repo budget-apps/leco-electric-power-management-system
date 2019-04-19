@@ -7,7 +7,7 @@ import AddExelSheet from '../Button/AddExelSheet'
 import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
 import FaultPath from '../FaultEdge/FaultEdge'
-import Card from '../Card/Card'
+import ErrorMessage from '../Warnings/ErrorMessage'
 
 import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
@@ -211,6 +211,8 @@ class Dashboard extends Component {
         const {electricmap} = this.props
         return (
             <div className="d-flex" id="wrapper">
+
+                {/*<ErrorMessage/>*/}
                 <SideMenu/>
                 <div id="page-content-wrapper" style={{padding: "0"}}>
 
