@@ -43,6 +43,7 @@ class faultEdge extends Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.faultSwitch!==this.props.faultSwitch){
+            console.log("Fault edge component updating...")
             this.setState({
                 faultSwitch: this.props.faultSwitch,
                 graph: this.props.graph
@@ -52,11 +53,6 @@ class faultEdge extends Component{
 
     faultSwitchInputHandler = () => {
         try{
-            this.setState(
-                {
-                    graph: this.props.graph
-                }
-            )
             console.log(this.state.faultSwitch);
             console.log(this.state.graph)
             this.findFault()

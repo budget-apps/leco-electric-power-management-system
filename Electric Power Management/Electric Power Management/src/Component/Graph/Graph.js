@@ -46,7 +46,7 @@ class Graph{
         while(tempAdjacent.length!==0){
             tempNode = tempAdjacent.pop();
             let tempNodeAdjacents = tempNode[0].getAdjacent();
-            allAdjacent.push(tempNode);
+            allAdjacent.push(tempNode[0]);
             tempAdjacent=tempAdjacent.concat(tempNodeAdjacents);
         }
         return allAdjacent;
@@ -84,33 +84,39 @@ class Graph{
 
     findFaultEdge(faultLocation){
         console.log(faultLocation)
-        try{
-            const faultSwitchNode = this.getVertex(faultLocation);
-            const faultPathNodes = this.findFaultPath(faultSwitchNode);
-            //console.log(faultPathNodes);
-            const faultNode = faultPathNodes.pop();
-            const parentNode = faultNode.getParent();
-            console.log([parentNode, faultNode]);
-            return [parentNode, faultNode];
-        }catch (e) {
-            alert('Error: '+e)
-        }
-
-
+        const faultSwitchNode = this.getVertex(faultLocation);
+        const faultPathNodes = this.findFaultPath(faultSwitchNode);
+        //console.log(faultPathNodes);
+        const faultNode = faultPathNodes.pop();
+        const parentNode = faultNode.getParent();
+        console.log([parentNode, faultNode]);
+        return [parentNode, faultNode];
     }
 
     findPaths(from,to){
         let allAdjacents =this.findAllAdjacent(from)
-        console.log(allAdjacents)
+        // console.log(allAdjacents)
+        let tempPath = [from]
+        let allPathsToEnd =[]
+        for(let i=0;i<allAdjacents.length;i++){
+            tempPath.push(allAdjacents[i])
+            if(allAdjacents[i].getNodeId()<0){
+                allPathsToEnd.push(tempPath)
+                tempPath = [from]
+            }
+        }
+        let allPathsToNode = []
+        for(let i=0;i<allAdjacents.length;i++){
+            tempPath.push(allAdjacents[i])
+            if(allAdjacents[i].getNodeId()===to.getNodeId()){
+                allPathsToNode.push(tempPath)
+                tempPath = [from]
+            }
+        }
+        console.log(allPathsToNode)
+        return allPathsToNode;
     }
 }
-// const node1 = new Node(1)
-// const node2 = new Node(2)
-// const node3 = new Node(3)
-// const node4 = new Node(4)
-//
-// node1.setAdjacent(node2,0)
-// node2.setAdjacent(node4,0)
 
 module.exports = Graph
 

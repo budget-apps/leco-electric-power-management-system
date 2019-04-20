@@ -20,7 +20,7 @@ class Dashboard extends Component {
     state = {
         electricMap:[],
         graph: new Graph(),
-        branch: "Negambo",
+        branch: "No ",
         nodeDataArray: [],
         linkDataArray: [],
         isSelect: false,
@@ -73,6 +73,9 @@ class Dashboard extends Component {
 
             }
         }
+        // console.log("\n--------------------------\n")
+        // graph.findPaths(graph.getVertices()[3],graph.getVertices()[5])
+        // console.log("\n--------------------------\n")
         this.setState({
             graph: graph
         })
@@ -163,8 +166,10 @@ class Dashboard extends Component {
     }
 
     selectMapEventHandler=(event)=>{
-
-        console.log(event.target.value)
+        this.setState({
+            branch: event.target.value
+        })
+        console.log(this.state.branch)
         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
         .once('value')
         
@@ -202,6 +207,8 @@ class Dashboard extends Component {
         }
     }
 
+    getFaultEdge(){}
+
     render() {
         //const {electricmap} = this.props
         return (
@@ -232,7 +239,7 @@ class Dashboard extends Component {
                             </div>
                             <div className="col-md-3">
                                 <FaultEdge faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>
-                                <Path/>
+                                <Path faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>
                             </div>
                         </div>
                     </div>
