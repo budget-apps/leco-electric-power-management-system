@@ -70,7 +70,7 @@ class faultEdge extends Component{
 
     render() {
         return (
-            <div className="btn-danger" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
+            <div className="bg-default" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
                 {
                     (this.state.hasFaults)
                         ? <div>
@@ -79,7 +79,7 @@ class faultEdge extends Component{
                         : <div>
 
                             <input
-                                className="btn btn-warning"
+                                className="btn btn-primary"
                                 type="submit"
                                 value="Find faults"
                                 style={{padding: "9px",width: "90%"}}

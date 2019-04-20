@@ -208,10 +208,9 @@ class Dashboard extends Component {
             <div className="d-flex" id="wrapper">
                 <SideMenu/>
                 <div id="page-content-wrapper" style={{padding: "0"}}>
-
                     <Header/>
                     <div className="container-fluid">
-                        <div className="row btn-info">
+                        <div className="row bg-warning">
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
                         <div className="row">
