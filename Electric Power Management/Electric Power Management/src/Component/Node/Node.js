@@ -13,6 +13,10 @@ class Node{
         this.branch = null;
     };
 
+    getIsTripped(){
+        return this.isTripped;
+    }
+
     setIsTripped(val){
         this.isTripped = val;
     }
@@ -83,7 +87,7 @@ class Node{
         const listLen = adjacentList.length
         for(let i=0;i<listLen;i++){
             //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
-            if(adjacentList[i][0].getNodeId()==node.getNodeId()){
+            if(adjacentList[i][0].getNodeId()===node.getNodeId()){
                 return true;
             }
         }
