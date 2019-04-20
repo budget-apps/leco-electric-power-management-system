@@ -31,7 +31,7 @@ class  AddExelSheet extends React.Component{
     submitFile=()=>{
         firebase.database().ref().child('electricMap').set({electricmap:this.state.arr},(err,doc)=>{
             if(!err){
-                alert("success")
+                alert("File added to database!!!")
             }
         })
     }

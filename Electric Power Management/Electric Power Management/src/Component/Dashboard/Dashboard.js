@@ -128,7 +128,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: nodeType,"loc": "300 0"}
+                let nodeDataRow={ key: nodeID, text: nodeType+"\nNormally Open","loc": "300 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -214,7 +214,6 @@ class Dashboard extends Component {
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
                         <div className="row">
-
                             <div className="col-md-3">
                                 <AddExelSheet/>
                             </div>
