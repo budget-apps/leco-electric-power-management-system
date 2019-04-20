@@ -2,7 +2,7 @@ import React from 'react'
 
 const path = () => {
     return (
-        <div className="btn-info" style={{borderRadius: "10px"}}>
+        <div className="bg-default" style={{borderRadius: "10px"}}>
             <input
                 className="btn btn-primary"
                 type="submit"

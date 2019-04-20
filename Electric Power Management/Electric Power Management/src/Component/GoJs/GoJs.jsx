@@ -96,7 +96,7 @@ export default class GoJs extends Component {
         this.renderCanvas ();
     }
 
-    componentWillUpdate (prevProps) {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.nodes !== prevProps.nodes) {
             console.log ('Updating');
             const model = this.state.myModel;

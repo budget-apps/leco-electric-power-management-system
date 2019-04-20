@@ -5,10 +5,7 @@ import { auth } from '../firebase';
 import * as routes from '../constants/routes';
 import {  MDBBtn } from 'mdbreact';
 import {
-  BrowserRouter as Router,
   Link,
-  Switch,
-  Route,
   Redirect,
 } from 'react-router-dom';
 import Dashboard from '../Component/Dashboard/Dashboard'
@@ -170,56 +167,43 @@ class SignIn extends React.Component {
           };
 
           return (
-            <div className="container-fluid" style={{width: "40%"}}>
-              <h1>Sign In</h1>
-              <form className="form-group" onSubmit={onSubmit}>
-                
-                <label htmlFor="email">Email</label>
-                <input
-                    className="form-control"
-                    style={{width: "100%"}}
-                    type="text"
-                    name="email"
-                    value={state.email}
-                    onChange={onEmailChange}
-                />
+            <div className="container-fluid" style={{width: "100%"}}>
+              <div className="container-fluid btn-default" style={{width: "50%",padding: "10px",borderRadius: "10px"}}>
+                <h1>Sign In</h1>
+                <form className="form-group" onSubmit={onSubmit}>
 
-                <label htmlFor="password">Password</label>
-                <input
-                    className="form-control"
-                    type="password"
-                    name="password"
-                    value={state.password}
-                    onChange={onPasswordChange}
-                />
-                {state.error &&
+                  <label htmlFor="email">Email</label>
+                  <input
+                      className="form-control"
+                      style={{width: "100%"}}
+                      type="text"
+                      name="email"
+                      value={state.email}
+                      onChange={onEmailChange}
+                  />
+
+                  <label htmlFor="password">Password</label>
+                  <input
+                      className="form-control"
+                      type="password"
+                      name="password"
+                      value={state.password}
+                      onChange={onPasswordChange}
+                  />
+                  {state.error &&
                   <p style={{ color: 'red' }}>
                     {state.error}
                   </p>}
-
-                <MDBBtn className="btn btn-primary" type="submit" size="sm">Sign In</MDBBtn>
-              </form>
-              
-
-
-
-      
-
-
+                  <MDBBtn className="btn btn-info" type="submit" size="sm">Sign In</MDBBtn>
+                </form>
+              </div>
 
             </div>
-           
           );
-          
         }}
       </State>
     );
   }
 }
-
-
-
-
-
 
 export default withRouter(SignIn);

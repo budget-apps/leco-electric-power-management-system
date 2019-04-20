@@ -4,16 +4,12 @@ import SideMenu from '../SideMenu/SideMenu'
 import Map from '../Map/Map'
 import Path from '../Path/Path'
 import AddExelSheet from '../Button/AddExelSheet'
-import AddFaults from '../Button/AddFaults'
 import SelectMap from '../Button/SelectMap'
-import FaultPath from '../FaultEdge/FaultEdge'
-import Card from '../Card/Card'
 
 import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
 import './Dashboard.css'
-import GoJs from "../GoJs/GoJs";
 
 var firebase = require("firebase");
 
@@ -28,6 +24,7 @@ class Dashboard extends Component {
         nodeDataArray: [],
         linkDataArray: [],
         isSelect: false,
+        faultSwitch: ""
     }
 
     generateGraph(){
@@ -69,7 +66,7 @@ class Dashboard extends Component {
                 let nodeID=nodesJson[j][0]
                 let nodeWeight = Number(nodesJson[j][1])
                 let node = graph.getVertex(nodeID)
-                if(node!=undefined && nodeWeight!=NaN){
+                if(node!==undefined && nodeWeight!==NaN){
                     vertex.setAdjacent(node,nodeWeight)
                     //console.log(vertex.getNodeId()+","+node.getNodeId())
                 }
@@ -93,21 +90,21 @@ class Dashboard extends Component {
             let nodeID= tempNode.getNodeId()
             let nodeType= tempNode.getNodeType()
             let switchType = tempNode.getSwitchType()
-            if(!(nodeType=="Start" || nodeType=="End" || nodeType=="Primary") && isNormal){
+            if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && isNormal){
                 let text = nodeID+"\n"+nodeType+"\n"+switchType
                 let nodeDataRow={ key: nodeID, text: text,"loc": placex+" "+placey}
                 placex+=100;
                 placey=100;
                 isNormal = false;
                 nodeData.push(nodeDataRow)
-            }else  if(!(nodeType=="Start" || nodeType=="End" || nodeType=="Primary") && !isNormal){
+            }else  if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && !isNormal){
                 let text = nodeID+"\n"+nodeType+"\n"+switchType
                 let nodeDataRow={ key: nodeID, text: text,"loc": (placex-100)+" "+placey}
                 placex+=100;
                 placey=-100;
                 isNormal = true;
                 nodeData.push(nodeDataRow)
-            }else if(nodeType=="Primary" && isPrimary){
+            }else if(nodeType==="Primary" && isPrimary){
                 //console.log("Primary")
                 let text = nodeID+"\n"+nodeType+"\n"+switchType
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 -100"}
@@ -116,7 +113,7 @@ class Dashboard extends Component {
                 isPrimary = false;
                 nodeData.push(nodeDataRow)
             }
-            else if(nodeType=="Primary" && !isPrimary){
+            else if(nodeType==="Primary" && !isPrimary){
                 //console.log("Primary")
                 let text = nodeID+"\n"+nodeType+"\n"+switchType
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 100"}
@@ -125,13 +122,13 @@ class Dashboard extends Component {
                 isPrimary = false;
                 nodeData.push(nodeDataRow)
             }
-            else if(nodeType=="Start"){
+            else if(nodeType==="Start"){
                 //console.log("Start")
                 let nodeDataRow={ key: nodeID, text: nodeType,"loc": "-600 0"}
                 nodeData.push(nodeDataRow)
-            }else if(nodeType=="End"){
+            }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: nodeType,"loc": "300 0"}
+                let nodeDataRow={ key: nodeID, text: nodeType+"\nNormally Open","loc": "300 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -142,25 +139,6 @@ class Dashboard extends Component {
         console.log(this.state.nodeDataArray)
     }
 
-    // generateNodeLocations() {
-    //     let allVertices = this.state.graph.getVertices();
-    //     let locArray = []
-    //     let locX = -600;
-    //     let locY = 0;
-    //     let locCord = locX + " " + locY
-    //
-    //     let tempAdjacent = allVertices[0].getAdjacent();
-    //     let tempNode;
-    //     let locRow = {id: 0, loc: "-600 0"}
-    //
-    //     while (tempAdjacent.length != 0) {
-    //         tempNode = tempAdjacent.pop();
-    //         let tempNodeAdjacents = tempNode[0].getAdjacent();
-    //         allAdjacent.push(tempNode);
-    //         tempAdjacent = tempAdjacent.concat(tempNodeAdjacents);
-    //     }
-    // }
-    //
     generateLinkDataArray(){
         let allVertices = this.state.graph.getVertices();
         let linkArray=[]
@@ -191,41 +169,55 @@ class Dashboard extends Component {
         .once('value')
         
         .then((snapshot) => {
-            const key = snapshot.key;
+            //const key = snapshot.key;
             const val = snapshot.val().electricmap;
             this.setState({electricMap:val})
             //console.log(this.state.electricMap[0])
             this.generateGraph()
-            this.generateNodeDataArray()
             this.generateLinkDataArray()
+            this.generateNodeDataArray()
+            this.checkingFaults()
             //GoJs.componentWillUpdate()
         })
         .catch((e) => {
-            console.log("nothing found"+e)
+            console.log(e)
             alert("Please select a branch")
         });
 
     }
 
+    checkingFaults(){
+        let vertices = this.state.graph.getVertices()
+        for(let i=0;i<vertices.length;i++){
+            let tempNode = vertices[i]
+            if(tempNode.getIsTripped()){
+
+                this.setState(
+                    {
+                        faultSwitch: tempNode.getNodeId()
+                    }
+                )
+                console.log("Fault switch: "+this.state.faultSwitch)
+            }
+        }
+    }
+
     render() {
-        const {electricmap} = this.props
+        //const {electricmap} = this.props
         return (
             <div className="d-flex" id="wrapper">
                 <SideMenu/>
                 <div id="page-content-wrapper" style={{padding: "0"}}>
-
                     <Header/>
                     <div className="container-fluid">
-                        <div className="row btn-info">
+                        <div className="row btn-default">
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
                         <div className="row">
-
                             <div className="col-md-3">
                                 <AddExelSheet/>
                             </div>
                             <div className="col-md-3">
-                                {/*<AddFaults/>*/}
                             </div>
                             <div className="col-md-3">
 
@@ -239,7 +231,7 @@ class Dashboard extends Component {
                                 <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                             </div>
                             <div className="col-md-3">
-                                <FaultEdge graph={this.state.graph}/>
+                                <FaultEdge faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>
                                 <Path/>
                             </div>
                         </div>

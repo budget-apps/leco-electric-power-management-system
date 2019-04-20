@@ -1,6 +1,5 @@
 import React from 'react'
 import * as excel from 'xlsx';
-import {  MDBBtn } from 'mdbreact';
 var firebase = require("firebase");
 
 
@@ -32,15 +31,15 @@ class  AddExelSheet extends React.Component{
     submitFile=()=>{
         firebase.database().ref().child('electricMap').set({electricmap:this.state.arr},(err,doc)=>{
             if(!err){
-                alert("success")
+                alert("File added to database!!!")
             }
         })
     }
     render(){
     return (
         <div>
-            <input className="btn btn-primary" type="file" onChange={this.uploadfile} style={{width: "40%",padding: "10px"}} />
-            <button className="btn btn-primary" type="submit" size="sm" onClick={this.submitFile} style={{width: "50%",padding: "12px"}}>Submit</button>
+            <input className="btn btn-primary" type="file" onChange={this.uploadfile} style={{width: "50%"}} />
+            <button className="btn btn-primary" type="submit" size="sm" onClick={this.submitFile} style={{width: "40%"}}>Upload</button>
             </div>
     )
 }
