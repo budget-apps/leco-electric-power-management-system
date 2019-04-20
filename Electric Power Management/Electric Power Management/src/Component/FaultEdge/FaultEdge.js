@@ -42,7 +42,7 @@ class faultEdge extends Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.faultSwitch!=this.props.faultSwitch){
+        if(prevProps.faultSwitch!==this.props.faultSwitch){
             this.setState({
                 faultSwitch: this.props.faultSwitch,
                 graph: this.props.graph
