@@ -210,7 +210,7 @@ class Dashboard extends Component {
                 <div id="page-content-wrapper" style={{padding: "0"}}>
                     <Header/>
                     <div className="container-fluid">
-                        <div className="row bg-warning">
+                        <div className="row btn-default">
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
                         <div className="row">
