@@ -5,10 +5,7 @@ import { auth } from '../firebase';
 import * as routes from '../constants/routes';
 import {  MDBBtn } from 'mdbreact';
 import {
-  BrowserRouter as Router,
   Link,
-  Switch,
-  Route,
   Redirect,
 } from 'react-router-dom';
 import Dashboard from '../Component/Dashboard/Dashboard'

@@ -1,5 +1,3 @@
-const Node = require('../Node/Node')
-
 class Graph{
     constructor(start,end){
         this.start=start;
@@ -17,7 +15,7 @@ class Graph{
     findPrimary(){
         let primaryArray=[]
         for(let i=0;i<this.order;i++){
-            if(this.vertices[i].getNodeType()=="Primary"){
+            if(this.vertices[i].getNodeType()==="Primary"){
                 primaryArray.push(this.vertices[i])
             }
         }
@@ -35,7 +33,7 @@ class Graph{
     getVertex(id){
         const vertices=this.getVertices();
         for(let i=0;i<this.order;i++){
-            if(vertices[i].getNodeId()==id){
+            if(vertices[i].getNodeId()===id){
                 return vertices[i];
             }
         }
@@ -45,7 +43,7 @@ class Graph{
         let allAdjacent=[];
         let tempAdjacent=node.getAdjacent();
         let tempNode;
-        while(tempAdjacent.length!=0){
+        while(tempAdjacent.length!==0){
             tempNode = tempAdjacent.pop();
             let tempNodeAdjacents = tempNode[0].getAdjacent();
             allAdjacent.push(tempNode);
@@ -58,7 +56,7 @@ class Graph{
         let tempfaultPathNodes = [faultSwitchNode];
         let faultPathNodes = [faultSwitchNode];
         let found = false;
-        while(tempfaultPathNodes.length != 0 && !found){
+        while(tempfaultPathNodes.length !== 0 && !found){
             let parent = tempfaultPathNodes.pop();
             let tempAdjacents = parent.getAdjacent();
             let tempAdjacentLength = tempAdjacents.length;
@@ -71,7 +69,7 @@ class Graph{
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode);
                 }
-                if(tempNode.getCurrentPower() == 0 && !tempNode.getFaultCurrent()){
+                if(tempNode.getCurrentPower() === 0 && !tempNode.getFaultCurrent()){
                     if(parent.getFaultCurrent()){
                         faultPathNodes.push(tempNode);
                         found = true;
