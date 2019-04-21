@@ -17,7 +17,7 @@ class faultEdge extends Component{
     }
 
     findFault(){
-        console.log(this.props.faultSwitch)
+        //console.log(this.props.faultSwitch)
         let faultEdges = this.state.graph.findFaultEdge(this.state.faultSwitch);
         console.log(faultEdges)
         let faultNodeData = []
@@ -53,8 +53,8 @@ class faultEdge extends Component{
 
     faultSwitchInputHandler = () => {
         try{
-            console.log(this.state.faultSwitch);
-            console.log(this.state.graph)
+            //console.log(this.state.faultSwitch);
+            //console.log(this.state.graph)
             this.findFault()
         }catch (e) {
             console.log("error: "+e)

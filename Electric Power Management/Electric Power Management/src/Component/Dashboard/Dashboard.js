@@ -207,8 +207,6 @@ class Dashboard extends Component {
         }
     }
 
-    getFaultEdge(){}
-
     render() {
         //const {electricmap} = this.props
         return (
