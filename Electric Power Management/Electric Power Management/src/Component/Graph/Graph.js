@@ -66,7 +66,7 @@ class Graph{
             for(let i=0;i<tempAdjacentLength;i++){
                 let tempNode = tempAdjacents.pop()[0];
                 tempfaultPathNodes.push(tempNode);
-                tempNode.setParent(parent);
+                tempNode.setParent(parent.getNodeId());
                 //console.log(tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower());
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode);
@@ -90,7 +90,7 @@ class Graph{
         const faultPathNodes = this.findFaultPath(faultSwitchNode);
         //console.log(faultPathNodes);
         const faultNode = faultPathNodes.pop();
-        const parentNode = faultNode.getParent();
+        const parentNode = this.getVertex(faultNode.getParent());
         //console.log([parentNode, faultNode]);
         return [parentNode, faultNode];
     }
