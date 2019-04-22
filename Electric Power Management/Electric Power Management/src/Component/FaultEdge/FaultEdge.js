@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import GoJs from "../GoJs/GoJs";
+import MiniGoJs from "../GoJs/MiniGoJs";
 
 class faultEdge extends Component{
 
@@ -17,7 +17,6 @@ class faultEdge extends Component{
     }
 
     findFault(){
-        //console.log(this.props.faultSwitch)
         let faultEdges = this.state.graph.findFaultEdge(this.state.faultSwitch);
         console.log(faultEdges)
         let faultNodeData = []
@@ -70,7 +69,7 @@ class faultEdge extends Component{
                 {
                     (this.state.hasFaults)
                         ? <div>
-                            <GoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
+                            <MiniGoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
                         </div>
                         : <div>
 

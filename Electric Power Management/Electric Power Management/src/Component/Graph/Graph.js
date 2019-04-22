@@ -42,6 +42,7 @@ class Graph{
     findAllAdjacent(node){
         let allAdjacent=[];
         let tempAdjacent=node.getAdjacent();
+        console.log(node.getAdjacent())
         let tempNode;
         while(tempAdjacent.length!==0){
             tempNode = tempAdjacent.pop();
@@ -49,6 +50,7 @@ class Graph{
             allAdjacent.push(tempNode[0]);
             tempAdjacent=tempAdjacent.concat(tempNodeAdjacents);
         }
+        console.log(allAdjacent)
         return allAdjacent;
     }
 
@@ -89,17 +91,19 @@ class Graph{
         //console.log(faultPathNodes);
         const faultNode = faultPathNodes.pop();
         const parentNode = faultNode.getParent();
-        console.log([parentNode, faultNode]);
+        //console.log([parentNode, faultNode]);
         return [parentNode, faultNode];
     }
 
     findPaths(from,to){
+        console.log(from)
         let allAdjacents =this.findAllAdjacent(from)
-        // console.log(allAdjacents)
+        console.log(allAdjacents)
         let tempPath = [from]
         let allPathsToEnd =[]
         for(let i=0;i<allAdjacents.length;i++){
             tempPath.push(allAdjacents[i])
+            console.log(allAdjacents[i])
             if(allAdjacents[i].getNodeId()<0){
                 allPathsToEnd.push(tempPath)
                 tempPath = [from]
@@ -114,6 +118,7 @@ class Graph{
             }
         }
         console.log(allPathsToNode)
+        console.log(allPathsToEnd)
         return allPathsToNode;
     }
 }

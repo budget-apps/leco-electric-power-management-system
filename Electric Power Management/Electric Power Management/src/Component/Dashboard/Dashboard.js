@@ -14,9 +14,6 @@ import './Dashboard.css'
 var firebase = require("firebase");
 
 class Dashboard extends Component {
-
-
-
     state = {
         electricMap:[],
         graph: new Graph(),
@@ -73,13 +70,9 @@ class Dashboard extends Component {
 
             }
         }
-        // console.log("\n--------------------------\n")
-        // graph.findPaths(graph.getVertices()[3],graph.getVertices()[5])
-        // console.log("\n--------------------------\n")
         this.setState({
             graph: graph
         })
-        //console.log(this.state.graph)
     }
     generateNodeDataArray(){
         let allVertices = this.state.graph.getVertices();
@@ -139,7 +132,6 @@ class Dashboard extends Component {
         this.setState({
             nodeDataArray: nodeData
         })
-        console.log(this.state.nodeDataArray)
     }
 
     generateLinkDataArray(){
@@ -161,28 +153,22 @@ class Dashboard extends Component {
         this.setState({
             linkDataArray: linkArray
         })
-        console.log(this.state.linkDataArray)
-        console.log(this.state.graph)
     }
 
     selectMapEventHandler=(event)=>{
         this.setState({
             branch: event.target.value
         })
-        console.log(this.state.branch)
         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(event.target.value)
         .once('value')
         
         .then((snapshot) => {
-            //const key = snapshot.key;
             const val = snapshot.val().electricmap;
             this.setState({electricMap:val})
-            //console.log(this.state.electricMap[0])
             this.generateGraph()
             this.generateLinkDataArray()
             this.generateNodeDataArray()
             this.checkingFaults()
-            //GoJs.componentWillUpdate()
         })
         .catch((e) => {
             console.log(e)
@@ -196,19 +182,17 @@ class Dashboard extends Component {
         for(let i=0;i<vertices.length;i++){
             let tempNode = vertices[i]
             if(tempNode.getIsTripped()){
-
                 this.setState(
                     {
                         faultSwitch: tempNode.getNodeId()
                     }
                 )
-                console.log("Fault switch: "+this.state.faultSwitch)
             }
         }
     }
 
     render() {
-        //const {electricmap} = this.props
+        console.log("[Dashboard.js render]")
         return (
             <div className="d-flex" id="wrapper">
                 <SideMenu/>
@@ -236,7 +220,7 @@ class Dashboard extends Component {
                                 <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                             </div>
                             <div className="col-md-3">
-                                <FaultEdge faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>
+                                {/*<FaultEdge faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>*/}
                                 <Path faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>
                             </div>
                         </div>
