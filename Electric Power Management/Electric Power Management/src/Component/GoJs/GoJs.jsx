@@ -96,7 +96,36 @@ export default class GoJs extends Component {
         this.renderCanvas ();
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (this.props.nodes !== nextProps.nodes) {
+            console.log ('Updating');
+            const model = this.state.myModel;
+            const diagram = this.state.myDiagram;
+            model.nodeDataArray = this.props.nodes;
+            model.linkDataArray = this.props.links
+            diagram.model = model;
+            this.setState({myModel: model, myDiagram: diagram});
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextProps.nodes!==this.props.nodes
+    }
+
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        if (this.props.nodes !== nextProps.nodes) {
+            console.log ('Updating');
+            const model = this.state.myModel;
+            const diagram = this.state.myDiagram;
+            model.nodeDataArray = this.props.nodes;
+            model.linkDataArray = this.props.links
+            diagram.model = model;
+            this.setState({myModel: model, myDiagram: diagram});
+        }
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("componentDidUpdate")
         if (this.props.nodes !== prevProps.nodes) {
             console.log ('Updating');
             const model = this.state.myModel;

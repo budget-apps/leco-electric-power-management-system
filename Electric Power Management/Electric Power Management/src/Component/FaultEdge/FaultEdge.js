@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import GoJs from "../GoJs/GoJs";
+import MiniGoJs from "../GoJs/MiniGoJs";
 
 class faultEdge extends Component{
 
@@ -17,7 +17,6 @@ class faultEdge extends Component{
     }
 
     findFault(){
-        console.log(this.props.faultSwitch)
         let faultEdges = this.state.graph.findFaultEdge(this.state.faultSwitch);
         console.log(faultEdges)
         let faultNodeData = []
@@ -43,6 +42,7 @@ class faultEdge extends Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.faultSwitch!==this.props.faultSwitch){
+            console.log("Fault edge component updating...")
             this.setState({
                 faultSwitch: this.props.faultSwitch,
                 graph: this.props.graph
@@ -52,13 +52,8 @@ class faultEdge extends Component{
 
     faultSwitchInputHandler = () => {
         try{
-            this.setState(
-                {
-                    graph: this.props.graph
-                }
-            )
-            console.log(this.state.faultSwitch);
-            console.log(this.state.graph)
+            //console.log(this.state.faultSwitch);
+            //console.log(this.state.graph)
             this.findFault()
         }catch (e) {
             console.log("error: "+e)
@@ -74,7 +69,7 @@ class faultEdge extends Component{
                 {
                     (this.state.hasFaults)
                         ? <div>
-                            <GoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
+                            <MiniGoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>
                         </div>
                         : <div>
 
