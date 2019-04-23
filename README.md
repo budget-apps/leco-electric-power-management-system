@@ -1,4 +1,4 @@
 # Electric-Power-Management
 
 ## Login
-![alt text](https://drive.google.com/open?id=1waFBl5-JH0VgeibpwOuI0layo6BS2AkC)
+![alt text](https://github.com/lahirudulanjaya/Electric-Power-Management/blob/master/Electric%20Power%20Management/Electric%20Power%20Management/src/Assests/login.PNG)
