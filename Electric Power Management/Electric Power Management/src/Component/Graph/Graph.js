@@ -42,7 +42,6 @@ class Graph{
     findAllAdjacent(node){
         let allAdjacent=[];
         let tempAdjacent=node.getAdjacent();
-        console.log(node.getAdjacent())
         let tempNode;
         while(tempAdjacent.length!==0){
             tempNode = tempAdjacent.pop();
@@ -50,7 +49,6 @@ class Graph{
             allAdjacent.push(tempNode[0]);
             tempAdjacent=tempAdjacent.concat(tempNodeAdjacents);
         }
-        console.log(allAdjacent)
         return allAdjacent;
     }
 
@@ -61,10 +59,8 @@ class Graph{
         while(tempfaultPathNodes.length !== 0 && !found){
             let parent = tempfaultPathNodes.pop();
             let tempAdjacents = parent.getAdjacent();
-            let tempAdjacentLength = tempAdjacents.length;
-
-            for(let i=0;i<tempAdjacentLength;i++){
-                let tempNode = tempAdjacents.pop()[0];
+            for(let i=0;i<tempAdjacents.length;i++){
+                let tempNode = tempAdjacents[i][0];
                 tempfaultPathNodes.push(tempNode);
                 tempNode.setParent(parent.getNodeId());
                 //console.log(tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower());
@@ -85,7 +81,6 @@ class Graph{
     }
 
     findFaultEdge(faultLocation){
-        console.log(faultLocation)
         const faultSwitchNode = this.getVertex(faultLocation);
         const faultPathNodes = this.findFaultPath(faultSwitchNode);
         //console.log(faultPathNodes);
@@ -96,15 +91,12 @@ class Graph{
     }
 
     findPaths(from,to){
-        console.log(from)
         let allAdjacents =this.findAllAdjacent(from)
-        console.log(allAdjacents)
-        let tempPath = [from]
         let allPathsToEnd =[]
+        let tempPath = [from]
         for(let i=0;i<allAdjacents.length;i++){
             tempPath.push(allAdjacents[i])
-            console.log(allAdjacents[i])
-            if(allAdjacents[i].getNodeId()<0){
+            if(allAdjacents[i].getNodeId()==-1){
                 allPathsToEnd.push(tempPath)
                 tempPath = [from]
             }
@@ -117,11 +109,9 @@ class Graph{
                 tempPath = [from]
             }
         }
-        console.log(allPathsToNode)
-        console.log(allPathsToEnd)
-        return allPathsToNode;
+        return allPathsToEnd;
     }
 }
 
-module.exports = Graph
+module.exports =  Graph
 

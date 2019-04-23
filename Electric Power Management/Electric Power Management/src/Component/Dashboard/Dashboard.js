@@ -221,7 +221,7 @@ class Dashboard extends Component {
             this.generateNodeDataArray()
             this.checkingFaults()
             this.findFaultEdges()
-            //this.findFaultPaths()
+            this.findFaultPaths()
             this.testfunc()
         })
         .catch((e) => {

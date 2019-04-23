@@ -4,8 +4,12 @@ import GoJs from "../GoJs/GoJs";
 
 class path extends Component{
 
-    state = {
-        showPath: false,
+    constructor(props){
+        super(props)
+        this.state = {
+            showPath: false,
+            path: [],
+        }
     }
 
     recoveryClickHandler = () => {
@@ -21,9 +25,9 @@ class path extends Component{
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if(this.props.path!==nextProps.path){
-            console.log(nextProps)
-        }
+        this.setState({
+            path: nextProps.path,
+        })
     }
 
     render() {
@@ -40,7 +44,7 @@ class path extends Component{
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.recoveryClickHandler}
                             />
-                            <p>{this.props.path}</p>
+                            <p>{this.state.path[0][0].getNodeId()}</p>
                         </div>
                         : <div>
                             <input
