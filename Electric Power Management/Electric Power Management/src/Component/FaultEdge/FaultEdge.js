@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MiniGoJs from "../GoJs/MiniGoJs";
+//import MiniGoJs from "../GoJs/MiniGoJs";
 
 class faultEdge extends Component{
 
@@ -26,7 +26,7 @@ class faultEdge extends Component{
                 {
                     (this.state.hasFaults)
                         ? <div>
-                            <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/>
+                            {/* <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/> */}
                         </div>
                         : <div>
 
