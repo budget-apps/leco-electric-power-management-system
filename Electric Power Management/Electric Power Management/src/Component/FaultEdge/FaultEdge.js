@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-//import MiniGoJs from "../GoJs/MiniGoJs";
+import MiniGoJs from "../GoJs/MiniGoJs";
 
 class faultEdge extends Component{
 
@@ -26,10 +26,16 @@ class faultEdge extends Component{
                 {
                     (this.state.hasFaults)
                         ? <div>
-                            {/* <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/> */}
+                            <input
+                                className="btn btn-primary"
+                                type="submit"
+                                value="Find faults"
+                                style={{padding: "9px",width: "90%"}}
+                                onClick={this.faultSwitchInputHandler}
+                            />
+                             <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/>
                         </div>
                         : <div>
-
                             <input
                                 className="btn btn-primary"
                                 type="submit"

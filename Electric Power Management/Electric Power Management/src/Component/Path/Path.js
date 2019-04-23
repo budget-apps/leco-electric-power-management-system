@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import Graph from '../Graph/Graph'
-import GoJs from "../GoJs/GoJs";
+import MiniGoJs from "../GoJs/MiniGoJs";
 
 class path extends Component{
 
@@ -8,12 +7,25 @@ class path extends Component{
         super(props)
         this.state = {
             showPath: false,
-            path: [],
+            nodeDataArray: this.props.nodeDataArray,
+            linkDataArray: this.props.linkDataArray,
+            componentRow: []
         }
+    }
+
+    generateComponent(){
+        let componentRow = []
+        for(let i=0;i<this.state.nodeDataArray.length;i++){
+            componentRow.push(<div className="bg-success" style={{marginBottom: "5px"}}><MiniGoJs nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/></div>)
+        }
+        this.setState({
+            componentRow: componentRow
+        })
     }
 
     recoveryClickHandler = () => {
         try{
+            this.generateComponent()
             this.setState({
                 showPath: true,
             })
@@ -26,7 +38,8 @@ class path extends Component{
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
-            path: nextProps.path,
+            nodeDataArray: nextProps.nodeDataArray,
+            linkDataArray: nextProps.linkDataArray
         })
     }
 
@@ -36,21 +49,22 @@ class path extends Component{
                 {
                     (this.state.showPath)
                         ? <div>
-                            {/*<GoJs nodes={this.state.nodeDataArray} links={this.state.linkDataArray}/>*/}
                             <input
                                 className="btn btn-primary"
                                 type="submit"
-                                value="Find Recovery Path"
+                                value="Find Recovery Paths"
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.recoveryClickHandler}
                             />
-                            <p>{this.state.path[0][0].getNodeId()}</p>
+                            <div style={{padding: "10px"}}>
+                                {this.state.componentRow}
+                            </div>
                         </div>
                         : <div>
                             <input
                                 className="btn btn-primary"
                                 type="submit"
-                                value="Find Recovery Path"
+                                value="Find Recovery Paths"
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.recoveryClickHandler}
                             />
