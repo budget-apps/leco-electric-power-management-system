@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c4ce1685-1dd9-4c37-b1e1-d7d49b8cdd98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Alert/alert.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Alert/alert.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Button/AddExelSheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Button/AddExelSheet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Button/SelectMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Button/SelectMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/FaultEdge/FaultEdge.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/FaultEdge/FaultEdge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Path/Path.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Path/Path.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/SideMenu/SideMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/SideMenu/SideMenu.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -409,21 +400,7 @@
       <workItem from="1555867209319" duration="5841000" />
       <workItem from="1555922395944" duration="23145000" />
       <workItem from="1556005343227" duration="10561000" />
-      <workItem from="1556046310177" duration="5312000" />
-    </task>
-    <task id="LOCAL-00001" summary="UI changes&#10;Implement Graph and Vertex classes&#10;Add Header,SideMenu,Map,Path components">
-      <created>1554589607704</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1554589607704</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Merge branches 'Asitha' and 'master' of https://github.com/lahirudulanjaya/Electric-Power-Management into Asitha&#10;&#10;# Conflicts:&#10;#&#9;Electric Power Management/Electric Power Management/src/Component/Graph/Graph.js&#10;#&#9;Electric Power Management/Electric Power Management/src/Component/Node/Node.js">
-      <created>1554628978291</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1554628978291</updated>
+      <workItem from="1556046310177" duration="6082000" />
     </task>
     <task id="LOCAL-00003" summary="Merge branches 'Asitha' and 'master' of https://github.com/lahirudulanjaya/Electric-Power-Management into Asitha&#10;&#10;# Conflicts:&#10;#&#9;Electric Power Management/Electric Power Management/src/Component/Graph/Graph.js&#10;#&#9;Electric Power Management/Electric Power Management/src/Component/Node/Node.js">
       <created>1554664733883</created>
@@ -754,11 +731,25 @@
       <option name="project" value="LOCAL" />
       <updated>1556021608832</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="completed give tasks">
+      <created>1556051836264</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1556051836264</updated>
+    </task>
+    <task id="LOCAL-00051" summary="completed give tasks">
+      <created>1556051883889</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1556051883889</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231606000" />
+    <option name="totallyTimeSpent" value="232376000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -802,7 +793,8 @@
     <MESSAGE value="complete fault detection" />
     <MESSAGE value="complete fault detection 2" />
     <MESSAGE value="recovery path component partially done" />
-    <option name="LAST_COMMIT_MESSAGE" value="recovery path component partially done" />
+    <MESSAGE value="completed give tasks" />
+    <option name="LAST_COMMIT_MESSAGE" value="completed give tasks" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/constants/routes.js">
