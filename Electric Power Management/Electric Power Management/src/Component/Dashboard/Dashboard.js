@@ -22,6 +22,8 @@ class Dashboard extends Component {
         linkDataArray: [],
         faultNodeArray: [],
         faultLinkArray: [],
+        oathNodeArray: [],
+        pathLinkArray: [],
         faultEdges: [],
         paths: [],
         isSelect: false,
@@ -39,6 +41,11 @@ class Dashboard extends Component {
             paths: paths,
         })
         console.log(paths)
+        for(let i=0;i<paths.length;i++){
+            for(let j=0;j<paths[i].length;j++){
+
+            }
+        }
     }
 
     findFaultEdges(){
@@ -119,10 +126,6 @@ class Dashboard extends Component {
             graph: graph
         })
         console.log(graph,this.state.graph)
-    }
-
-    testfunc(){
-        console.log(this.state.graph)
     }
 
     generateNodeDataArray(){

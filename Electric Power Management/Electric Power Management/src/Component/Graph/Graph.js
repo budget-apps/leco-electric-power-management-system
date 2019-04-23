@@ -101,14 +101,6 @@ class Graph{
                 tempPath = [from]
             }
         }
-        let allPathsToNode = []
-        for(let i=0;i<allAdjacents.length;i++){
-            tempPath.push(allAdjacents[i])
-            if(allAdjacents[i].getNodeId()===to.getNodeId()){
-                allPathsToNode.push(tempPath)
-                tempPath = [from]
-            }
-        }
         return allPathsToEnd;
     }
 }
