@@ -10,6 +10,7 @@ import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
 import './Dashboard.css'
+import Swal from "sweetalert2";
 
 var firebase = require("firebase");
 
@@ -20,8 +21,84 @@ class Dashboard extends Component {
         branch: "No ",
         nodeDataArray: [],
         linkDataArray: [],
+        faultNodeArray: [],
+        faultLinkArray: [],
+        pathNodeArray: [],
+        pathLinkArray: [],
+        faultEdges: [],
+        paths: [],
         isSelect: false,
         faultSwitch: ""
+    }
+
+    findFaultPaths(){
+        let graph=this.state.graph;
+        let faultLoc = this.state.faultSwitch
+        let faultEdges = graph.findFaultEdge(faultLoc)
+        let from = graph.getVertex(faultLoc)
+        let to = faultEdges[1]
+        let paths = graph.findPaths(from,to)
+        this.setState({
+            paths: paths,
+        })
+        console.log(paths)
+        let allPathNodeData = []
+        let allPathLinkData = []
+        for(let i=0;i<paths.length;i++){
+            let pathNodeSet = []
+            let pathLinkSet = []
+            let locX = -100
+            let locY= 0
+            for(let j=0;j<paths[i].length;j++){
+                let tempNode = paths[i][j]
+                let nodeID= tempNode.getNodeId()
+                let nodeType= tempNode.getNodeType()
+                let switchType = tempNode.getSwitchType()
+                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let pathNodeDataRow = {key: nodeID,text: text,"loc": locX+" "+locY}
+                locX+=100;
+                pathNodeSet.push(pathNodeDataRow)
+                let pathNodeLinkRow= {}
+                if(j!==paths[i].length-1){
+                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": "Line Capacity"}
+                }
+                pathLinkSet.push(pathNodeLinkRow)
+            }
+            allPathNodeData.push(pathNodeSet)
+            allPathLinkData.push(pathLinkSet)
+        }
+        this.setState({
+            pathNodeArray: allPathNodeData,
+            pathLinkArray: allPathLinkData
+        })
+    }
+
+    findFaultEdges(){
+        //console.log(this.state.graph)
+        let graph=this.state.graph;
+        let faultLoc = this.state.faultSwitch
+        let faultEdges = graph.findFaultEdge(faultLoc);
+        console.log(faultEdges)
+        let faultNodeData = []
+        let loc =["-100 0","50 0"]
+        for(let i=0;i<2;i++){
+            let tempNode = faultEdges[i]
+            let nodeID= tempNode.getNodeId()
+            let nodeType= tempNode.getNodeType()
+            let switchType = tempNode.getSwitchType()
+            let text = nodeID+"\n"+nodeType+"\n"+switchType
+            let faultNodeDataRow = {key: nodeID,text: text,"loc": loc[i]}
+            faultNodeData.push(faultNodeDataRow)
+        }
+        let faultNodeLink = [];
+        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": "Line Capacity"}
+        faultNodeLink.push(faultNodeLinkRow)
+        this.setState({
+            faultEdges: faultEdges,
+            faultNodeArray: faultNodeData,
+            faultLinkArray: faultNodeLink,
+        })
+        //console.log(this.state.graph)
     }
 
     generateGraph(){
@@ -73,7 +150,9 @@ class Dashboard extends Component {
         this.setState({
             graph: graph
         })
+        console.log(graph,this.state.graph)
     }
+
     generateNodeDataArray(){
         let allVertices = this.state.graph.getVertices();
         let nodeData=[];
@@ -169,10 +248,12 @@ class Dashboard extends Component {
             this.generateLinkDataArray()
             this.generateNodeDataArray()
             this.checkingFaults()
+            this.findFaultEdges()
+            this.findFaultPaths()
         })
         .catch((e) => {
             console.log(e)
-            alert("Please select a branch")
+            Swal.fire('Please select a branch')
         });
 
     }
@@ -192,7 +273,6 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log("[Dashboard.js render]")
         return (
             <div className="d-flex" id="wrapper">
                 <SideMenu/>
@@ -220,8 +300,8 @@ class Dashboard extends Component {
                                 <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                             </div>
                             <div className="col-md-3">
-                                {/*<FaultEdge faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>*/}
-                                <Path faultSwitch={this.state.faultSwitch} graph={this.state.graph}/>
+                                <FaultEdge nodeDataArray={this.state.faultNodeArray} linkDataArray={this.state.faultLinkArray}/>
+                                <Path nodeDataArray={this.state.pathNodeArray} linkDataArray={this.state.pathLinkArray}/>
                             </div>
                         </div>
                     </div>
