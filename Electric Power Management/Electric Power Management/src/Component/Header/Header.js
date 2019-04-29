@@ -18,19 +18,19 @@ const header = () => {
                     <li className="nav-item active">
                         <Link className="nav-link" to={routes.HOME_PATH}>Home</Link>
                     </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" id="navbar-dropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <MDBIcon icon="bell" className="pr-3" /><span
-                            className="badge badge-light">4</span>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
+                    {/*<li className="nav-item dropdown">*/}
+                        {/*<a className="nav-link dropdown-toggle" id="navbar-dropdown" role="button"*/}
+                           {/*data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*/}
+                            {/*<MDBIcon icon="bell" className="pr-3" /><span*/}
+                            {/*className="badge badge-light">4</span>*/}
+                        {/*</a>*/}
+                        {/*<div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown">*/}
+                            {/*<a className="dropdown-item" href="#">Action</a>*/}
+                            {/*<a className="dropdown-item" href="#">Another action</a>*/}
+                            {/*<div className="dropdown-divider"></div>*/}
+                            {/*<a className="dropdown-item" href="#">Something else here</a>*/}
+                        {/*</div>*/}
+                    {/*</li>*/}
                     <li className="nav-item">
                         <Link className="nav-link"  to={routes.SIGN_OUT_PATH}>Log Out</Link>
                     </li>

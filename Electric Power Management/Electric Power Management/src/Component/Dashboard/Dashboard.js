@@ -60,7 +60,7 @@ class Dashboard extends Component {
                 pathNodeSet.push(pathNodeDataRow)
                 let pathNodeLinkRow= {}
                 if(j!==paths[i].length-1){
-                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": "Line Capacity"}
+                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": "40"}
                 }
                 pathLinkSet.push(pathNodeLinkRow)
             }
@@ -91,7 +91,7 @@ class Dashboard extends Component {
             faultNodeData.push(faultNodeDataRow)
         }
         let faultNodeLink = [];
-        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": "Line Capacity"}
+        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": "40"}
         faultNodeLink.push(faultNodeLinkRow)
         this.setState({
             faultEdges: faultEdges,
@@ -165,15 +165,19 @@ class Dashboard extends Component {
             let nodeID= tempNode.getNodeId()
             let nodeType= tempNode.getNodeType()
             let switchType = tempNode.getSwitchType()
+            let isTripped = tempNode.getIsTripped()
+            let faultCurrent = tempNode.getFaultCurrent()
+            let currentPower = tempNode.getCurrentPower()
+            let capacity = tempNode.getCapacity()
             if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && isNormal){
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower+"\nSwitch Capacity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": placex+" "+placey}
                 placex+=100;
                 placey=100;
                 isNormal = false;
                 nodeData.push(nodeDataRow)
             }else  if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && !isNormal){
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower+"\nSwitch Capacity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": (placex-100)+" "+placey}
                 placex+=100;
                 placey=-100;
@@ -181,7 +185,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="Primary" && isPrimary){
                 //console.log("Primary")
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "Type: "+nodeType+"\nTotal Feeder Capcity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 -100"}
                 placex+=100;
                 placey=100;
@@ -190,7 +194,7 @@ class Dashboard extends Component {
             }
             else if(nodeType==="Primary" && !isPrimary){
                 //console.log("Primary")
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "Type: "+nodeType+"\nTotal Feeder Capcity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 100"}
                 placex+=100;
                 placey=-100;
@@ -203,7 +207,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: nodeType+"\nNormally Open","loc": "300 0"}
+                let nodeDataRow={ key: nodeID, text: "Type: Switch\nStatus: Normally Open","loc": "300 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -224,7 +228,7 @@ class Dashboard extends Component {
                 let childNodeID = childNode.getNodeId()
                 //console.log("Link data array "+parentNodeID+","+childNodeID+"->"+parentNode.isAdjacent(childNode))
                 if(parentNode.isAdjacent(childNode)){
-                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "Line Capacity\n40"};
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "40"};
                     linkArray.push(linkRows)
                 }
             }
