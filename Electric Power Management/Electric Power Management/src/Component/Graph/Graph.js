@@ -96,10 +96,19 @@ class Graph{
         let tempPath = [from]
         for(let i=0;i<allAdjacents.length;i++){
             tempPath.push(allAdjacents[i])
-            if(allAdjacents[i].getNodeId()==-1){
+            if(allAdjacents[i].getNodeId()===-1){
                 allPathsToEnd.push(tempPath)
                 tempPath = [from]
             }
+        }
+        for(let i=0;i<allPathsToEnd.length;i++){
+            for(let j=0;j<allPathsToEnd[i].length;j++){
+                if(allPathsToEnd[i][j].getNodeId()===to.getNodeId()){
+                    allPathsToEnd[i].pop()
+                    console.log(allPathsToEnd[i])
+                }
+            }
+
         }
         return allPathsToEnd;
     }

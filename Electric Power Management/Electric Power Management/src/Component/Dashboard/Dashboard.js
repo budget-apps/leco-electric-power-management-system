@@ -139,9 +139,11 @@ class Dashboard extends Component {
             for(let j=0;j<nodesJson.length;j++){
                 let nodeID=nodesJson[j][0]
                 let nodeWeight = Number(nodesJson[j][1])
+                let nodeLength = Number(nodesJson[j][2])
+                let nodeConductivity = Number(nodesJson[j][3])
                 let node = graph.getVertex(nodeID)
                 if(node!==undefined && nodeWeight!==NaN){
-                    vertex.setAdjacent(node,nodeWeight)
+                    vertex.setAdjacent(node,nodeWeight,nodeLength,nodeConductivity)
                     //console.log(vertex.getNodeId()+","+node.getNodeId())
                 }
 
