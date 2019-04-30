@@ -112,6 +112,35 @@ class Graph{
         }
         return allPathsToEnd;
     }
+
+    findVoltageDrop(paths){
+        for(let i=0;i<paths.length;i++){
+            console.log("Find drop")
+        }
+    }
+
+    findMaxCurrentCapacity(paths){
+
+    }
+
+    findLimitedFactor(path){
+        let primary = path[0]
+        let primaryCapacity = Number(primary.getCapacity())
+        let totalFeeders = Number(primary.getAdjacent().length)
+        let feederCapacity = primaryCapacity/totalFeeders
+        let switchCapacity = Number(primary.getAdjacent()[0][0].getCapacity())
+        let lineConductivity = Number(primary.getAdjacent()[0][3])
+        let allFactors= [feederCapacity,switchCapacity,lineConductivity]
+
+        let min = allFactors[0]
+        for(let i=1;i<allFactors.length;i++){
+            if(min > allFactors[i]){
+                min = allFactors[i]
+            }
+        }
+
+        return min;
+    }
 }
 
 module.exports =  Graph

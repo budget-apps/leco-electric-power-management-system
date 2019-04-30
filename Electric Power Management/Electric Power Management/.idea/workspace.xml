@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c4ce1685-1dd9-4c37-b1e1-d7d49b8cdd98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Graph/Graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Graph/Graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Node/Node.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Node/Node.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,16 +25,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1293">
-              <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+            <state relative-caret-position="392">
+              <caret line="141" column="19" selection-start-line="141" selection-start-column="19" selection-end-line="141" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
@@ -170,9 +168,9 @@
         <option value="$PROJECT_DIR$/src/Component/Path/Path.js" />
         <option value="$PROJECT_DIR$/src/Component/Header/Header.js" />
         <option value="$PROJECT_DIR$/src/Component/SideMenu/SideMenu.js" />
-        <option value="$PROJECT_DIR$/src/Component/Graph/Graph.js" />
         <option value="$PROJECT_DIR$/src/Component/Node/Node.js" />
         <option value="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/Component/Graph/Graph.js" />
       </list>
     </option>
   </component>
@@ -404,14 +402,7 @@
       <workItem from="1556046310177" duration="6614000" />
       <workItem from="1556566665032" duration="3292000" />
       <workItem from="1556641337666" duration="2401000" />
-      <workItem from="1556645756395" duration="1889000" />
-    </task>
-    <task id="LOCAL-00006" summary="Changed Graph">
-      <created>1554744950348</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1554744950348</updated>
+      <workItem from="1556645756395" duration="3523000" />
     </task>
     <task id="LOCAL-00007" summary="Changed Graph">
       <created>1554750635983</created>
@@ -749,11 +740,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556569440705</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="change map&#10;add update component">
+      <created>1556647799298</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1556647799299</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240490000" />
+    <option name="totallyTimeSpent" value="242124000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="33" width="1550" height="838" extended-state="6" />
@@ -1021,13 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1293">
-          <caret line="102" column="9" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/Node/Node.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1042,6 +1033,13 @@
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="141" column="19" selection-start-line="141" selection-start-column="19" selection-end-line="141" selection-end-column="19" />
         </state>
       </provider>
     </entry>
