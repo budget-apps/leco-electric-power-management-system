@@ -2,8 +2,50 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import * as routes from "../../constants/routes";
 import { MDBIcon } from "mdbreact";
+import Swal from 'sweetalert2'
+import { Button, ToastContainer, toast } from 'mdbreact';
 
-const header = () => {
+const firebase =require('firebase')
+
+
+
+
+
+
+class  header extends  React.Component {
+    constructor(props){
+        super(props)
+        console.log(props)
+        this.state={
+            changed :0
+
+        }
+
+    }
+    notify=()=>{
+        if(this.state.changed==1){
+        toast.info('Database Chaged', {
+            autoClose: 5000
+            
+          },this.setState({changed:0})
+          );
+        }
+        else{
+            toast.info('No Messages', {
+                autoClose: 5000
+            })
+        }
+
+    }
+    render(){
+        var changed
+        firebase.database().ref().child('electricMap').on('child_changed',snapshot=>{
+        
+            console.log(snapshot.val())
+            this.setState({changed:1})
+            
+          })
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 
@@ -21,8 +63,9 @@ const header = () => {
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" id="navbar-dropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <MDBIcon icon="bell" className="pr-3" /><span
-                            className="badge badge-light">4</span>
+                           <span 
+                            className="badge badge-info">{this.state.changed}</span>
+                            <MDBIcon onClick={this.notify} icon="bell" className="pr-3" />
                         </a>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown">
                             <a className="dropdown-item" href="#">Action</a>
@@ -35,9 +78,15 @@ const header = () => {
                         <Link className="nav-link"  to={routes.SIGN_OUT_PATH}>Log Out</Link>
                     </li>
                 </ul>
+                <ToastContainer
+          hideProgressBar={true}
+          newestOnTop={true}
+          autoClose={5000}
+        />
             </div>
         </nav>
     )
+    }
 };
 
 export default header;
