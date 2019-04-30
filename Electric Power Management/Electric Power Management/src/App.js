@@ -11,7 +11,6 @@ import * as routes from './constants/routes';
 import SignIn from './Login/SignIn';
 import Dashboard from './Component/Dashboard/Dashboard'
 
-import'./Component/Alert/alert'
 import { firebase, auth } from './firebase';
 
 const UnauthenticatedHomeContent = () => {
