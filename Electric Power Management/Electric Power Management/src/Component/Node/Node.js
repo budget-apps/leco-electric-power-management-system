@@ -11,7 +11,20 @@ class Node{
         this.faultCurrent=false;
         this.parent = null;
         this.branch = null;
+        this.visited = false;
     };
+
+    getAdjacentCount(){
+        return this.adjacent.length
+    }
+
+    getVisited(){
+        return this.visited;
+    }
+
+    setVisited(val){
+        this.visited = val
+    }
 
     getIsTripped(){
         return this.isTripped;

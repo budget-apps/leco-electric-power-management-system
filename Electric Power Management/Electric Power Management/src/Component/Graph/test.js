@@ -14,13 +14,15 @@ node3.setAdjacent(node4)
 node4.setAdjacent(node5)
 
 graph.addVertertices([node2,node3,node4])
-for(let i=0;i<graph.getVertices().length;i++){
-    console.log(graph.getVertices()[i].getAdjacent().length)
-}
-console.log("==============================")
-graph.findFaultEdge(2)
-for(let i=0;i<graph.getVertices().length;i++){
-    console.log(graph.getVertices()[i].getAdjacent().length)
-}
-console.log("==============================")
-console.log(graph.findPaths(node1,node5))
+// for(let i=0;i<graph.getVertices().length;i++){
+//     console.log(graph.getVertices()[i].getAdjacent().length)
+// }
+// console.log("==============================")
+// graph.findFaultEdge(2)
+// for(let i=0;i<graph.getVertices().length;i++){
+//     console.log(graph.getVertices()[i].getAdjacent().length)
+// }
+// console.log("==============================")
+// console.log(graph.findPaths(node1,node5))
+
+graph.getAllPaths(node1,node5)

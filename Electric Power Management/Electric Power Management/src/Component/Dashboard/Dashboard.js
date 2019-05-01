@@ -35,9 +35,13 @@ class Dashboard extends Component {
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc)
-        let from = graph.getVertex(faultLoc)
+        let from = graph.getVertex(0)
+        console.log(from)
         let to = faultEdges[1]
-        let paths = graph.findPaths(from,to)
+        let pathsTesting = graph.getAllPaths(from,to)
+
+        let paths = graph.findMaxCurrentPath(pathsTesting)
+
         this.setState({
             paths: paths,
         })
@@ -60,7 +64,8 @@ class Dashboard extends Component {
                 pathNodeSet.push(pathNodeDataRow)
                 let pathNodeLinkRow= {}
                 if(j!==paths[i].length-1){
-                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": "40"}
+                    let lineCapacity = paths[i][j].getLineCurrent(paths[i][j+1])
+                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": lineCapacity}
                 }
                 pathLinkSet.push(pathNodeLinkRow)
             }
@@ -91,7 +96,8 @@ class Dashboard extends Component {
             faultNodeData.push(faultNodeDataRow)
         }
         let faultNodeLink = [];
-        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": "40"}
+        let lineCapacity = faultEdges[0].getLineCurrent(faultEdges[1])
+        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": lineCapacity}
         faultNodeLink.push(faultNodeLinkRow)
         this.setState({
             faultEdges: faultEdges,
@@ -143,6 +149,9 @@ class Dashboard extends Component {
                 let nodeConductivity = Number(nodesJson[j][3])
                 let node = graph.getVertex(nodeID)
                 if(node!==undefined && nodeWeight!==NaN){
+                    if(vertex.getNodeType()==="Start"){
+                        vertex.setAdjacent(node,0,0,0)
+                    }
                     vertex.setAdjacent(node,nodeWeight,nodeLength,nodeConductivity)
                     //console.log(vertex.getNodeId()+","+node.getNodeId())
                 }
@@ -230,7 +239,8 @@ class Dashboard extends Component {
                 let childNodeID = childNode.getNodeId()
                 //console.log("Link data array "+parentNodeID+","+childNodeID+"->"+parentNode.isAdjacent(childNode))
                 if(parentNode.isAdjacent(childNode)){
-                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "40"};
+                    let lineCapacity = parentNode.getLineCurrent(childNode)
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": lineCapacity};
                     linkArray.push(linkRows)
                 }
             }

@@ -22,6 +22,15 @@ class Graph{
         return primaryArray
     }
 
+    isPrimary(){
+        for(let i=0;i<this.order;i++){
+            if(this.vertices[i].getNodeType()==="Primary"){
+                return true
+            }
+        }
+        return false;
+    }
+
     getVertices(){
         return this.vertices;
     }
@@ -39,18 +48,49 @@ class Graph{
         }
     }
 
-    findAllAdjacent(node){
-        let allAdjacent=[];
-        let tempAdjacent=node.getAdjacent();
-        let tempNode;
-        while(tempAdjacent.length!==0){
-            tempNode = tempAdjacent.pop();
-            let tempNodeAdjacents = tempNode[0].getAdjacent();
-            allAdjacent.push(tempNode[0]);
-            tempAdjacent=tempAdjacent.concat(tempNodeAdjacents);
+    isNotVisited(node,path){
+        for(let i=0;i<path.length;i++){
+            if(path[i].getNodeId()===node.getNodeId()){
+                console.log(path[i],node)
+                return false;
+            }
         }
-        return allAdjacent;
+        return true;
     }
+
+    getAllPaths(start, end){
+        let allPaths = []
+        let queue = []
+        let path =[]
+        path.push(start)
+        queue.push(path)
+        while(queue.length!==0){
+            path = queue.shift()
+            let last =path[path.length-1]
+            if(last.getNodeId()===end.getNodeId()){
+                allPaths.push(path)
+            }else{
+                let tempAdjacent = last.getAdjacent()
+                for(let i=0;i<tempAdjacent.length;i++){
+                    if(this.isNotVisited(tempAdjacent[i][0],path)){
+                        //console.log(path)
+                        //console.log(tempAdjacent[i][0].getNodeId())
+                        //console.log(queue)
+                        let newPath = []
+                        for(let i=0;i<path.length;i++){
+                            newPath.push(path[i])
+                        }
+                        newPath.push(tempAdjacent[i][0])
+                        queue.unshift(newPath)
+                    }
+                }
+                //console.log("\n-------------------\n")
+            }
+        }
+        console.log(allPaths)
+        return allPaths
+    }
+
 
     findFaultPath(faultSwitchNode){
         let tempfaultPathNodes = [faultSwitchNode];
@@ -90,41 +130,52 @@ class Graph{
         return [parentNode, faultNode];
     }
 
-    findPaths(from,to){
-        let allAdjacents =this.findAllAdjacent(from)
-        let allPathsToEnd =[]
-        let tempPath = [from]
-        for(let i=0;i<allAdjacents.length;i++){
-            tempPath.push(allAdjacents[i])
-            if(allAdjacents[i].getNodeId()===-1){
-                allPathsToEnd.push(tempPath)
-                tempPath = [from]
-            }
-        }
-        for(let i=0;i<allPathsToEnd.length;i++){
-            for(let j=0;j<allPathsToEnd[i].length;j++){
-                if(allPathsToEnd[i][j].getNodeId()===to.getNodeId()){
-                    allPathsToEnd[i].pop()
-                    console.log(allPathsToEnd[i])
-                }
-            }
-
-        }
-        return allPathsToEnd;
-    }
-
-    findVoltageDrop(paths){
+    findVoltageDropPath(paths){
         for(let i=0;i<paths.length;i++){
             console.log("Find drop")
         }
     }
 
-    findMaxCurrentCapacity(paths){
-
+    findMaxCurrentPath(paths){
+        let testedPaths =[];
+        for(let i=0;i<paths.length;i++){
+            let limitedFactor = this.findLimitedFactor(paths[i])
+            let totalLineCurrent = 0;
+            let j=0;
+            for(j=0;j<paths[i].length-1;j++){
+                if(totalLineCurrent<limitedFactor){
+                    totalLineCurrent += paths[i][j].getLineCurrent(paths[i][j+1])
+                }else{
+                    break;
+                }
+            }
+            if(j==paths[i].length-1){
+                testedPaths.push([paths[i],true])
+            }else{
+                testedPaths.push([paths[i],false])
+            }
+        }
+        console.log("Paths with max current capacity ")
+        console.log(testedPaths)
+        let validPaths = []
+        for(let i=0;i<testedPaths.length;i++){
+            if(testedPaths[i][1]==true){
+                validPaths.push(testedPaths[i][0])
+            }
+        }
+        console.log(validPaths)
+        return validPaths;
     }
 
     findLimitedFactor(path){
-        let primary = path[0]
+        let primary = path[0];
+        for(let i=0;i<path.length;i++){
+            if(path[i].getNodeType()==="Primary"){
+                primary = path[i]
+                console.log(primary)
+                break;
+            }
+        }
         let primaryCapacity = Number(primary.getCapacity())
         let totalFeeders = Number(primary.getAdjacent().length)
         let feederCapacity = primaryCapacity/totalFeeders
@@ -138,7 +189,7 @@ class Graph{
                 min = allFactors[i]
             }
         }
-
+        console.log(min)
         return min;
     }
 }
