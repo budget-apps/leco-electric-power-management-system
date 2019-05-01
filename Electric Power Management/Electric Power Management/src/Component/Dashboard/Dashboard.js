@@ -39,8 +39,9 @@ class Dashboard extends Component {
         console.log(from)
         let to = faultEdges[1]
         let pathsTesting = graph.getAllPaths(from,to)
-
-        let paths = graph.findMaxCurrentPath(pathsTesting)
+        let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
+        let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
+        let paths = graph.findMaxCurrentPath(totallyValidPaths)
 
         this.setState({
             paths: paths,
@@ -58,14 +59,17 @@ class Dashboard extends Component {
                 let nodeID= tempNode.getNodeId()
                 let nodeType= tempNode.getNodeType()
                 let switchType = tempNode.getSwitchType()
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType
                 let pathNodeDataRow = {key: nodeID,text: text,"loc": locX+" "+locY}
-                locX+=100;
+                locX+=200;
                 pathNodeSet.push(pathNodeDataRow)
                 let pathNodeLinkRow= {}
                 if(j!==paths[i].length-1){
                     let lineCapacity = paths[i][j].getLineCurrent(paths[i][j+1])
-                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": lineCapacity}
+                    let lineLength = paths[i][j].getLineLength(paths[i][j+1])
+                    let lineConduct = paths[i][j].getLineConductivity(paths[i][j+1])
+                    let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": text2}
                 }
                 pathLinkSet.push(pathNodeLinkRow)
             }
@@ -91,13 +95,16 @@ class Dashboard extends Component {
             let nodeID= tempNode.getNodeId()
             let nodeType= tempNode.getNodeType()
             let switchType = tempNode.getSwitchType()
-            let text = nodeID+"\n"+nodeType+"\n"+switchType
+            let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType
             let faultNodeDataRow = {key: nodeID,text: text,"loc": loc[i]}
             faultNodeData.push(faultNodeDataRow)
         }
         let faultNodeLink = [];
         let lineCapacity = faultEdges[0].getLineCurrent(faultEdges[1])
-        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": lineCapacity}
+        let lineLength = faultEdges[0].getLineLength(faultEdges[1])
+        let lineConduct = faultEdges[0].getLineConductivity(faultEdges[1])
+        let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": text2}
         faultNodeLink.push(faultNodeLinkRow)
         this.setState({
             faultEdges: faultEdges,
@@ -240,7 +247,10 @@ class Dashboard extends Component {
                 //console.log("Link data array "+parentNodeID+","+childNodeID+"->"+parentNode.isAdjacent(childNode))
                 if(parentNode.isAdjacent(childNode)){
                     let lineCapacity = parentNode.getLineCurrent(childNode)
-                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": lineCapacity};
+                    let lineLength = parentNode.getLineLength(childNode)
+                    let lineConduct = parentNode.getLineConductivity(childNode)
+                    let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": text2};
                     linkArray.push(linkRows)
                 }
             }

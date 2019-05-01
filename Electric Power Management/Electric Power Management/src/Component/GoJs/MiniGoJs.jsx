@@ -71,7 +71,7 @@ export default class GoJs extends Component {
                     goObj(go.TextBlock, "transition",  // the label text
                         {
                             textAlign: "center",
-                            font: "8pt helvetica, arial, sans-serif",
+                            font: "7pt helvetica, arial, sans-serif",
                             margin: 3,
                             editable: true  // enable in-place editing
                         },

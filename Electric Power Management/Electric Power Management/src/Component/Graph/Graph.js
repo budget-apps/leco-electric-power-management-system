@@ -121,19 +121,53 @@ class Graph{
     }
 
     findFaultEdge(faultLocation){
-        const faultSwitchNode = this.getVertex(faultLocation);
-        const faultPathNodes = this.findFaultPath(faultSwitchNode);
+        let faultSwitchNode = this.getVertex(faultLocation);
+        faultSwitchNode.setSwitchType("Closed")
+        let faultPathNodes = this.findFaultPath(faultSwitchNode);
         //console.log(faultPathNodes);
-        const faultNode = faultPathNodes.pop();
-        const parentNode = this.getVertex(faultNode.getParent());
+        let faultNode = faultPathNodes.pop();
+        let parentNode = this.getVertex(faultNode.getParent());
         //console.log([parentNode, faultNode]);
+        parentNode.setSwitchType("Open")
+        faultNode.setSwitchType("open")
         return [parentNode, faultNode];
     }
 
-    findVoltageDropPath(paths){
+    findMaxVoltageDropPath(paths){
+        let testedPaths = []
+        let maxVoltageDropPrecentage = 6.0
         for(let i=0;i<paths.length;i++){
-            console.log("Find drop")
+            let voltageDrop = 0
+            for(let j=2;j<paths[i].length-1;j++){
+                let sw1 = paths[i][j];
+                let sw2 = paths[i][j+1]
+
+                let lineLength = sw1.getLineLength(sw2)
+                let sw1Capacity = sw1.getCurrentPower()
+                let sw2Capacity = sw2.getCurrentPower()
+                //console.log(sw1.getNodeId(),sw2.getNodeId(),lineLength,sw1Capacity,sw2Capacity)
+                let tempVoltageDrop = ((sw1Capacity-sw2Capacity)/2)*lineLength*0.25
+                voltageDrop += tempVoltageDrop
+                console.log(voltageDrop)
+            }
+            let voltageDropPrecentage = (voltageDrop/11000)*100
+            console.log(voltageDropPrecentage)
+            if(voltageDropPrecentage<maxVoltageDropPrecentage){
+                testedPaths.push([paths[i],true])
+            }else{
+                testedPaths.push([paths[i],false])
+            }
         }
+        let validPaths = []
+        for(let i=0;i<testedPaths.length;i++){
+            console.log(testedPaths[i][1])
+            if(testedPaths[i][1]===true){
+                validPaths.push(testedPaths[i][0])
+            }
+        }
+        console.log(testedPaths)
+        console.log(validPaths)
+        return validPaths;
     }
 
     findMaxCurrentPath(paths){
@@ -143,9 +177,9 @@ class Graph{
             let totalLineCurrent = 0;
             let j=0;
             for(j=0;j<paths[i].length-1;j++){
-                if(totalLineCurrent<limitedFactor){
-                    totalLineCurrent += paths[i][j].getLineCurrent(paths[i][j+1])
-                }else{
+                totalLineCurrent += paths[i][j].getLineCurrent(paths[i][j+1])
+                console.log(paths[i].length-1,j,totalLineCurrent)
+                if(totalLineCurrent>=limitedFactor){
                     break;
                 }
             }
@@ -159,7 +193,7 @@ class Graph{
         console.log(testedPaths)
         let validPaths = []
         for(let i=0;i<testedPaths.length;i++){
-            if(testedPaths[i][1]==true){
+            if(testedPaths[i][1]===true){
                 validPaths.push(testedPaths[i][0])
             }
         }

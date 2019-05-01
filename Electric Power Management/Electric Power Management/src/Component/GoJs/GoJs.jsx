@@ -41,7 +41,7 @@ export default class GoJs extends Component {
                     }),
                 goObj(go.TextBlock,
                     {
-                        font: "bold 11pt helvetica, bold arial, sans-serif",
+                        font: "bold 10pt helvetica, bold arial, sans-serif",
                         editable: true,  // editing the text automatically updates the model data,
                     },
                     new go.Binding("text").makeTwoWay())
@@ -71,7 +71,7 @@ export default class GoJs extends Component {
                     goObj(go.TextBlock, "transition",  // the label text
                         {
                             textAlign: "center",
-                            font: "9pt helvetica, arial, sans-serif",
+                            font: "8pt helvetica, arial, sans-serif",
                             margin: 4,
                             editable: true  // enable in-place editing
                         },

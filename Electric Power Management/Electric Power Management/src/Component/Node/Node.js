@@ -14,18 +14,6 @@ class Node{
         this.visited = false;
     };
 
-    getAdjacentCount(){
-        return this.adjacent.length
-    }
-
-    getVisited(){
-        return this.visited;
-    }
-
-    setVisited(val){
-        this.visited = val
-    }
-
     getIsTripped(){
         return this.isTripped;
     }
@@ -123,6 +111,16 @@ class Node{
             //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
             if(adjacentList[i][0].getNodeId()===node.getNodeId()){
                 return adjacentList[i][2];
+            }
+        }
+    }
+    getLineConductivity(node){
+        const adjacentList = this.getAdjacent();
+        const listLen = adjacentList.length
+        for(let i=0;i<listLen;i++){
+            //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
+            if(adjacentList[i][0].getNodeId()===node.getNodeId()){
+                return adjacentList[i][3];
             }
         }
     }

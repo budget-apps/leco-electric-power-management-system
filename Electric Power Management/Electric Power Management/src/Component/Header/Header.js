@@ -2,14 +2,9 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import * as routes from "../../constants/routes";
 import { MDBIcon } from "mdbreact";
-import { Button, ToastContainer, toast } from 'mdbreact';
+import {ToastContainer, toast } from 'mdbreact';
 
 const firebase =require('firebase')
-
-
-
-
-
 
 class  header extends  React.Component {
     constructor(props){
@@ -22,7 +17,7 @@ class  header extends  React.Component {
 
     }
     notify=()=>{
-        if(this.state.changed==1){
+        if(this.state.changed===1){
         toast.info('Database Chaged', {
             autoClose: 5000
             
@@ -37,9 +32,7 @@ class  header extends  React.Component {
 
     }
     render(){
-        var changed
         firebase.database().ref().child('electricMap').on('child_changed',snapshot=>{
-        
             console.log(snapshot.val())
             this.setState({changed:1})
             
@@ -57,21 +50,15 @@ class  header extends  React.Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li className="nav-item active">
-                        <Link className="nav-link" to={routes.HOME_PATH}>Home</Link>
+                        <Link className="nav-link" to={routes.HOME_PATH}><MDBIcon icon="home" /></Link>
                     </li>
-                    <li className="nav-item dropdown">
+                    <li className="nav-item">
                         <a className="nav-link dropdown-toggle" id="navbar-dropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <span 
                             className="badge badge-info">{this.state.changed}</span>
                             <MDBIcon onClick={this.notify} icon="bell" className="pr-3" />
                         </a>
-                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-dropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                        </div>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link"  to={routes.SIGN_OUT_PATH}>Log Out</Link>
