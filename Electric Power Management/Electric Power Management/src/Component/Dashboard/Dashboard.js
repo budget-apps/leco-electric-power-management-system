@@ -28,7 +28,8 @@ class Dashboard extends Component {
         faultEdges: [],
         paths: [],
         isSelect: false,
-        faultSwitch: ""
+        faultSwitch: "",
+        show:true
     }
 
     findFaultPaths(){
@@ -297,17 +298,22 @@ class Dashboard extends Component {
             }
         }
     }
+    changevalue=()=>{
+        this.setState({show:!this.state.show})
+    }
 
     render() {
         return (
             <div className="d-flex" id="wrapper">
-                <SideMenu/>
+                <SideMenu  changevalue={this.changevalue}/>
                 <div id="page-content-wrapper" style={{padding: "0"}}>
                     <Header/>
                     <div className="container-fluid">
                         <div className="row btn-default">
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
+                        {this.state.show ?
+                        <div>
                         <div className="row">
                             <div className="col-md-3">
                                 <AddExelSheet/>
@@ -330,6 +336,9 @@ class Dashboard extends Component {
                                 <Path nodeDataArray={this.state.pathNodeArray} linkDataArray={this.state.pathLinkArray}/>
                             </div>
                         </div>
+                        </div>
+                        :
+                        <div></div>}
                     </div>
 
                 </div>
