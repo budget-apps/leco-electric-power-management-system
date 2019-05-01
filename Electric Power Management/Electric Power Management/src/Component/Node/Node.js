@@ -11,6 +11,7 @@ class Node{
         this.faultCurrent=false;
         this.parent = null;
         this.branch = null;
+        this.visited = false;
     };
 
     getIsTripped(){
@@ -76,8 +77,8 @@ class Node{
     setCurrentPower(val){
         this.currentPower = val;
     }
-    setAdjacent(node,weight){
-        this.adjacent.push([node,weight])
+    setAdjacent(node,current,length,conductivity){
+        this.adjacent.push([node,current,length,conductivity])
     }
     getAdjacent(){
         return this.adjacent
@@ -92,6 +93,36 @@ class Node{
             }
         }
         return false;
+    }
+    getLineCurrent(node){
+        const adjacentList = this.getAdjacent();
+        const listLen = adjacentList.length
+        for(let i=0;i<listLen;i++){
+            //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
+            if(adjacentList[i][0].getNodeId()===node.getNodeId()){
+                return adjacentList[i][1];
+            }
+        }
+    }
+    getLineLength(node){
+        const adjacentList = this.getAdjacent();
+        const listLen = adjacentList.length
+        for(let i=0;i<listLen;i++){
+            //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
+            if(adjacentList[i][0].getNodeId()===node.getNodeId()){
+                return adjacentList[i][2];
+            }
+        }
+    }
+    getLineConductivity(node){
+        const adjacentList = this.getAdjacent();
+        const listLen = adjacentList.length
+        for(let i=0;i<listLen;i++){
+            //console.log("Node"+this.getNodeId()+"Adjacent len"+listLen+"adjacent node="+adjacentList[i][0].getNodeId()+", is adjacent to->"+node.getNodeId())
+            if(adjacentList[i][0].getNodeId()===node.getNodeId()){
+                return adjacentList[i][3];
+            }
+        }
     }
 }
 

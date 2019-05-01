@@ -35,9 +35,14 @@ class Dashboard extends Component {
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc)
-        let from = graph.getVertex(faultLoc)
+        let from = graph.getVertex(0)
+        console.log(from)
         let to = faultEdges[1]
-        let paths = graph.findPaths(from,to)
+        let pathsTesting = graph.getAllPaths(from,to)
+        let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
+        let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
+        let paths = graph.findMaxCurrentPath(totallyValidPaths)
+
         this.setState({
             paths: paths,
         })
@@ -54,13 +59,17 @@ class Dashboard extends Component {
                 let nodeID= tempNode.getNodeId()
                 let nodeType= tempNode.getNodeType()
                 let switchType = tempNode.getSwitchType()
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType
                 let pathNodeDataRow = {key: nodeID,text: text,"loc": locX+" "+locY}
-                locX+=100;
+                locX+=200;
                 pathNodeSet.push(pathNodeDataRow)
                 let pathNodeLinkRow= {}
                 if(j!==paths[i].length-1){
-                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": "Line Capacity"}
+                    let lineCapacity = paths[i][j].getLineCurrent(paths[i][j+1])
+                    let lineLength = paths[i][j].getLineLength(paths[i][j+1])
+                    let lineConduct = paths[i][j].getLineConductivity(paths[i][j+1])
+                    let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+                    pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": text2}
                 }
                 pathLinkSet.push(pathNodeLinkRow)
             }
@@ -86,12 +95,16 @@ class Dashboard extends Component {
             let nodeID= tempNode.getNodeId()
             let nodeType= tempNode.getNodeType()
             let switchType = tempNode.getSwitchType()
-            let text = nodeID+"\n"+nodeType+"\n"+switchType
+            let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType
             let faultNodeDataRow = {key: nodeID,text: text,"loc": loc[i]}
             faultNodeData.push(faultNodeDataRow)
         }
         let faultNodeLink = [];
-        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": "Line Capacity"}
+        let lineCapacity = faultEdges[0].getLineCurrent(faultEdges[1])
+        let lineLength = faultEdges[0].getLineLength(faultEdges[1])
+        let lineConduct = faultEdges[0].getLineConductivity(faultEdges[1])
+        let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": text2}
         faultNodeLink.push(faultNodeLinkRow)
         this.setState({
             faultEdges: faultEdges,
@@ -139,9 +152,14 @@ class Dashboard extends Component {
             for(let j=0;j<nodesJson.length;j++){
                 let nodeID=nodesJson[j][0]
                 let nodeWeight = Number(nodesJson[j][1])
+                let nodeLength = Number(nodesJson[j][2])
+                let nodeConductivity = Number(nodesJson[j][3])
                 let node = graph.getVertex(nodeID)
                 if(node!==undefined && nodeWeight!==NaN){
-                    vertex.setAdjacent(node,nodeWeight)
+                    if(vertex.getNodeType()==="Start"){
+                        vertex.setAdjacent(node,0,0,0)
+                    }
+                    vertex.setAdjacent(node,nodeWeight,nodeLength,nodeConductivity)
                     //console.log(vertex.getNodeId()+","+node.getNodeId())
                 }
 
@@ -165,15 +183,19 @@ class Dashboard extends Component {
             let nodeID= tempNode.getNodeId()
             let nodeType= tempNode.getNodeType()
             let switchType = tempNode.getSwitchType()
+            let isTripped = tempNode.getIsTripped()
+            let faultCurrent = tempNode.getFaultCurrent()
+            let currentPower = tempNode.getCurrentPower()
+            let capacity = tempNode.getCapacity()
             if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && isNormal){
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower+"\nSwitch Capacity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": placex+" "+placey}
                 placex+=100;
                 placey=100;
                 isNormal = false;
                 nodeData.push(nodeDataRow)
             }else  if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && !isNormal){
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower+"\nSwitch Capacity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": (placex-100)+" "+placey}
                 placex+=100;
                 placey=-100;
@@ -181,7 +203,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="Primary" && isPrimary){
                 //console.log("Primary")
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "Type: "+nodeType+"\nTotal Feeder Capcity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 -100"}
                 placex+=100;
                 placey=100;
@@ -190,7 +212,7 @@ class Dashboard extends Component {
             }
             else if(nodeType==="Primary" && !isPrimary){
                 //console.log("Primary")
-                let text = nodeID+"\n"+nodeType+"\n"+switchType
+                let text = "Type: "+nodeType+"\nTotal Feeder Capcity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 100"}
                 placex+=100;
                 placey=-100;
@@ -203,7 +225,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: nodeType+"\nNormally Open","loc": "300 0"}
+                let nodeDataRow={ key: nodeID, text: "Type: Switch\nStatus: Normally Open","loc": "300 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -224,7 +246,11 @@ class Dashboard extends Component {
                 let childNodeID = childNode.getNodeId()
                 //console.log("Link data array "+parentNodeID+","+childNodeID+"->"+parentNode.isAdjacent(childNode))
                 if(parentNode.isAdjacent(childNode)){
-                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": "Line Capacity\n40"};
+                    let lineCapacity = parentNode.getLineCurrent(childNode)
+                    let lineLength = parentNode.getLineLength(childNode)
+                    let lineConduct = parentNode.getLineConductivity(childNode)
+                    let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+                    let linkRows={ "from": parentNodeID, "to": childNodeID, "text": text2};
                     linkArray.push(linkRows)
                 }
             }
