@@ -69,7 +69,7 @@ class Dashboard extends Component {
                     let lineCapacity = paths[i][j].getLineCurrent(paths[i][j+1])
                     let lineLength = paths[i][j].getLineLength(paths[i][j+1])
                     let lineConduct = paths[i][j].getLineConductivity(paths[i][j+1])
-                    let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+                    let text2 = "Current power: "+lineCapacity+"\nLength: "+lineLength+"\nCapacity: "+lineConduct
                     pathNodeLinkRow = {"from": paths[i][j].getNodeId(),"to": paths[i][j+1].getNodeId(),"text": text2}
                 }
                 pathLinkSet.push(pathNodeLinkRow)
@@ -104,7 +104,7 @@ class Dashboard extends Component {
         let lineCapacity = faultEdges[0].getLineCurrent(faultEdges[1])
         let lineLength = faultEdges[0].getLineLength(faultEdges[1])
         let lineConduct = faultEdges[0].getLineConductivity(faultEdges[1])
-        let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+        let text2 = "Current power: "+lineCapacity+"\nLength: "+lineLength+"\nCapacity: "+lineConduct
         let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": text2}
         faultNodeLink.push(faultNodeLinkRow)
         this.setState({
@@ -250,7 +250,7 @@ class Dashboard extends Component {
                     let lineCapacity = parentNode.getLineCurrent(childNode)
                     let lineLength = parentNode.getLineLength(childNode)
                     let lineConduct = parentNode.getLineConductivity(childNode)
-                    let text2 = "Capacity: "+lineCapacity+"\nLength: "+lineLength+"\nConductivity: "+lineConduct
+                    let text2 = "Current power: "+lineCapacity+"\nLength: "+lineLength+"\nCapacity: "+lineConduct
                     let linkRows={ "from": parentNodeID, "to": childNodeID, "text": text2};
                     linkArray.push(linkRows)
                 }
