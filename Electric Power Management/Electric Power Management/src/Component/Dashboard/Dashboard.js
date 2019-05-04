@@ -10,6 +10,7 @@ import FaultEdge from '../FaultEdge/FaultEdge'
 import Graph from '../Graph/Graph'
 import Node from '../Node/Node'
 import './Dashboard.css'
+import UpdateComponent from '../UpdateMaps/UpdateMap'
 import Swal from "sweetalert2";
 
 var firebase = require("firebase");
@@ -29,7 +30,7 @@ class Dashboard extends Component {
         paths: [],
         isSelect: false,
         faultSwitch: "",
-        show:true
+        show:false
     }
 
     findFaultPaths(){
@@ -298,22 +299,29 @@ class Dashboard extends Component {
             }
         }
     }
-    changevalue=()=>{
-        this.setState({show:!this.state.show})
+    showmap=()=>{
+        this.setState({show:true})
+    }
+    hidemap =()=>{
+        this.setState({show:false})
     }
 
     render() {
         return (
             <div className="d-flex" id="wrapper">
-                <SideMenu  changevalue={this.changevalue}/>
+                <SideMenu  changevalue={this.showmap} hidemap={this.hidemap}/>
                 <div id="page-content-wrapper" style={{padding: "0"}}>
                     <Header/>
                     <div className="container-fluid">
+                    {!this.state.show ?
+                    <div>
+                    <div>
                         <div className="row btn-default">
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
-                        {this.state.show ?
-                        <div>
+                        </div>
+                       
+                        
                         <div className="row">
                             <div className="col-md-3">
                                 <AddExelSheet/>
@@ -335,10 +343,14 @@ class Dashboard extends Component {
                                 <FaultEdge nodeDataArray={this.state.faultNodeArray} linkDataArray={this.state.faultLinkArray}/>
                                 <Path nodeDataArray={this.state.pathNodeArray} linkDataArray={this.state.pathLinkArray}/>
                             </div>
+                            </div>
+                            </div>
+                    
+                         :
+                         <div>
+                             <UpdateComponent></UpdateComponent>
                         </div>
-                        </div>
-                        :
-                        <div></div>}
+                        }
                     </div>
 
                 </div>
