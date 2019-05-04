@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import MiniGoJs from "../GoJs/MiniGoJs";
+import MiniGoJsSuccess from "../GoJs/MiniGoJsSuccess";
 
 class path extends Component{
 
@@ -16,7 +16,7 @@ class path extends Component{
     generateComponent(){
         let componentRow = []
         for(let i=0;i<this.state.nodeDataArray.length;i++){
-            componentRow.push(<div style={{marginBottom: "5px"}}><MiniGoJs nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/></div>)
+            componentRow.push(<div style={{marginBottom: "5px"}}><MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/></div>)
         }
         this.setState({
             componentRow: componentRow
@@ -49,25 +49,36 @@ class path extends Component{
                 {
                     (this.state.showPath)
                         ? <div>
-                            <input
-                                className="btn btn-primary"
-                                type="submit"
-                                value="Find Recovery Paths"
-                                style={{padding: "9px",width: "90%"}}
-                                onClick={this.recoveryClickHandler}
-                            />
+                            <div className="row">
+                                <div className="col-md-9"> <h2 className="btn-default" style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
+                                <div className="col-md-3">
+                                    <input
+                                        className="btn btn-primary"
+                                        type="submit"
+                                        value="Find Recovery Paths"
+                                        style={{padding: "9px",width: "90%"}}
+                                        onClick={this.recoveryClickHandler}
+                                    />
+                                </div>
+
+                            </div>
+
                             <div style={{padding: "10px"}}>
                                 {this.state.componentRow}
                             </div>
                         </div>
-                        : <div>
-                            <input
+                        : <div className="row">
+                            <div className="col-md-9"> <h2 className="btn-default" style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
+                            <div className="col-md-3">
+                                <input
                                 className="btn btn-primary"
                                 type="submit"
                                 value="Find Recovery Paths"
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.recoveryClickHandler}
                             />
+                            </div>
+
                         </div>
                 }
             </div>

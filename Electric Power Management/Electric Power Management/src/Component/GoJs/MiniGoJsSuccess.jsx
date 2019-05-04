@@ -30,7 +30,7 @@ export default class GoJs extends Component {
                 goObj(go.Shape, "RoundedRectangle",
                     {
                         parameter1: 12,  // the corner has a large radius
-                        fill: goObj(go.Brush, "Linear", { 0: "rgb(217,100,79)", 1: "rgb(217,83,79)" }),
+                        fill: goObj(go.Brush, "Linear", { 0: "rgb(92,200,92)", 1: "rgb(92,184,92)" }),
                         stroke: null,
                         portId: "",  // this Shape is the Node's port, not the whole Node
                         fromLinkable: true, fromLinkableSelfNode: true, fromLinkableDuplicates: true,

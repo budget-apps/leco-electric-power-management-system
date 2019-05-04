@@ -45,6 +45,12 @@ class Dashboard extends Component {
         let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
         let paths = graph.findMaxCurrentPath(totallyValidPaths)
 
+        let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(to)
+        for(let i=0;i<pathsAlt.length;i++){
+            paths.push(pathsAlt[i])
+        }
+        //console.log(pathsAlt)
+
         this.setState({
             paths: paths,
         })
@@ -341,9 +347,14 @@ class Dashboard extends Component {
                             </div>
                             <div className="col-md-3">
                                 <FaultEdge nodeDataArray={this.state.faultNodeArray} linkDataArray={this.state.faultLinkArray}/>
+
+                            </div>
+                            </div>
+                        <div className="row">
+                            <div className="col-md-12">
                                 <Path nodeDataArray={this.state.pathNodeArray} linkDataArray={this.state.pathLinkArray}/>
                             </div>
-                            </div>
+                        </div>
                             </div>
                     
                          :
