@@ -241,11 +241,12 @@ class Graph{
     }
 
     removeFaultLocFromPaths(validPaths,faultLoc){
+        let faultNode = this.getVertex(faultLoc)
         let test3 = []
         for(let i=0;i<validPaths.length;i++){
             let found = false;
             for(let j=0;j<validPaths[i].length;j++){
-                if(validPaths[i][j]===faultLoc){
+                if(validPaths[i][j].getNodeId()===faultNode.getNodeId()){
                     found = true;
                     break;
                 }
@@ -255,6 +256,7 @@ class Graph{
             }
 
         }
+        console.log(test3)
         return test3;
 
     }
