@@ -9,7 +9,7 @@ const firebase =require('firebase')
 class  header extends  React.Component {
     constructor(props){
         super(props)
-        console.log(props)
+        //console.log(props)
         this.state={
             changed :0
 
@@ -33,7 +33,7 @@ class  header extends  React.Component {
     }
     render(){
         firebase.database().ref().child('electricMap').on('child_changed',snapshot=>{
-            console.log(snapshot.val())
+            //console.log(snapshot.val())
             this.setState({changed:1})
             
           })

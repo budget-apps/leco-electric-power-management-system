@@ -103,15 +103,18 @@ class Graph{
                 let tempNode = tempAdjacents[i][0];
                 tempfaultPathNodes.push(tempNode);
                 tempNode.setParent(parent.getNodeId());
-                //console.log(tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower());
+                console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode);
                 }
                 if(tempNode.getCurrentPower() === 0 && !tempNode.getFaultCurrent()){
                     if(parent.getFaultCurrent()){
-                        faultPathNodes.push(tempNode);
-                        found = true;
-                        break;
+                        if((tempNode.getNodeId()!==-1 && tempAdjacents.length!==1)||(tempNode.getNodeId()===-1 && tempAdjacents.length===1)){
+                            faultPathNodes.push(tempNode);
+                            found = true;
+                            break;
+                        }
+
                     }
 
                 }
@@ -237,6 +240,24 @@ class Graph{
         return validPaths;
     }
 
+    removeFaultLocFromPaths(validPaths,faultLoc){
+        let test3 = []
+        for(let i=0;i<validPaths.length;i++){
+            let found = false;
+            for(let j=0;j<validPaths[i].length;j++){
+                if(validPaths[i][j]===faultLoc){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                test3.push(validPaths[i])
+            }
+
+        }
+        return test3;
+
+    }
 
     findMaxCurrentPath(paths){
         let testedPaths =[];

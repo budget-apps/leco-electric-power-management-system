@@ -5,8 +5,8 @@ class selectMap extends React.Component {
     render(){
         return (
             <div>
-                <select class="browser-default custom-select btn-primary btn-sm" style={{marginTop: "10px",marginBottom: "5px"}} onChange={this.props.changed}>
-                  <option selected> Select branch</option>
+                <select className="browser-default custom-select btn-primary btn-sm" style={{marginTop: "10px",marginBottom: "5px"}} onChange={this.props.changed}>
+                  <option defaultValue={"No"}> Select branch</option>
                   <option value="Negambo">Negambo</option>
                 </select>
             </div>

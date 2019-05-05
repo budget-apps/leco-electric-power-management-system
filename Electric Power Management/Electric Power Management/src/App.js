@@ -26,10 +26,10 @@ const UnauthenticatedHomeContent = () => {
 
 const AuthenticatedHomeContent = ({ authUser }) => {
   return (
-    <p>
+      <div>
       {/*Welcome back, {authUser.email}!*/}
-      <Dashboard></Dashboard>
-    </p>
+        <Dashboard></Dashboard>
+      </div>
   );
 };
 

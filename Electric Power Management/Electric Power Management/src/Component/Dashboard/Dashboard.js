@@ -44,6 +44,7 @@ class Dashboard extends Component {
         let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
         let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
         let paths = graph.findMaxCurrentPath(totallyValidPaths)
+        paths = graph.removeFaultLocFromPaths(paths,faultLoc)
 
         let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(to)
         for(let i=0;i<pathsAlt.length;i++){
