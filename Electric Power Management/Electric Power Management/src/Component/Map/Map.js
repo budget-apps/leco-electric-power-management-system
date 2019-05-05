@@ -6,6 +6,14 @@ class map extends Component{
         return (
             <div className="" style={{width: "100%",padding: 0,borderRadius: "10px",marginBottom: "5px"}}>
                 <h2 className="btn-default" style={{padding: "10px",borderRadius: "10px"}}>{this.props.branch} Branch</h2>
+                {this.props.isTipped!==""?
+                    <div className="alert alert-danger alert-dismissible">
+                        <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong> Indicates a dangerous or potentially negative action at switch ID: {this.props.isTipped} in {this.props.branch} electric grid.
+                    </div>
+                   :
+                    <div></div>
+                }
                 <GoJs nodes={this.props.dataNodes} links={this.props.dataLinks}/>
             </div>
         )

@@ -234,7 +234,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: "Type: Switch\nStatus: Normally Open","loc": "300 0"}
+                let nodeDataRow={ key: nodeID, text: "Type: Switch\nStatus: Normally Open","loc": "900 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -344,7 +344,7 @@ class Dashboard extends Component {
                         </div>
                         <div className="row">
                             <div className="col-md-9">
-                                <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
+                                <Map isTipped={this.state.faultSwitch} branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                             </div>
                             <div className="col-md-3">
                                 <FaultEdge nodeDataArray={this.state.faultNodeArray} linkDataArray={this.state.faultLinkArray}/>
