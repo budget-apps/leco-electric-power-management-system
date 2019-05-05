@@ -13,6 +13,7 @@
     "gojs": "^2.0.7",
     "mdbreact": "^4.12.0",
     "react": "^16.4.0",
+    "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.4.0",
     "react-powerplug": "^1.0.0-alpha.7",
     "react-router-dom": "^4.3.1",
