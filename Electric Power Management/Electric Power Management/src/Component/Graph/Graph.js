@@ -81,11 +81,15 @@ class Graph{
                             newPath.push(path[i])
                         }
                         newPath.push(tempAdjacent[i][0])
+                        //tempAdjacent[i][0].setParent(last.getNodeId())
                         queue.unshift(newPath)
                     }
                 }
                 //console.log("\n-------------------\n")
             }
+        }
+        for(let i=0;i<allPaths.length;i++){
+            allPaths[i].pop()
         }
         //console.log(allPaths)
         return allPaths
@@ -133,7 +137,7 @@ class Graph{
         //console.log(faultPathNodes);
         let faultNode = faultPathNodes.pop();
         let parentNode = this.getVertex(faultNode.getParent());
-        //console.log([parentNode, faultNode]);
+        console.log([parentNode, faultNode]);
         parentNode.setSwitchType("Open")
         faultNode.setSwitchType("open")
 
@@ -178,19 +182,64 @@ class Graph{
         return validPaths;
     }
 
+    checkFaultEndContaonOpenSwitch(faultEdge){
+        console.log(faultEdge[1].getSwitchType())
+        if(faultEdge[1].getSwitchType()==="Open" || faultEdge[1].getSwitchType()==="open"){
+            console.log(faultEdge[1].getSwitchType())
+            return true;
+        }
+        return false;
+    }
+
+    checkAllSwitchesAreClosed(paths){
+        let test3=[]
+        for(let i=0;i<paths.length;i++){
+            let found = false;
+            for(let j=0;j<paths[i].length;j++){
+                console.log(paths[i][j].getSwitchType())
+                if(paths[i][j].getSwitchType()!=="Closed"){
+                    test3.push(paths[i])
+                    found = true
+                    break
+                }
+            }
+        }
+        return test3
+    }
+
     checkParentisFault(validPaths,from){
         let test3 = []
         //console.log(validPaths.length)
-        //console.log(validPaths)
-        for(let i=0;i<validPaths.length;i++){
+        let length = validPaths.length
+        for(let i=0;i<length;i++){
             let last = validPaths[i][validPaths[i].length-1]
             let lastParent = this.getVertex(last.getParent())
-            //console.log(lastParent.getNodeId()+","+from.getNodeId())
-            if(lastParent.getNodeId()!==from.getNodeId()){
-                test3.push(validPaths[i])
-           }
+            let fromParent = this.getVertex(from.getParent())
+            if(last.getNodeId()=== -1){
+                console.log(validPaths[i])
+                console.log(lastParent.getNodeId()+","+fromParent.getNodeId())
+                console.log(test3)
+                console.log("------------------------")
+                if(lastParent.getNodeId()!==fromParent.getNodeId()){
+                    test3.push(validPaths[i])
+                }
+            }else{
+                let adjacents = last.getAdjacent()
+                let found = false
+                for(let j=0;j<adjacents.length;j++){
+                    if(adjacents[j][0].getNodeId()===fromParent.getNodeId()){
+                        found = true
+                        break;
+                    }
+                }
+                if(!found){
+                    test3.push(validPaths[i])
+                }
+            }
+
+
         }
-        //console.log(test3)
+        //
         return test3
     }
 
@@ -382,7 +431,7 @@ class Graph{
                     let voltageDrpPrecentage = ((tempDrop+totalVoltageDrop)/11000)*100
                     if(voltageDrpPrecentage<6.0){
                         //console.log("true drop")
-                        faultToEndPaths[j].pop()
+                        test3[i][0].pop()
                         paths.push(test3[i][0].concat(faultToEndPaths[j].reverse()))
                     }
                 }

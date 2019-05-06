@@ -37,21 +37,36 @@ class Dashboard extends Component {
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc)
+        console.log(faultEdges[1].getNodeId())
+        if(graph.checkFaultEndContaonOpenSwitch(faultEdges)){
+            console.log(faultEdges[1].getNodeId())
+            return;
+        }
+
         let from = graph.getVertex(0)
         //console.log(from)
         let to = faultEdges[1]
+        console.log(faultEdges[1].getNodeId())
         let pathsTesting = graph.getAllPaths(from,to)
+        console.log("=============================")
+        console.log(pathsTesting)
+        console.log("=============================")
         let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
         let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
         let paths = graph.removeFaultLocFromPaths(totallyValidPaths,faultLoc)
-
         let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(from)
+        console.log("=============================")
+        console.log(pathsAlt)
+        console.log("=============================")
         for(let i=0;i<pathsAlt.length;i++){
             paths.push(pathsAlt[i])
         }
-        paths = graph.checkParentisFault(paths,to)
+        paths = graph.checkParentisFault(paths,faultEdges[1])
+        paths = graph.removeFaultLocFromPaths(paths,faultEdges[0].getNodeId())
+        paths = graph.removeFaultLocFromPaths(paths,faultEdges[1].getNodeId())
 
-        //console.log(pathsAlt)
+        //console.log(graph.getVertex(paths[0][paths[0].length-1].getParent()).getNodeId())
+        paths = graph.checkAllSwitchesAreClosed(paths)
 
         this.setState({
             paths: paths,
