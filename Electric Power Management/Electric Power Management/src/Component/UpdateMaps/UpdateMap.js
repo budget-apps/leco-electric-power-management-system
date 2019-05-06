@@ -36,7 +36,6 @@ export default class UpdateComponent extends Component {
     }
 
     handleShow = (element) => {
-        this.setState({ id: element.id })
         this.setState({
             show: true,
             row: element,
@@ -44,15 +43,15 @@ export default class UpdateComponent extends Component {
             type: element.type,
             adjecent: element.adjecent,
             switchType: element.switchType,
-            faultCurrent: element.faultCurrent,
+            faultCurrent: element.faultCurrent.toString(),
             currentPower: element.currentPower,
             capacity: element.capacity,
             branch: element.branch,
-            isTripped: element.isTripped
+            isTripped: element.isTripped.toString()
 
 
         });
-        //alert(element.id)
+
     }
     deleteitem = (id) => {
         var arr = []
@@ -120,7 +119,6 @@ export default class UpdateComponent extends Component {
     }
     onchangetableField = (e) => {
         this.setState({ [e.target.name]: e.target.value })
-        console.log(e.target.name)
     }
     updateMap = () => {
         //var i = 0;
@@ -131,11 +129,11 @@ export default class UpdateComponent extends Component {
             type: this.state.type,
             adjecent: this.state.adjecent,
             switchType: this.state.switchType,
-            faultCurrent: this.state.faultCurrent === "true",
+            faultCurrent: (this.state.faultCurrent == "true"),
             currentPower: this.state.currentPower,
             capacity: this.state.capacity,
             branch: this.state.branch,
-            isTripped: this.state.isTripped === "true"
+            isTripped: (this.state.isTripped == "true")
         }
         this.state.electricMap.forEach(element => {
             if (element.id === this.state.id) {
