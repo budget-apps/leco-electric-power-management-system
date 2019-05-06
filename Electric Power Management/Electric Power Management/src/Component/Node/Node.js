@@ -11,8 +11,16 @@ class Node{
         this.faultCurrent=false;
         this.parent = null;
         this.branch = null;
-        this.visited = false;
+        this.allParent = [];
     };
+
+    setAllParent(par){
+        this.allParent.push(par)
+    }
+
+    getAllParent(){
+        return this.allParent
+    }
 
     getIsTripped(){
         return this.isTripped;
