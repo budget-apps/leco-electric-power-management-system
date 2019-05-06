@@ -51,7 +51,7 @@ class Graph{
     isNotVisited(node,path){
         for(let i=0;i<path.length;i++){
             if(path[i].getNodeId()===node.getNodeId()){
-                console.log(path[i],node)
+                //console.log(path[i],node)
                 return false;
             }
         }
@@ -87,7 +87,7 @@ class Graph{
                 //console.log("\n-------------------\n")
             }
         }
-        console.log(allPaths)
+        //console.log(allPaths)
         return allPaths
     }
 
@@ -104,7 +104,7 @@ class Graph{
                 tempfaultPathNodes.push(tempNode);
                 tempNode.setParent(parent.getNodeId());
                 tempNode.setAllParent(parent)
-                console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
+                //console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode);
                 }
@@ -119,7 +119,7 @@ class Graph{
                     }
 
                 }
-                console.log(tempNode.getAllParent())
+                //console.log(tempNode.getAllParent())
             }
 
         }
@@ -155,10 +155,10 @@ class Graph{
                 //console.log(sw1.getNodeId(),sw2.getNodeId(),lineLength,sw1Capacity,sw2Capacity)
                 let tempVoltageDrop = ((sw1Capacity-sw2Capacity)/2)*lineLength*0.25
                 voltageDrop += tempVoltageDrop
-                console.log(voltageDrop)
+                //console.log(voltageDrop)
             }
             let voltageDropPrecentage = (voltageDrop/11000)*100
-            console.log(voltageDropPrecentage)
+            //console.log(voltageDropPrecentage)
             if(voltageDropPrecentage<maxVoltageDropPrecentage){
                 testedPaths.push([paths[i],true,voltageDropPrecentage,maxVoltageDropPrecentage])
             }else{
@@ -167,30 +167,31 @@ class Graph{
         }
         let validPaths = []
         for(let i=0;i<testedPaths.length;i++){
-            console.log(testedPaths[i][1])
+           // console.log(testedPaths[i][1])
             if(testedPaths[i][1]===true){
                 validPaths.push(testedPaths[i][0])
             }
         }
-        console.log(testedPaths)
-        console.log(validPaths)
-        let test3 = []
-        for(let i=0;i<validPaths.length;i++){
-            let found = false;
-            let last = validPaths[i][validPaths.length-1]
-            let parents = last.getAllParent()
-            for(let j=0;j<parents.length;j++){
-                if(last.getNodeId()===parents[j].getNodeId()){
-                    found = true;
-                    break;
-                }
-            }
-        if(!found){
-            test3.push(validPaths[i])
-        }
-        }
+        //console.log(testedPaths)
+        //console.log(validPaths)
 
         return validPaths;
+    }
+
+    checkParentisFault(validPaths,from){
+        let test3 = []
+        console.log(validPaths.length)
+        console.log(validPaths)
+        for(let i=0;i<validPaths.length;i++){
+            let last = validPaths[i][validPaths[i].length-1]
+            let lastParent = this.getVertex(last.getParent())
+            console.log(lastParent.getNodeId()+","+from.getNodeId())
+            if(lastParent.getNodeId()!==from.getNodeId()){
+                test3.push(validPaths[i])
+           }
+        }
+        console.log(test3)
+        return test3
     }
 
     findMaxVoltageDropPathAll(paths){
@@ -208,10 +209,10 @@ class Graph{
                 //console.log(sw1.getNodeId(),sw2.getNodeId(),lineLength,sw1Capacity,sw2Capacity)
                 let tempVoltageDrop = ((sw1Capacity-sw2Capacity)/2)*lineLength*0.25
                 voltageDrop += tempVoltageDrop
-                console.log(voltageDrop)
+                //console.log(voltageDrop)
             }
             let voltageDropPrecentage = (voltageDrop/11000)*100
-            console.log(voltageDropPrecentage)
+            //console.log(voltageDropPrecentage)
             if(voltageDropPrecentage<maxVoltageDropPrecentage){
                 let temp = paths[i].concat([true,voltageDrop])
                 testedPaths.push(temp)
@@ -227,8 +228,8 @@ class Graph{
                 validPaths.push(testedPaths[i])
             }
         }
-        console.log(testedPaths)
-        console.log(validPaths)
+        //console.log(testedPaths)
+        //console.log(validPaths)
         return validPaths;
     }
 
@@ -239,7 +240,7 @@ class Graph{
             let totalLineCurrent = 0;
             for(let j=0;j<paths[i].length-1;j++){
                 totalLineCurrent += paths[i][j].getLineCurrent(paths[i][j+1])
-                console.log(paths[i].length-1,j,totalLineCurrent)
+                //console.log(paths[i].length-1,j,totalLineCurrent)
             }
             if(totalLineCurrent<limitedFactor){
                 testedPaths.push([paths[i],true,totalLineCurrent,limitedFactor])
@@ -247,15 +248,15 @@ class Graph{
                 testedPaths.push([paths[i],false,totalLineCurrent,limitedFactor])
             }
         }
-        console.log("Paths with max current capacity ")
-        console.log(testedPaths)
+        //console.log("Paths with max current capacity ")
+        //console.log(testedPaths)
         let validPaths = []
         for(let i=0;i<testedPaths.length;i++){
             if(testedPaths[i][1]===true){
                 validPaths.push(testedPaths[i])
             }
         }
-        console.log(validPaths)
+        //console.log(validPaths)
         return validPaths;
     }
 
@@ -275,7 +276,7 @@ class Graph{
             }
 
         }
-        console.log(test3)
+        //console.log(test3)
         return test3;
 
     }
@@ -287,7 +288,7 @@ class Graph{
             let totalLineCurrent = 0;
             for(let j=0;j<paths[i].length-1;j++){
                 totalLineCurrent += paths[i][j].getLineCurrent(paths[i][j+1])
-                console.log(paths[i].length-1,j,totalLineCurrent)
+                //console.log(paths[i].length-1,j,totalLineCurrent)
             }
             if(totalLineCurrent<limitedFactor){
                 testedPaths.push([paths[i],true,totalLineCurrent,limitedFactor])
@@ -295,15 +296,15 @@ class Graph{
                 testedPaths.push([paths[i],false,totalLineCurrent,limitedFactor])
             }
         }
-        console.log("Paths with max current capacity ")
-        console.log(testedPaths)
+        //console.log("Paths with max current capacity ")
+        //console.log(testedPaths)
         let validPaths = []
         for(let i=0;i<testedPaths.length;i++){
             if(testedPaths[i][1]===true){
                 validPaths.push(testedPaths[i][0])
             }
         }
-        console.log(validPaths)
+        //console.log(validPaths)
         return validPaths;
     }
 
@@ -312,7 +313,7 @@ class Graph{
         for(let i=0;i<path.length;i++){
             if(path[i].getNodeType()==="Primary"){
                 primary = path[i]
-                console.log(primary)
+                //console.log(primary)
                 break;
             }
         }
@@ -329,7 +330,7 @@ class Graph{
                 min = allFactors[i]
             }
         }
-        console.log(min)
+        //console.log(min)
         return min;
     }
 
@@ -355,8 +356,8 @@ class Graph{
             }
 
         }
-        console.log(test3)
-        console.log(faultToEndPaths)
+        //console.log(test3)
+        //console.log(faultToEndPaths)
         let paths = []
         for(let i=0;i<test3.length;i++){
             let totalVoltageDrop = test3[i][5]
@@ -373,14 +374,14 @@ class Graph{
                     let len = sw1.getLineLength(sw2)
                     let tempVoltageDrop = ((sw1cap-sw2cap)/2)*len*0.25
                     tempDrop+= tempVoltageDrop
-                    console.log(tempCurrent)
-                    console.log(tempDrop)
+                    //console.log(tempCurrent)
+                    //console.log(tempDrop)
                 }
                 if(tempCurrent<maxCurrent){
-                    console.log("True")
+                    //console.log("True")
                     let voltageDrpPrecentage = ((tempDrop+totalVoltageDrop)/11000)*100
                     if(voltageDrpPrecentage<6.0){
-                        console.log("true drop")
+                        //console.log("true drop")
                         faultToEndPaths[j].pop()
                         paths.push(test3[i][0].concat(faultToEndPaths[j].reverse()))
                     }

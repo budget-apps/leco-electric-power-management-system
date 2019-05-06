@@ -38,19 +38,20 @@ class Dashboard extends Component {
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc)
         let from = graph.getVertex(0)
-        console.log(from)
+        //console.log(from)
         let to = faultEdges[1]
         let pathsTesting = graph.getAllPaths(from,to)
         let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
         let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
-        let paths = graph.findMaxCurrentPath(totallyValidPaths)
-        paths = graph.removeFaultLocFromPaths(paths,faultLoc)
+        let paths = graph.removeFaultLocFromPaths(totallyValidPaths,faultLoc)
 
-        let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(to)
+        let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(from)
         for(let i=0;i<pathsAlt.length;i++){
             paths.push(pathsAlt[i])
         }
-        console.log(pathsAlt)
+        paths = graph.checkParentisFault(paths,to)
+
+        //console.log(pathsAlt)
 
         this.setState({
             paths: paths,
