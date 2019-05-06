@@ -180,17 +180,17 @@ class Graph{
 
     checkParentisFault(validPaths,from){
         let test3 = []
-        console.log(validPaths.length)
-        console.log(validPaths)
+        //console.log(validPaths.length)
+        //console.log(validPaths)
         for(let i=0;i<validPaths.length;i++){
             let last = validPaths[i][validPaths[i].length-1]
             let lastParent = this.getVertex(last.getParent())
-            console.log(lastParent.getNodeId()+","+from.getNodeId())
+            //console.log(lastParent.getNodeId()+","+from.getNodeId())
             if(lastParent.getNodeId()!==from.getNodeId()){
                 test3.push(validPaths[i])
            }
         }
-        console.log(test3)
+        //console.log(test3)
         return test3
     }
 
