@@ -103,6 +103,7 @@ class Graph{
                 let tempNode = tempAdjacents[i][0];
                 tempfaultPathNodes.push(tempNode);
                 tempNode.setParent(parent.getNodeId());
+                tempNode.setAllParent(parent)
                 console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode);
@@ -118,7 +119,9 @@ class Graph{
                     }
 
                 }
+                console.log(tempNode.getAllParent())
             }
+
         }
         return faultPathNodes;
     }
@@ -171,6 +174,22 @@ class Graph{
         }
         console.log(testedPaths)
         console.log(validPaths)
+        let test3 = []
+        for(let i=0;i<validPaths.length;i++){
+            let found = false;
+            let last = validPaths[i][validPaths.length-1]
+            let parents = last.getAllParent()
+            for(let j=0;j<parents.length;j++){
+                if(last.getNodeId()===parents[j].getNodeId()){
+                    found = true;
+                    break;
+                }
+            }
+        if(!found){
+            test3.push(validPaths[i])
+        }
+        }
+
         return validPaths;
     }
 
