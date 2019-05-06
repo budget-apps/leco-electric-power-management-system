@@ -108,13 +108,14 @@ class Graph{
                 tempfaultPathNodes.push(tempNode);
                 tempNode.setParent(parent.getNodeId());
                 tempNode.setAllParent(parent)
-                //console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
+                console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length+","+parent.getFaultCurrent());
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode);
                 }
                 if(tempNode.getCurrentPower() === 0 && !tempNode.getFaultCurrent()){
                     if(parent.getFaultCurrent()){
                         if((tempNode.getNodeId()!==-1 && tempAdjacents.length!==1)||(tempNode.getNodeId()===-1 && tempAdjacents.length===1)){
+                            console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
                             faultPathNodes.push(tempNode);
                             found = true;
                             break;
@@ -124,6 +125,9 @@ class Graph{
 
                 }
                 //console.log(tempNode.getAllParent())
+            }
+            if(found){
+                break
             }
 
         }
