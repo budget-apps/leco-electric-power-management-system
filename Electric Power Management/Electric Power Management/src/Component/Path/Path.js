@@ -16,7 +16,21 @@ class path extends Component{
     generateComponent(){
         let componentRow = []
         for(let i=0;i<this.state.nodeDataArray.length;i++){
-            componentRow.push(<div style={{marginBottom: "5px"}}><MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/></div>)
+            componentRow.push(
+                <div style={{marginBottom: "5px"}} className="row">
+                    <div className="col-md-1">
+                        <label className="btn btn-primary">{i+1}</label>
+                    </div>
+                    <div className="col-md-9">
+                        <MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/>
+                    </div>
+                    <div className="col-md-1">
+                        <button style={{width:"100%"}} className="btn btn-primary btn-sm">Apply</button>
+                    </div>
+                    <div className="col-md-1">
+                        <button style={{width:"100%"}} className="btn btn-danger btn-sm">Reset</button>
+                    </div>
+                </div>)
         }
         this.setState({
             componentRow: componentRow

@@ -218,7 +218,7 @@ export default class UpdateComponent extends Component {
                     </table>
                     <Modal show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Edit </Modal.Title>
+                            <Modal.Title>Change node details </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
 
@@ -229,7 +229,7 @@ export default class UpdateComponent extends Component {
 
                                 </Form.Group>
                                 <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>adjecent</Form.Label>
+                                    <Form.Label>adjecent <br></br>[Connected Node, Current power, Line length, Conductivity]</Form.Label>
                                     <Form.Control value={this.state.adjecent} name="adjecent" onChange={this.onchangetableField} type="text" />
 
                                 </Form.Group>

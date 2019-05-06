@@ -39,7 +39,7 @@ class Dashboard extends Component {
         let faultEdges = graph.findFaultEdge(faultLoc)
         console.log(faultEdges[1].getNodeId())
         if(graph.checkFaultEndContaonOpenSwitch(faultEdges)){
-            console.log(faultEdges[1].getNodeId())
+            console.log(faultEdges[1].getNodeId()+","+faultEdges[1].getSwitchType())
             return;
         }
 
@@ -144,6 +144,7 @@ class Dashboard extends Component {
         const end=new Node(-1)
         start.setNodeType("Start")
         end.setNodeType("End")
+        end.setCapacity(20)
 
         const graph = new Graph(start,end)
 

@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Graph/Graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Graph/Graph.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/Path/Path.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Path/Path.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="186" column="85" selection-start-line="186" selection-start-column="85" selection-end-line="186" selection-end-column="85" />
+            <state relative-caret-position="-1285">
+              <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -35,13 +37,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1457">
-              <caret line="252" column="103" selection-start-line="252" selection-start-column="99" selection-end-line="252" selection-end-column="103" />
+            <state relative-caret-position="17">
+              <caret line="332" column="14" selection-start-line="332" selection-start-column="14" selection-end-line="332" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Component/Path/Path.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="26" column="45" lean-forward="true" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,15 +66,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="415">
               <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -77,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+            <state relative-caret-position="170">
+              <caret line="38" column="12" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="38" selection-end-column="12" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -89,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2567">
-              <caret line="157" lean-forward="true" selection-start-line="157" selection-end-line="157" />
+            <state relative-caret-position="2431">
+              <caret line="231" column="124" selection-start-line="231" selection-start-column="124" selection-end-line="231" selection-end-column="124" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -169,17 +174,17 @@
         <option value="$PROJECT_DIR$/src/Component/FaultEdge/FaultEdge.js" />
         <option value="$PROJECT_DIR$/src/Component/GoJs/MiniGoJsSuccess.jsx" />
         <option value="$PROJECT_DIR$/src/Component/GoJs/MiniGoJs.jsx" />
-        <option value="$PROJECT_DIR$/src/Component/Path/Path.js" />
         <option value="$PROJECT_DIR$/src/Component/Header/Header.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/Component/Button/SelectMap.js" />
         <option value="$PROJECT_DIR$/src/Component/SideMenu/SideMenu.js" />
-        <option value="$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js" />
         <option value="$PROJECT_DIR$/src/Component/Map/Map.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/Component/Node/Node.js" />
-        <option value="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/Component/Graph/Graph.js" />
+        <option value="$PROJECT_DIR$/src/Component/Path/Path.js" />
+        <option value="$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js" />
+        <option value="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" />
       </list>
     </option>
   </component>
@@ -416,21 +421,7 @@
       <workItem from="1556989030183" duration="16586000" />
       <workItem from="1557057284167" duration="12772000" />
       <workItem from="1557129435190" duration="10276000" />
-      <workItem from="1557150400382" duration="9459000" />
-    </task>
-    <task id="LOCAL-00022" summary="changed two way binding">
-      <created>1555432709598</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1555432709598</updated>
-    </task>
-    <task id="LOCAL-00023" summary="changed two way binding">
-      <created>1555434228051</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1555434228051</updated>
+      <workItem from="1557150400382" duration="23038000" />
     </task>
     <task id="LOCAL-00024" summary="changed two way binding">
       <created>1555456976446</created>
@@ -761,11 +752,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557143472535</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="correct finding paths 2">
+      <created>1557160008985</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1557160008985</updated>
+    </task>
+    <task id="LOCAL-00072" summary="correct finding paths 2">
+      <created>1557170635099</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1557170635100</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323837000" />
+    <option name="totallyTimeSpent" value="337416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -819,7 +824,8 @@
     <MESSAGE value="final updates4" />
     <MESSAGE value="final updates5" />
     <MESSAGE value="correct finding paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct finding paths" />
+    <MESSAGE value="correct finding paths 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct finding paths 2" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/constants/routes.js">
@@ -970,16 +976,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Path/Path.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="67" column="34" selection-start-line="65" selection-start-column="28" selection-end-line="67" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/favicon.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1004,26 +1000,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="171" selection-start-line="18" selection-start-column="171" selection-end-line="18" selection-end-column="171" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2567">
-          <caret line="157" lean-forward="true" selection-start-line="157" selection-end-line="157" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1058,20 +1034,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1457">
-          <caret line="252" column="103" selection-start-line="252" selection-start-column="99" selection-end-line="252" selection-end-column="103" />
+        <state relative-caret-position="-1285">
+          <caret line="182" column="31" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Path/Path.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="26" column="45" lean-forward="true" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="186" column="85" selection-start-line="186" selection-start-column="85" selection-end-line="186" selection-end-column="85" />
+        <state relative-caret-position="2431">
+          <caret line="231" column="124" selection-start-line="231" selection-start-column="124" selection-end-line="231" selection-end-column="124" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Header/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="38" column="12" lean-forward="true" selection-start-line="34" selection-start-column="8" selection-end-line="38" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="332" column="14" selection-start-line="332" selection-start-column="14" selection-end-line="332" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

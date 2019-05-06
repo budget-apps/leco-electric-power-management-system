@@ -95,14 +95,53 @@ class Graph{
         return allPaths
     }
 
+    getAllPathsAll(start, end){
+        let allPaths = []
+        let queue = []
+        let path =[]
+        path.push(start)
+        queue.push(path)
+        while(queue.length!==0){
+            path = queue.shift()
+            let last =path[path.length-1]
+            if(last.getNodeId()===end.getNodeId()){
+                allPaths.push(path)
+            }else{
+                let tempAdjacent = last.getAdjacent()
+                for(let i=0;i<tempAdjacent.length;i++){
+                    if(this.isNotVisited(tempAdjacent[i][0],path)){
+                        //console.log(path)
+                        //console.log(tempAdjacent[i][0].getNodeId())
+                        //console.log(queue)
+                        let newPath = []
+                        for(let i=0;i<path.length;i++){
+                            newPath.push(path[i])
+                        }
+                        newPath.push(tempAdjacent[i][0])
+                        //tempAdjacent[i][0].setParent(last.getNodeId())
+                        queue.unshift(newPath)
+                    }
+                }
+                //console.log("\n-------------------\n")
+            }
+        }
+        //console.log(allPaths)
+        return allPaths
+    }
 
     findFaultPath(faultSwitchNode){
         let tempfaultPathNodes = [faultSwitchNode];
-        let faultPathNodes = [faultSwitchNode];
+        let faultPathNodes = [];
+        for(let i=0;i<tempfaultPathNodes.length;i++){
+            faultPathNodes.push(tempfaultPathNodes[i])
+        }
+
         let found = false;
         while(tempfaultPathNodes.length !== 0 && !found){
+            console.log(faultPathNodes)
             let parent = tempfaultPathNodes.pop();
             let tempAdjacents = parent.getAdjacent();
+            console.log(faultPathNodes)
             for(let i=0;i<tempAdjacents.length;i++){
                 let tempNode = tempAdjacents[i][0];
                 tempfaultPathNodes.push(tempNode);
@@ -110,7 +149,7 @@ class Graph{
                 tempNode.setAllParent(parent)
                 console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length+","+parent.getFaultCurrent());
                 if(tempNode.getFaultCurrent()){
-                    faultPathNodes.push(tempNode);
+                    faultPathNodes.push(tempNode)
                 }
                 if(tempNode.getCurrentPower() === 0 && !tempNode.getFaultCurrent()){
                     if(parent.getFaultCurrent()){
@@ -138,12 +177,10 @@ class Graph{
         let faultSwitchNode = this.getVertex(faultLocation);
         faultSwitchNode.setSwitchType("Closed")
         let faultPathNodes = this.findFaultPath(faultSwitchNode);
-        //console.log(faultPathNodes);
-        let faultNode = faultPathNodes.pop();
-        let parentNode = this.getVertex(faultNode.getParent());
-        console.log([parentNode, faultNode]);
-        parentNode.setSwitchType("Open")
-        faultNode.setSwitchType("open")
+        console.log(faultPathNodes);
+        let faultNode = faultPathNodes[faultPathNodes.length-1];
+        let parentNode = faultPathNodes[faultPathNodes.length-2];
+        console.log(faultNode);
 
         return [parentNode, faultNode];
     }
