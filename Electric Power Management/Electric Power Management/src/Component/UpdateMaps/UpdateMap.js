@@ -36,7 +36,6 @@ export default class UpdateComponent extends Component {
     }
 
     handleShow = (element) => {
-        this.setState({ id: element.id })
         this.setState({
             show: true,
             row: element,
@@ -52,7 +51,6 @@ export default class UpdateComponent extends Component {
 
 
         });
-        alert(element.id)
     }
     deleteitem = (id) => {
         var arr = []
