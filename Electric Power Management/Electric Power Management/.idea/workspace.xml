@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4ce1685-1dd9-4c37-b1e1-d7d49b8cdd98" name="Default Changelist" comment="final updates4">
+    <list default="true" id="c4ce1685-1dd9-4c37-b1e1-d7d49b8cdd98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -18,8 +18,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2534">
-              <caret line="248" column="59" selection-start-line="248" selection-start-column="59" selection-end-line="248" selection-end-column="59" />
+            <state relative-caret-position="18">
+              <caret line="184" column="26" lean-forward="true" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Component/Node/Node.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -156,7 +165,6 @@
         <option value="$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMaps.css" />
         <option value="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.css" />
         <option value="$PROJECT_DIR$/src/Component/Graph/test.js" />
-        <option value="$PROJECT_DIR$/src/Component/Node/Node.js" />
         <option value="$PROJECT_DIR$/src/Component/GoJs/GoJs.jsx" />
         <option value="$PROJECT_DIR$/src/Component/FaultEdge/FaultEdge.js" />
         <option value="$PROJECT_DIR$/src/Component/GoJs/MiniGoJsSuccess.jsx" />
@@ -169,8 +177,9 @@
         <option value="$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMap.js" />
         <option value="$PROJECT_DIR$/src/Component/Map/Map.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/Component/Graph/Graph.js" />
         <option value="$PROJECT_DIR$/src/Component/Dashboard/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/Component/Node/Node.js" />
+        <option value="$PROJECT_DIR$/src/Component/Graph/Graph.js" />
       </list>
     </option>
   </component>
@@ -406,21 +415,7 @@
       <workItem from="1556913076493" duration="596000" />
       <workItem from="1556989030183" duration="16586000" />
       <workItem from="1557057284167" duration="12772000" />
-      <workItem from="1557129435190" duration="2419000" />
-    </task>
-    <task id="LOCAL-00017" summary="changed uis">
-      <created>1555405710099</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1555405710099</updated>
-    </task>
-    <task id="LOCAL-00018" summary="changed uis">
-      <created>1555406101969</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1555406101969</updated>
+      <workItem from="1557129435190" duration="5632000" />
     </task>
     <task id="LOCAL-00019" summary="changed uis">
       <created>1555424013948</created>
@@ -751,11 +746,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557097763866</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="final updates4">
+      <created>1557132299878</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1557132299880</updated>
+    </task>
+    <task id="LOCAL-00067" summary="final updates5">
+      <created>1557139220325</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1557139220325</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306521000" />
+    <option name="totallyTimeSpent" value="309734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -765,9 +774,9 @@
       <window_info id="npm" order="1" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="2" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.3297587" />
@@ -807,7 +816,8 @@
     <MESSAGE value="final updates2" />
     <MESSAGE value="final updates3" />
     <MESSAGE value="final updates4" />
-    <option name="LAST_COMMIT_MESSAGE" value="final updates4" />
+    <MESSAGE value="final updates5" />
+    <option name="LAST_COMMIT_MESSAGE" value="final updates5" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/constants/routes.js">
@@ -906,13 +916,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/UpdateMaps/UpdateMaps.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/Node/Node.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="122" column="40" selection-start-line="122" selection-start-column="40" selection-end-line="122" selection-end-column="40" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/Graph/test.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1056,10 +1059,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/Node/Node.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/Graph/Graph.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2534">
-          <caret line="248" column="59" selection-start-line="248" selection-start-column="59" selection-end-line="248" selection-end-column="59" />
+        <state relative-caret-position="18">
+          <caret line="184" column="26" lean-forward="true" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
         </state>
       </provider>
     </entry>
