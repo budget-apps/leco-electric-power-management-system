@@ -44,12 +44,13 @@ class Dashboard extends Component {
         let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
         let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
         let paths = graph.findMaxCurrentPath(totallyValidPaths)
+        paths = graph.removeFaultLocFromPaths(paths,faultLoc)
 
         let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(to)
         for(let i=0;i<pathsAlt.length;i++){
             paths.push(pathsAlt[i])
         }
-        //console.log(pathsAlt)
+        console.log(pathsAlt)
 
         this.setState({
             paths: paths,
@@ -196,14 +197,14 @@ class Dashboard extends Component {
             let currentPower = tempNode.getCurrentPower()
             let capacity = tempNode.getCapacity()
             if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && isNormal){
-                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower+"\nSwitch Capacity: "+capacity
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
                 let nodeDataRow={ key: nodeID, text: text,"loc": placex+" "+placey}
                 placex+=100;
                 placey=100;
                 isNormal = false;
                 nodeData.push(nodeDataRow)
             }else  if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && !isNormal){
-                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower+"\nSwitch Capacity: "+capacity
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
                 let nodeDataRow={ key: nodeID, text: text,"loc": (placex-100)+" "+placey}
                 placex+=100;
                 placey=-100;
@@ -211,7 +212,7 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="Primary" && isPrimary){
                 //console.log("Primary")
-                let text = "Type: "+nodeType+"\nTotal Feeder Capcity: "+capacity
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nTotal Feeder Capcity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 -100"}
                 placex+=100;
                 placey=100;
@@ -220,7 +221,7 @@ class Dashboard extends Component {
             }
             else if(nodeType==="Primary" && !isPrimary){
                 //console.log("Primary")
-                let text = "Type: "+nodeType+"\nTotal Feeder Capcity: "+capacity
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nTotal Feeder Capcity: "+capacity
                 let nodeDataRow={ key: nodeID, text: text,"loc": "-500 100"}
                 placex+=100;
                 placey=-100;
@@ -229,11 +230,11 @@ class Dashboard extends Component {
             }
             else if(nodeType==="Start"){
                 //console.log("Start")
-                let nodeDataRow={ key: nodeID, text: nodeType,"loc": "-600 0"}
+                let nodeDataRow={ key: nodeID, text: "ID: "+nodeID+"\n"+nodeType,"loc": "-600 0"}
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: "Type: Switch\nStatus: Normally Open","loc": "300 0"}
+                let nodeDataRow={ key: nodeID, text: "ID: "+nodeID+"\n"+"Type: End Switch\nStatus: Open","loc": "900 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -343,7 +344,7 @@ class Dashboard extends Component {
                         </div>
                         <div className="row">
                             <div className="col-md-9">
-                                <Map branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
+                                <Map isTipped={this.state.faultSwitch} branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                             </div>
                             <div className="col-md-3">
                                 <FaultEdge nodeDataArray={this.state.faultNodeArray} linkDataArray={this.state.faultLinkArray}/>

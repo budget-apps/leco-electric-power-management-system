@@ -51,11 +51,12 @@ export default class UpdateComponent extends Component {
 
 
         });
+
     }
     deleteitem = (id) => {
         var arr = []
         this.state.electricMap.forEach(element => {
-            if (!(element.id == id)) {
+            if (!(element.id === id)) {
                 arr.push(element)
             }
         });
@@ -121,22 +122,22 @@ export default class UpdateComponent extends Component {
         console.log(e.target.name)
     }
     updateMap = () => {
-        var i = 0;
-        var g
+        //var i = 0;
+        //var g
         var array = []
         const row = {
             id: this.state.id,
             type: this.state.type,
             adjecent: this.state.adjecent,
             switchType: this.state.switchType,
-            faultCurrent: this.state.faultCurrent == "true",
+            faultCurrent: this.state.faultCurrent === "true",
             currentPower: this.state.currentPower,
             capacity: this.state.capacity,
             branch: this.state.branch,
-            isTripped: this.state.isTripped == "true"
+            isTripped: this.state.isTripped === "true"
         }
         this.state.electricMap.forEach(element => {
-            if (element.id == this.state.id) {
+            if (element.id === this.state.id) {
                 array.push(row)
             }
             else {
@@ -183,12 +184,12 @@ export default class UpdateComponent extends Component {
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="container-fluid row">
                     <table className="table table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Adjacent</th>
+                                <th>Adjacent<br></br>[Connected Node, Current power, Line length, Conductivity]</th>
                                 <th>Type</th>
                                 <th>Switch Type</th>
                                 <th>Fault Current</th>
