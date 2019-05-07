@@ -80,7 +80,7 @@ export default class UpdateComponent extends Component {
                         )
                         firebase.database().ref().child('electricMap').orderByChild('1/branch').equalTo(this.state.branch).once('value')
                             .then((snapshot) => {
-                                console.log(snapshot.val().electricmap)
+                                //console.log(snapshot.val().electricmap)
                                 this.setState({ electricMap: snapshot.val().electricmap })
 
                             })
@@ -106,7 +106,7 @@ export default class UpdateComponent extends Component {
             .once('value')
 
             .then((snapshot) => {
-                console.log(snapshot.val().electricmap)
+                //console.log(snapshot.val().electricmap)
                 this.setState({ electricMap: snapshot.val().electricmap })
             })
             .catch(
@@ -145,7 +145,7 @@ export default class UpdateComponent extends Component {
 
 
         });
-        console.log(array)
+        //console.log(array)
 
         firebase.database().ref().child('electricMap').set({ electricmap: array }, (err, doc) => {
             if (!err) {
@@ -161,7 +161,7 @@ export default class UpdateComponent extends Component {
     }
 
     render() {
-        console.log(this.state)
+       // console.log(this.state)
 
         return (
             <div>
