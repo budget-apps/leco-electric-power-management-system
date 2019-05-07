@@ -17,18 +17,15 @@ class path extends Component{
         let componentRow = []
         for(let i=0;i<this.state.nodeDataArray.length;i++){
             componentRow.push(
-                <div key={i} style={{marginBottom: "5px"}} className="row">
-                    <div className="col-md-1">
-                        <label className="btn btn-primary">{i+1}</label>
-                    </div>
-                    <div className="col-md-9">
+                <div key={i} style={{marginBottom: "5px",display: "flex"}} className="row align-items-center">
+                    <div className="col-md-10">
                         <MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/>
                     </div>
                     <div className="col-md-1">
-                        <button style={{width:"100%"}} className="btn btn-primary btn-sm">Apply</button>
+                        <button style={{width:"100%"}} style={{borderRadius: "40px"}} className="btn btn-primary">Apply</button>
                     </div>
                     <div className="col-md-1">
-                        <button style={{width:"100%"}} className="btn btn-danger btn-sm">Reset</button>
+                        <button style={{width:"100%"}} style={{borderRadius: "40px"}} className="btn btn-danger">Reset</button>
                     </div>
                 </div>)
         }

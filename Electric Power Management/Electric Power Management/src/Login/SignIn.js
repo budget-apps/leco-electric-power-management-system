@@ -167,38 +167,42 @@ class SignIn extends React.Component {
           };
 
           return (
-            <div className="container-fluid" style={{width: "100%"}}>
-              <div className="container-fluid btn-default" style={{width: "50%",padding: "10px",borderRadius: "10px"}}>
-                <h1>Sign In</h1>
-                <form className="form-group" onSubmit={onSubmit}>
+              <div className="container-fluid" style={{padding: "10px"}}>
+                <div className="row align-items-center">
+                  <div className="col-md-4"></div>
+                  <div className="col-md-4 bg-light " style={{padding: "10px",borderRadius: "10px"}}>
+                    <h1>Sign In</h1>
+                    <form className="form-group" onSubmit={onSubmit}>
 
-                  <label htmlFor="email">Email</label>
-                  <input
-                      className="form-control"
-                      style={{width: "100%"}}
-                      type="text"
-                      name="email"
-                      value={state.email}
-                      onChange={onEmailChange}
-                  />
+                      <label htmlFor="email">Email</label>
+                      <input
+                          className="form-control"
+                          style={{width: "100%"}}
+                          type="text"
+                          name="email"
+                          value={state.email}
+                          onChange={onEmailChange}
+                      />
 
-                  <label htmlFor="password">Password</label>
-                  <input
-                      className="form-control"
-                      type="password"
-                      name="password"
-                      value={state.password}
-                      onChange={onPasswordChange}
-                  />
-                  {state.error &&
-                  <p style={{ color: 'red' }}>
-                    {state.error}
-                  </p>}
-                  <MDBBtn className="btn btn-info" type="submit" size="sm">Sign In</MDBBtn>
-                </form>
+                      <label htmlFor="password">Password</label>
+                      <input
+                          className="form-control"
+                          type="password"
+                          name="password"
+                          value={state.password}
+                          onChange={onPasswordChange}
+                      />
+                      {state.error &&
+                      <p style={{ color: 'red' }}>
+                        {state.error}
+                      </p>}
+                      <MDBBtn className="btn btn-info" type="submit" size="sm">Sign In</MDBBtn>
+                    </form>
+                  </div>
+                  <div className="col-md-4"></div>
+                </div>
               </div>
 
-            </div>
           );
         }}
       </State>

@@ -33,40 +33,14 @@ class Dashboard extends Component {
         show:false
     }
 
+    /*Find recovery paths*/
     findFaultPaths(){
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc)
         //console.log(faultEdges[1].getNodeId())
-        if(graph.checkFaultEndContaonOpenSwitch(faultEdges)){
-            console.log(faultEdges[1].getNodeId()+","+faultEdges[1].getSwitchType())
-            return;
-        }
 
-        let from = graph.getVertex(0)
-        //console.log(from)
-        let to = faultEdges[1]
-        //console.log(faultEdges[1].getNodeId())
-        let pathsTesting = graph.getAllPaths(from,to)
-        //console.log("=============================")
-        //console.log(pathsTesting)
-        //console.log("=============================")
-        let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
-        let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
-        let paths = graph.removeFaultLocFromPaths(totallyValidPaths,faultLoc)
-        let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(from)
-        //console.log("=============================")
-        //console.log(pathsAlt)
-        //console.log("=============================")
-        for(let i=0;i<pathsAlt.length;i++){
-            paths.push(pathsAlt[i])
-        }
-        paths = graph.checkParentisFault(paths,faultEdges[1])
-        paths = graph.removeFaultLocFromPaths(paths,faultEdges[0].getNodeId())
-        paths = graph.removeFaultLocFromPaths(paths,faultEdges[1].getNodeId())
-
-        //console.log(graph.getVertex(paths[0][paths[0].length-1].getParent()).getNodeId())
-        paths = graph.checkAllSwitchesAreClosed(paths)
+        let paths = graph.findAltPaths(faultEdges)
 
         this.setState({
             paths: paths,
@@ -107,6 +81,7 @@ class Dashboard extends Component {
         })
     }
 
+    /*Find fault edges*/
     findFaultEdges(){
         //console.log(this.state.graph)
         let graph=this.state.graph;
@@ -139,9 +114,11 @@ class Dashboard extends Component {
         //console.log(this.state.graph)
     }
 
+    /*Generate graph from db data*/
     generateGraph(){
         const start=new Node(0)
         start.setNodeType("Start")
+        //const end = new Node(-5)
 
         const graph = new Graph(start)
 
@@ -162,6 +139,7 @@ class Dashboard extends Component {
             tempNode.setSwitchType(nodeData.switchType)
             nodeArray.push(tempNode)
         }
+        //nodeArray.push(end)
         graph.addVertertices(nodeArray)
         let allPrimarys = graph.findPrimary();
         for(let i=0;i<allPrimarys.length;i++){
@@ -201,6 +179,7 @@ class Dashboard extends Component {
         //console.log(graph,this.state.graph)
     }
 
+    /*Generate maps nodes objects and nodes places*/
     generateNodeDataArray(){
         let allVertices = this.state.graph.getVertices();
         let nodeData=[];
@@ -255,7 +234,8 @@ class Dashboard extends Component {
                 nodeData.push(nodeDataRow)
             }else if(nodeType==="End"){
                 //console.log("End")
-                let nodeDataRow={ key: nodeID, text: "ID: "+nodeID+"\n"+"Type: End Switch\nStatus: Open","loc": "900 0"}
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                let nodeDataRow={ key: nodeID, text: text,"loc": "900 0"}
                 nodeData.push(nodeDataRow)
             }
 
@@ -265,6 +245,7 @@ class Dashboard extends Component {
         })
     }
 
+    /*Generate node's links objects for GoJs Map*/
     generateLinkDataArray(){
         let allVertices = this.state.graph.getVertices();
         let linkArray=[]
@@ -290,6 +271,7 @@ class Dashboard extends Component {
         })
     }
 
+    /*Change map details on change of the drop down*/
     selectMapEventHandler=(event)=>{
         this.setState({
             branch: event.target.value
@@ -328,6 +310,7 @@ class Dashboard extends Component {
 
     }
 
+    /*Find fault location*/
     checkingFaults(){
         let vertices = this.state.graph.getVertices()
         for(let i=0;i<vertices.length;i++){
@@ -362,8 +345,6 @@ class Dashboard extends Component {
                             <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
                         </div>
                         </div>
-                       
-                        
                         <div className="row">
                             <div className="col-md-3">
                                 <AddExelSheet/>
@@ -392,7 +373,6 @@ class Dashboard extends Component {
                             </div>
                         </div>
                             </div>
-                    
                          :
                          <div>
                              <UpdateComponent></UpdateComponent>
@@ -405,6 +385,5 @@ class Dashboard extends Component {
             </div>
         );
     }
-
 }
 export default Dashboard
