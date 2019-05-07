@@ -73,20 +73,22 @@ class SignOut extends React.Component {
   }
 }
 
-const AuthenticatedNavigation = () => {
-  return (
-    <React.Fragment>
-      <li>
-        <Link to={routes.SIGN_OUT_PATH}>Sign Out</Link>
-      </li>
-    </React.Fragment>
-  );
-};
+// const AuthenticatedNavigation = () => {
+//   return (
+//     <React.Fragment>
+//       <li>
+//         <Link to={routes.SIGN_OUT_PATH}>Sign Out</Link>
+//       </li>
+//     </React.Fragment>
+//   );
+// };
 
 const UnauthenticatedNavigation = () => {
   return (
     <React.Fragment>
-
+      <li>
+              <Link to={routes.HOME_PATH}>Home</Link>
+      </li>
       <li>
         <Link to={routes.SIGN_IN_PATH}>Sign In</Link>
       </li>
@@ -99,13 +101,9 @@ const Navigation = () => {
     <AuthContext.Consumer>
       {({ authUser }) =>
         <nav>
-          <ul>
-            <li>
-              <Link to={routes.HOME_PATH}>Home</Link>
-            </li>
-            {authUser && <AuthenticatedNavigation />}
+         
             {!authUser && <UnauthenticatedNavigation />}
-          </ul>
+         
         </nav>}
     </AuthContext.Consumer>
   );
