@@ -13,7 +13,7 @@ import { firebase } from '../firebase';
 
 const UnauthenticatedHomeContent = () => {
   return (
-    <React.Fragment>
+    <React.Fragment >
       <p>
         Welcome, please <Link to={routes.SIGN_IN_PATH}>sign in</Link>
       </p>
@@ -88,6 +88,9 @@ const UnauthenticatedNavigation = () => {
       <li style={{display: "none"}}>
         <Link to={routes.SIGN_IN_PATH}>Sign In</Link>
       </li>
+      <li>
+          <Link to={routes.HOME_PATH}>Home</Link>
+        </li>
     </React.Fragment>
   );
 };
@@ -97,13 +100,11 @@ const Navigation = () => {
     <AuthContext.Consumer>
       {({ authUser }) =>
         <nav style={{display: "none"}}>
-          <ul>
-            <li>
-              <Link to={routes.HOME_PATH}>Home</Link>
-            </li>
-            {authUser && <AuthenticatedNavigation />}
+         
+            
+            
             {!authUser && <UnauthenticatedNavigation />}
-          </ul>
+        
         </nav>}
     </AuthContext.Consumer>
   );
