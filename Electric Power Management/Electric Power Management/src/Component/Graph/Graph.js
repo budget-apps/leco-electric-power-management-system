@@ -1,8 +1,7 @@
 class Graph{
-    constructor(start,end){
+    constructor(start){
         this.start=start;
-        this.end = end
-        this.vertices=[start,end];
+        this.vertices=[start];
         this.order=this.vertices.length;
     }
     addVertertices(vertices){
@@ -22,22 +21,11 @@ class Graph{
         return primaryArray
     }
 
-    isPrimary(){
-        for(let i=0;i<this.order;i++){
-            if(this.vertices[i].getNodeType()==="Primary"){
-                return true
-            }
-        }
-        return false;
-    }
 
     getVertices(){
         return this.vertices;
     }
 
-    printGraph(){
-        console.log(this.vertices)
-    }
 
     getVertex(id){
         const vertices=this.getVertices();
@@ -95,39 +83,6 @@ class Graph{
         return allPaths
     }
 
-    getAllPathsAll(start, end){
-        let allPaths = []
-        let queue = []
-        let path =[]
-        path.push(start)
-        queue.push(path)
-        while(queue.length!==0){
-            path = queue.shift()
-            let last =path[path.length-1]
-            if(last.getNodeId()===end.getNodeId()){
-                allPaths.push(path)
-            }else{
-                let tempAdjacent = last.getAdjacent()
-                for(let i=0;i<tempAdjacent.length;i++){
-                    if(this.isNotVisited(tempAdjacent[i][0],path)){
-                        //console.log(path)
-                        //console.log(tempAdjacent[i][0].getNodeId())
-                        //console.log(queue)
-                        let newPath = []
-                        for(let i=0;i<path.length;i++){
-                            newPath.push(path[i])
-                        }
-                        newPath.push(tempAdjacent[i][0])
-                        //tempAdjacent[i][0].setParent(last.getNodeId())
-                        queue.unshift(newPath)
-                    }
-                }
-                //console.log("\n-------------------\n")
-            }
-        }
-        //console.log(allPaths)
-        return allPaths
-    }
 
     findFaultPath(faultSwitchNode){
         let tempfaultPathNodes = [faultSwitchNode];
@@ -138,27 +93,25 @@ class Graph{
 
         let found = false;
         while(tempfaultPathNodes.length !== 0 && !found){
-            console.log(faultPathNodes)
+            //console.log(faultPathNodes)
             let parent = tempfaultPathNodes.pop();
             let tempAdjacents = parent.getAdjacent();
-            console.log(faultPathNodes)
+            //console.log(faultPathNodes)
             for(let i=0;i<tempAdjacents.length;i++){
                 let tempNode = tempAdjacents[i][0];
                 tempfaultPathNodes.push(tempNode);
                 tempNode.setParent(parent.getNodeId());
                 tempNode.setAllParent(parent)
-                console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length+","+parent.getFaultCurrent());
+                //console.log(i+","+tempNode.getNodeId()+","+typeof tempNode.getFaultCurrent()+","+typeof Number(tempNode.getCurrentPower())+","+tempAdjacents.length+","+parent.getFaultCurrent());
                 if(tempNode.getFaultCurrent()){
                     faultPathNodes.push(tempNode)
                 }
-                if(tempNode.getCurrentPower() === 0 && !tempNode.getFaultCurrent()){
+                if(Number(tempNode.getCurrentPower()) === 0 && !tempNode.getFaultCurrent()){
+                    //console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
                     if(parent.getFaultCurrent()){
-                        if((tempNode.getNodeId()!==-1 && tempAdjacents.length!==1)||(tempNode.getNodeId()===-1 && tempAdjacents.length===1)){
-                            console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
-                            faultPathNodes.push(tempNode);
-                            found = true;
-                            break;
-                        }
+                        faultPathNodes.push(tempNode);
+                        found = true;
+                        break;
 
                     }
 
@@ -177,10 +130,10 @@ class Graph{
         let faultSwitchNode = this.getVertex(faultLocation);
         faultSwitchNode.setSwitchType("Closed")
         let faultPathNodes = this.findFaultPath(faultSwitchNode);
-        console.log(faultPathNodes);
+        //console.log(faultPathNodes);
         let faultNode = faultPathNodes[faultPathNodes.length-1];
         let parentNode = faultPathNodes[faultPathNodes.length-2];
-        console.log(faultNode);
+        //console.log(faultNode);
 
         return [parentNode, faultNode];
     }
@@ -224,9 +177,9 @@ class Graph{
     }
 
     checkFaultEndContaonOpenSwitch(faultEdge){
-        console.log(faultEdge[1].getSwitchType())
+        //console.log(faultEdge[1].getSwitchType())
         if(faultEdge[1].getSwitchType()==="Open" || faultEdge[1].getSwitchType()==="open"){
-            console.log(faultEdge[1].getSwitchType())
+            //console.log(faultEdge[1].getSwitchType())
             return true;
         }
         return false;
@@ -237,7 +190,7 @@ class Graph{
         for(let i=0;i<paths.length;i++){
             let found = false;
             for(let j=0;j<paths[i].length;j++){
-                console.log(paths[i][j].getSwitchType())
+                //console.log(paths[i][j].getSwitchType())
                 if(paths[i][j].getSwitchType()!=="Closed"){
                     test3.push(paths[i])
                     found = true
@@ -257,10 +210,10 @@ class Graph{
             let lastParent = this.getVertex(last.getParent())
             let fromParent = this.getVertex(from.getParent())
             if(last.getNodeId()=== -1){
-                console.log(validPaths[i])
-                console.log(lastParent.getNodeId()+","+fromParent.getNodeId())
-                console.log(test3)
-                console.log("------------------------")
+                //console.log(validPaths[i])
+                //console.log(lastParent.getNodeId()+","+fromParent.getNodeId())
+                //console.log(test3)
+                //console.log("------------------------")
                 if(lastParent.getNodeId()!==fromParent.getNodeId()){
                     test3.push(validPaths[i])
                 }
@@ -313,7 +266,7 @@ class Graph{
         }
         let validPaths = []
         for(let i=0;i<testedPaths.length;i++){
-            console.log(testedPaths[i][1])
+            //console.log(testedPaths[i][1])
             if(testedPaths[i][4]===true){
                 validPaths.push(testedPaths[i])
             }
@@ -480,7 +433,7 @@ class Graph{
 
             }
         }
-        console.log(paths)
+        //console.log(paths)
         return paths;
     }
 

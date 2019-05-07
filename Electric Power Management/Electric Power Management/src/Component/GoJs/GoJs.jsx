@@ -98,7 +98,7 @@ export default class GoJs extends Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         if (this.props.nodes !== nextProps.nodes) {
-            console.log ('Updating');
+            console.log ('Map Component Updating');
             const model = this.state.myModel;
             const diagram = this.state.myDiagram;
             model.nodeDataArray = this.props.nodes;
@@ -114,7 +114,7 @@ export default class GoJs extends Component {
 
     componentWillUpdate(nextProps, nextState, nextContext) {
         if (this.props.nodes !== nextProps.nodes) {
-            console.log ('Updating');
+            console.log ('Map Component Updating');
             const model = this.state.myModel;
             const diagram = this.state.myDiagram;
             model.nodeDataArray = this.props.nodes;
@@ -125,9 +125,8 @@ export default class GoJs extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("componentDidUpdate")
         if (this.props.nodes !== prevProps.nodes) {
-            console.log ('Updating');
+            console.log ('Map Component DidUpdate');
             const model = this.state.myModel;
             const diagram = this.state.myDiagram;
             model.nodeDataArray = this.props.nodes;

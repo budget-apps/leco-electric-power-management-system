@@ -37,7 +37,7 @@ class Dashboard extends Component {
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc)
-        console.log(faultEdges[1].getNodeId())
+        //console.log(faultEdges[1].getNodeId())
         if(graph.checkFaultEndContaonOpenSwitch(faultEdges)){
             console.log(faultEdges[1].getNodeId()+","+faultEdges[1].getSwitchType())
             return;
@@ -46,18 +46,18 @@ class Dashboard extends Component {
         let from = graph.getVertex(0)
         //console.log(from)
         let to = faultEdges[1]
-        console.log(faultEdges[1].getNodeId())
+        //console.log(faultEdges[1].getNodeId())
         let pathsTesting = graph.getAllPaths(from,to)
-        console.log("=============================")
-        console.log(pathsTesting)
-        console.log("=============================")
+        //console.log("=============================")
+        //console.log(pathsTesting)
+        //console.log("=============================")
         let partiallyValidPaths = graph.findMaxCurrentPath(pathsTesting)
         let totallyValidPaths = graph.findMaxVoltageDropPath(partiallyValidPaths)
         let paths = graph.removeFaultLocFromPaths(totallyValidPaths,faultLoc)
         let pathsAlt = graph.findAlternativePathsFromOtherPrimaries(from)
-        console.log("=============================")
-        console.log(pathsAlt)
-        console.log("=============================")
+        //console.log("=============================")
+        //console.log(pathsAlt)
+        //console.log("=============================")
         for(let i=0;i<pathsAlt.length;i++){
             paths.push(pathsAlt[i])
         }
@@ -71,7 +71,7 @@ class Dashboard extends Component {
         this.setState({
             paths: paths,
         })
-        console.log(paths)
+        //console.log(paths)
         let allPathNodeData = []
         let allPathLinkData = []
         for(let i=0;i<paths.length;i++){
@@ -112,7 +112,7 @@ class Dashboard extends Component {
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.findFaultEdge(faultLoc);
-        console.log(faultEdges)
+       // console.log(faultEdges)
         let faultNodeData = []
         let loc =["-100 0","50 0"]
         for(let i=0;i<2;i++){
@@ -141,18 +141,17 @@ class Dashboard extends Component {
 
     generateGraph(){
         const start=new Node(0)
-        const end=new Node(-1)
         start.setNodeType("Start")
-        end.setNodeType("End")
-        end.setCapacity(20)
 
-        const graph = new Graph(start,end)
+        const graph = new Graph(start)
 
         const map = this.state.electricMap
+        //console.log(map)
         let dataLength = this.state.electricMap.length;
         let nodeArray=[]
         for(let i=0;i<dataLength;i++){
             let nodeData = map[i];
+            //console.log(nodeData)
             let tempNode = new Node(nodeData.id)
             tempNode.setCurrentPower(nodeData.currentPower)
             tempNode.setNodeType(nodeData.type)
@@ -168,13 +167,15 @@ class Dashboard extends Component {
         for(let i=0;i<allPrimarys.length;i++){
             start.setAdjacent(allPrimarys[i],0)
         }
+        //console.log(graph)
 
         let allVertices=graph.getVertices()
         for(let i=0;i<dataLength;i++){
             let nodeData = map[i]
             let nodeAdjacents = "["+nodeData.adjecent+"]"
             let nodesJson = JSON.parse(nodeAdjacents)
-            let vertex = allVertices[i+2];
+            //console.log(nodesJson)
+            let vertex = allVertices[i+1];
             for(let j=0;j<nodesJson.length;j++){
                 let nodeID=nodesJson[j][0]
                 let nodeWeight = Number(nodesJson[j][1])
@@ -182,10 +183,13 @@ class Dashboard extends Component {
                 let nodeConductivity = Number(nodesJson[j][3])
                 let node = graph.getVertex(nodeID)
                 if(node!==undefined && nodeWeight!==NaN){
-                    if(vertex.getNodeType()==="Start"){
-                        vertex.setAdjacent(node,0,0,0)
+                    if(nodeID!==-2){
+                        if(vertex.getNodeType()==="Start"){
+                            vertex.setAdjacent(node,0,0,0)
+                        }
+                        vertex.setAdjacent(node,nodeWeight,nodeLength,nodeConductivity)
                     }
-                    vertex.setAdjacent(node,nodeWeight,nodeLength,nodeConductivity)
+
                     //console.log(vertex.getNodeId()+","+node.getNodeId())
                 }
 
@@ -194,7 +198,7 @@ class Dashboard extends Component {
         this.setState({
             graph: graph
         })
-        console.log(graph,this.state.graph)
+        //console.log(graph,this.state.graph)
     }
 
     generateNodeDataArray(){
@@ -302,10 +306,24 @@ class Dashboard extends Component {
             this.checkingFaults()
             this.findFaultEdges()
             this.findFaultPaths()
+            console.log("++++++++++Graph+++++++++++++++")
+            console.log(this.state.graph)
+            console.log("++++++++++Tipped Switch+++++++++++++++")
+            console.log(this.state.faultSwitch)
+            console.log("++++++++++Fault Edge+++++++++++++++")
+            console.log(this.state.faultEdges)
+            console.log("++++++++++Raw Data Map+++++++++++++++")
+            console.log(this.state.electricMap)
+            console.log("++++++++++Recovery Paths+++++++++++++++")
+            console.log(this.state.paths)
         })
         .catch((e) => {
             console.log(e)
-            Swal.fire('Please select a branch')
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
         });
 
     }

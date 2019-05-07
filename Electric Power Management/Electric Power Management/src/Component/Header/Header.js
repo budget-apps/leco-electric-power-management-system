@@ -11,14 +11,14 @@ class  header extends  React.Component {
         super(props)
         //console.log(props)
         this.state={
-            changed :0
-
+            changed :0,
         }
 
     }
     notify=()=>{
         if(this.state.changed===1){
-        toast.info('Database Chaged', {
+        toast.info('Database Changed', {
+
             autoClose: 5000
             
           },this.setState({changed:0})

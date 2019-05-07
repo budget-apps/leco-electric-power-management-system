@@ -17,7 +17,7 @@ class path extends Component{
         let componentRow = []
         for(let i=0;i<this.state.nodeDataArray.length;i++){
             componentRow.push(
-                <div style={{marginBottom: "5px"}} className="row">
+                <div key={i} style={{marginBottom: "5px"}} className="row">
                     <div className="col-md-1">
                         <label className="btn btn-primary">{i+1}</label>
                     </div>
