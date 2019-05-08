@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import MiniGoJsSuccess from "../GoJs/MiniGoJsSuccess";
+import Swal from "sweetalert2";
 
 class path extends Component{
 
@@ -13,6 +14,31 @@ class path extends Component{
         }
     }
 
+    applyButtonClickEventHandler = () =>{
+        Swal.fire({
+            title: 'Are you sure to apply new changes?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, apply it!'
+        })
+    }
+
+    closeButtonClickEventHandler = () =>{
+        Swal.fire({
+            title: 'Do you want to reset the paths?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, reset it!'
+        })
+    }
+
+
     generateComponent(){
         let componentRow = []
         for(let i=0;i<this.state.nodeDataArray.length;i++){
@@ -22,10 +48,10 @@ class path extends Component{
                         <MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/>
                     </div>
                     <div className="col-md-1">
-                        <button style={{width:"100%"}} className="btn btn-primary">Apply</button>
+                        <button onClick={this.applyButtonClickEventHandler} style={{width:"100%"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
                     </div>
                     <div className="col-md-1">
-                        <button style={{width:"100%"}} className="btn btn-danger">Reset</button>
+                        <button onClick={this.closeButtonClickEventHandler} style={{width:"100%"}} className="btn btn-danger"><i className="fa fa-undo"></i></button>
                     </div>
                 </div>)
         }
@@ -63,13 +89,13 @@ class path extends Component{
                             <div className="row">
                                 <div className="col-md-9"> <h2 className="btn-default" style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
                                 <div className="col-md-3">
-                                    <input
+                                    <button
                                         className="btn btn-primary"
                                         type="submit"
                                         value="Find Recovery Paths"
                                         style={{padding: "9px",width: "90%"}}
                                         onClick={this.recoveryClickHandler}
-                                    />
+                                    ><i className="fa fa-search"></i> Search recovery</button>
                                 </div>
 
                             </div>
@@ -81,13 +107,13 @@ class path extends Component{
                         : <div className="row">
                             <div className="col-md-9"> <h2 className="btn-default" style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
                             <div className="col-md-3">
-                                <input
-                                className="btn btn-primary"
-                                type="submit"
-                                value="Find Recovery Paths"
-                                style={{padding: "9px",width: "90%"}}
-                                onClick={this.recoveryClickHandler}
-                            />
+                                <button
+                                    className="btn btn-primary"
+                                    type="submit"
+                                    value="Find Recovery Paths"
+                                    style={{padding: "9px",width: "90%"}}
+                                    onClick={this.recoveryClickHandler}
+                                ><i className="fa fa-search"></i> Search recovery</button>
                             </div>
 
                         </div>

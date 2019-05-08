@@ -27,22 +27,23 @@ class faultEdge extends Component{
                     (this.state.hasFaults)
                         ? <div>
                              <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/>
-                             <input
+                             <button className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button>
+                             <button
                                 className="btn btn-primary"
                                 type="submit"
                                 value="Find faults"
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.faultSwitchInputHandler}
-                            />
+                             ><i className="fa fa-search"></i> Search faults</button>
                         </div>
                         : <div>
-                            <input
+                            <button
                                 className="btn btn-primary"
                                 type="submit"
                                 value="Find faults"
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.faultSwitchInputHandler}
-                            />
+                            ><i className="fa fa-search"></i> Search faults</button>
                     </div>
                 }
             </div>

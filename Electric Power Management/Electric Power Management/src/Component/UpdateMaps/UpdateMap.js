@@ -201,16 +201,16 @@ export default class UpdateComponent extends Component {
                         </thead>
                         <tbody>
                             {this.state.electricMap.map(element =>
-                                <tr   >
+                                <tr   className={element.currentPower===0?"bg-warning":""}>
                                     <td name="id" value={element.id}>{element.id}</td>
                                     <td name="adjecent" value={element.adjecent} >{element.adjecent}</td>
                                     <td name="type" value={element.type} >{element.type}</td>
                                     <td name="switchType" value={element.switchType} >{element.switchType}</td>
-                                    <td name="faultCurrent" value={element.faultCurrent} >{element.faultCurrent.toString()}</td>
-                                    <td name="currentPower" value={element.currentPower} >{element.currentPower}</td>
+                                    <td name="faultCurrent" className={element.faultCurrent?"bg-danger":""} value={element.faultCurrent} >{element.faultCurrent.toString()}</td>
+                                    <td name="currentPower" className={element.currentPower===0?"bg-danger":""} value={element.currentPower} >{element.currentPower}</td>
                                     <td name="capacity" value={element.capacity} >{element.capacity}</td>
                                     <td name="branch" value={element.branch} >{element.branch}</td>
-                                    <td name="isTripped" value={element.isTripped} >{element.isTripped.toString()}</td>
+                                    <td name="isTripped" className={element.isTripped?"bg-danger":""} value={element.isTripped} >{element.isTripped.toString()}</td>
                                     <td ><button onClick={() => this.handleShow(element)} className="btn btn-default btn-sm"><i className="fa fa-arrow-up"></i></button><button onClick={() => this.deleteitem(element.id)} className="btn btn-danger btn-sm"><i className="fa fa-trash"></i></button></td>
                                 </tr>
                             )}

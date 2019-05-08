@@ -195,6 +195,7 @@ class Graph{
                 totalLineCurrent += paths[i][j].getLineCurrent(paths[i][j+1])
                 //console.log(paths[i].length-1,j,totalLineCurrent)
             }
+            console.log("total Line Current "+"of line"+(i+1)+totalLineCurrent)
             if(totalLineCurrent<limitedFactor){
                 testedPaths.push([paths[i],true,totalLineCurrent,limitedFactor])
             }else{
@@ -236,7 +237,8 @@ class Graph{
                 min = allFactors[i]
             }
         }
-        //console.log(min)
+        console.log("+++++++++++++limited factor++++++++++++++++++")
+        console.log(min)
         return min;
     }
 
