@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import MiniGoJs from "../GoJs/MiniGoJs";
+import Swal from "sweetalert2";
 
 class faultEdge extends Component{
 
@@ -20,6 +21,18 @@ class faultEdge extends Component{
 
     }
 
+    disconnectEventHandler = () =>{
+        Swal.fire({
+            title: 'Are you sure to disconnect the fault edge?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, disconnect it!'
+        })
+    }
+
     render() {
         return (
             <div className="bg-default" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
@@ -27,7 +40,7 @@ class faultEdge extends Component{
                     (this.state.hasFaults)
                         ? <div>
                              <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/>
-                             <button className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button>
+                             <button onClick={this.disconnectEventHandler} className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button>
                              <button
                                 className="btn btn-primary"
                                 type="submit"
