@@ -21,8 +21,8 @@ export default class UpdateComponent extends Component {
             adjecent: '',
             switchType: '',
             faultCurrent: '',
-            currentPower: '',
-            capacity: '',
+            currentPower: 0,
+            capacity: 0,
             index: '',
             branch: '',
             isTripped: ''
@@ -130,12 +130,13 @@ export default class UpdateComponent extends Component {
             adjecent: this.state.adjecent,
             switchType: this.state.switchType,
             faultCurrent: (this.state.faultCurrent == "true"),
-            currentPower: this.state.currentPower,
-            capacity: this.state.capacity,
+            currentPower: Number(this.state.currentPower),
+            capacity: Number(this.state.capacity),
             branch: this.state.branch,
             isTripped: (this.state.isTripped == "true")
         }
         this.state.electricMap.forEach(element => {
+            
             if (element.id === this.state.id) {
                 array.push(row)
             }
@@ -245,12 +246,12 @@ export default class UpdateComponent extends Component {
                                 </Form.Group>
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label>currentPower</Form.Label>
-                                    <Form.Control value={this.state.currentPower} name="currentPower" onChange={this.onchangetableField} type="text" />
+                                    <Form.Control value={this.state.currentPower} name="currentPower" onChange={this.onchangetableField} type="number" />
 
                                 </Form.Group>
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label>capacity</Form.Label>
-                                    <Form.Control value={this.state.capacity} name="capacity" onChange={this.onchangetableField} type="text" />
+                                    <Form.Control value={this.state.capacity} name="capacity" onChange={this.onchangetableField} type="number" />
 
                                 </Form.Group>
                                 <Form.Group controlId="formBasicEmail">
