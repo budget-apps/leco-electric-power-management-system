@@ -36,9 +36,9 @@ class Dashboard extends Component {
     /*Find recovery paths*/
     findFaultPaths(){
         let graph=this.state.graph;
-        let faultLoc = this.state.faultSwitch
-        let faultEdges = graph.findFaultEdge(faultLoc)
-        //console.log(faultEdges[1].getNodeId())
+        //let faultEdges = graph.findFaultEdge(faultLoc)
+        let faultEdges = this.state.faultEdges
+        //console.log(faultEdges)
 
         let paths = graph.findAltPaths(faultEdges)
 
@@ -86,7 +86,7 @@ class Dashboard extends Component {
         //console.log(this.state.graph)
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
-        let faultEdges = graph.findFaultEdge(faultLoc);
+        let faultEdges = graph.getAllPathsTo(faultLoc);
        // console.log(faultEdges)
         let faultNodeData = []
         let loc =["-100 0","50 0"]

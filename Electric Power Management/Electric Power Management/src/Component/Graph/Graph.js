@@ -1,3 +1,4 @@
+
 class Graph{
     constructor(start){
         this.start=start;
@@ -89,58 +90,60 @@ class Graph{
     }
 
     /*Find complete fault path from faulted switch*/
-    findFaultPath(faultSwitchNode){
-        let tempfaultPathNodes = [faultSwitchNode];
-        let faultPathNodes = [];
-        for(let i=0;i<tempfaultPathNodes.length;i++){
-            faultPathNodes.push(tempfaultPathNodes[i])
-        }
-
-        let found = false;
-        while(tempfaultPathNodes.length !== 0 && !found){
-            //console.log(faultPathNodes)
-            let parent = tempfaultPathNodes.pop();
-            let tempAdjacents = parent.getAdjacent();
-            //console.log(faultPathNodes)
-            for(let i=0;i<tempAdjacents.length;i++){
-                let tempNode = tempAdjacents[i][0];
-                tempfaultPathNodes.push(tempNode);
-                tempNode.setParent(parent.getNodeId());
-                //console.log(i+","+tempNode.getNodeId()+","+typeof tempNode.getFaultCurrent()+","+typeof Number(tempNode.getCurrentPower())+","+tempAdjacents.length+","+parent.getFaultCurrent());
-                if(tempNode.getFaultCurrent()){
-                    faultPathNodes.push(tempNode)
+    getAllPathsTo(startid){
+        let start = this.getVertex(startid)
+        let allPaths = []
+        let queue = []
+        let path =[]
+        path.push(start)
+        queue.push(path)
+        while(queue.length!==0){
+            path = queue.shift()
+            let last =path[path.length-1]
+            //console.log(last.getNodeId()+","+last.getCurrentPower()+","+last.getFaultCurrent())
+            if(last.getCurrentPower()===0 && !last.getFaultCurrent()){
+                allPaths.push(path)
+            }else{
+                let tempAdjacent = last.getAdjacent()
+                let validAdjacent = []
+                for(let i=0;i<tempAdjacent.length;i++){
+                    let temp = tempAdjacent[i][0]
+                    if(last.getLineCurrent(temp)!==0){
+                        //console.log(temp.getNodeId()+","+end2.getLineCurrent(temp))
+                        validAdjacent.push(temp)
+                    }
                 }
-                if(Number(tempNode.getCurrentPower()) === 0 && !tempNode.getFaultCurrent()){
-                    //console.log(i+","+tempNode.getNodeId()+","+tempNode.getFaultCurrent()+","+tempNode.getCurrentPower()+","+tempAdjacents.length);
-                    if(parent.getFaultCurrent()){
-                        faultPathNodes.push(tempNode);
-                        found = true;
-                        break;
+                //console.log(validAdjacent)
+                for(let i=0;i<validAdjacent.length;i++){
+                    if(this.isNotVisited(validAdjacent[i],path)){
+                        //console.log(path)
+                        //console.log(validAdjacent[i].getNodeId())
+                        //console.log(queue)
+                        let newPath = []
+                        for(let j=0;j<path.length;j++){
+                            newPath.push(path[j])
+                        }
+                        //console.log(newPath)
+                        //console.log(validAdjacent[i].getCurrentPower()+","+validAdjacent[i].getFaultCurrent())
+                        if(validAdjacent[i].getCurrentPower()===0){
+                           // console.log(validAdjacent[i].getCurrentPower()+","+validAdjacent[i].getFaultCurrent())
+                            newPath.push(validAdjacent[i])
+                            //tempAdjacent[i][0].setParent(last.getNodeId())
+                            queue.unshift(newPath)
+                        }
+
 
                     }
-
                 }
-                //console.log(tempNode.getAllParent())
+                //console.log("\n-------------------\n")
             }
-            if(found){
-                break
-            }
-
         }
-        return faultPathNodes;
-    }
-
-    /*get only the edge from complete fault path*/
-    findFaultEdge(faultLocation){
-        let faultSwitchNode = this.getVertex(faultLocation);
-        faultSwitchNode.setSwitchType("Closed")
-        let faultPathNodes = this.findFaultPath(faultSwitchNode);
-        //console.log(faultPathNodes);
-        let faultNode = faultPathNodes[faultPathNodes.length-1];
-        let parentNode = faultPathNodes[faultPathNodes.length-2];
-        //console.log(faultNode);
-
-        return [parentNode, faultNode];
+        let faultedge =[]
+        faultedge.unshift(allPaths[0][allPaths[0].length-1])
+        faultedge.unshift(allPaths[0][allPaths[0].length-2])
+        //console.log(allPaths)
+        //console.log(faultedge)
+        return faultedge
     }
 
     /*Find maximum voltage drop a path can have*/
@@ -355,11 +358,15 @@ class Graph{
                 valid.push(tempValid[i])
             }
         }
-        //console.log(valid)
 
+        console.log("++++++++++Valid recovery paths before checking Max current capacity++++++++++++++")
+        console.log(valid)
         valid = this.findMaxCurrentPath(valid)
+        console.log("++++++++++Valid recovery paths after checking Max current capacity++++++++++++++")
+        console.log(valid)
         valid = this.findMaxVoltageDropPath(valid)
-
+        console.log("++++++++++Valid recovery paths after checking Max voltage drop++++++++++++++")
+        console.log(valid)
         return valid
     }
 

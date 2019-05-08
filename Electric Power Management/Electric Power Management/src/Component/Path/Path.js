@@ -22,10 +22,10 @@ class path extends Component{
                         <MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/>
                     </div>
                     <div className="col-md-1">
-                        <button style={{width:"100%"}} style={{borderRadius: "40px"}} className="btn btn-primary">Apply</button>
+                        <button style={{width:"100%"}} className="btn btn-primary">Apply</button>
                     </div>
                     <div className="col-md-1">
-                        <button style={{width:"100%"}} style={{borderRadius: "40px"}} className="btn btn-danger">Reset</button>
+                        <button style={{width:"100%"}} className="btn btn-danger">Reset</button>
                     </div>
                 </div>)
         }
