@@ -188,27 +188,27 @@ export default class UpdateComponent extends Component {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Adjacent<br></br>[Connected Node, Current power, Line length, Conductivity]</th>
-                                <th>Type</th>
-                                <th>Switch Type</th>
-                                <th>Fault Current</th>
-                                <th>Current Power</th>
-                                <th>Capacity</th>
-                                <th>Branch</th>
-                                <th>Tipped Status</th>
-                                <th>Action</th>
+                                <th className="btn-light">ID</th>
+                                <th className="btn-light">Adjacent<br></br><small>(Connected Node, Current power, Line length, Conductivity)</small></th>
+                                <th className="btn-light">Type</th>
+                                <th className="btn-light">Switch Type</th>
+                                <th className="btn-light">Fault Current</th>
+                                <th className="btn-light">Current Power</th>
+                                <th className="btn-light">Capacity</th>
+                                <th className="btn-light">Branch</th>
+                                <th className="btn-light">Tipped Status</th>
+                                <th className="btn-light">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {this.state.electricMap.map(element =>
-                                <tr   className={element.currentPower===0?"bg-warning":""}>
+                                <tr   className={element.currentPower===0 && element.switchType!=="Open"?"bg-warning":""}>
                                     <td name="id" value={element.id}>{element.id}</td>
                                     <td name="adjecent" value={element.adjecent} >{element.adjecent}</td>
                                     <td name="type" value={element.type} >{element.type}</td>
                                     <td name="switchType" value={element.switchType} >{element.switchType}</td>
                                     <td name="faultCurrent" className={element.faultCurrent?"bg-danger":""} value={element.faultCurrent} >{element.faultCurrent.toString()}</td>
-                                    <td name="currentPower" className={element.currentPower===0?"bg-danger":""} value={element.currentPower} >{element.currentPower}</td>
+                                    <td name="currentPower" className={element.currentPower===0 && element.switchType!=="Open"?"bg-danger":""} value={element.currentPower} >{element.currentPower}</td>
                                     <td name="capacity" value={element.capacity} >{element.capacity}</td>
                                     <td name="branch" value={element.branch} >{element.branch}</td>
                                     <td name="isTripped" className={element.isTripped?"bg-danger":""} value={element.isTripped} >{element.isTripped.toString()}</td>

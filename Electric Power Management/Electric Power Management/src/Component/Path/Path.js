@@ -41,6 +41,8 @@ class path extends Component{
 
     generateComponent(){
         let componentRow = []
+        //console.log(this.state.nodeDataArray)
+        //console.log(this.state.linkDataArray)
         for(let i=0;i<this.state.nodeDataArray.length;i++){
             componentRow.push(
                 <div key={i} style={{marginBottom: "5px",display: "flex"}} className="row align-items-center">
@@ -48,16 +50,17 @@ class path extends Component{
                         <MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/>
                     </div>
                     <div className="col-md-1">
-                        <button onClick={this.applyButtonClickEventHandler} style={{width:"100%"}} className="btn btn-primary"><i className="fa fa-check"></i></button>
+                        <button onClick={this.applyButtonClickEventHandler} style={{width:"100%"}} className="btn btn-primary">Apply</button>
                     </div>
                     <div className="col-md-1">
-                        <button onClick={this.closeButtonClickEventHandler} style={{width:"100%"}} className="btn btn-danger"><i className="fa fa-undo"></i></button>
+                        <button onClick={this.closeButtonClickEventHandler} style={{width:"100%"}} className="btn btn-danger">Revert</button>
                     </div>
                 </div>)
         }
         this.setState({
             componentRow: componentRow
         })
+        //console.log(this.state.componentRow)
     }
 
     recoveryClickHandler = () => {

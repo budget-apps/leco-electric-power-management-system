@@ -139,8 +139,16 @@ class Graph{
             }
         }
         let faultedge =[]
-        faultedge.unshift(allPaths[0][allPaths[0].length-1])
-        faultedge.unshift(allPaths[0][allPaths[0].length-2])
+        // faultedge.unshift(allPaths[0][allPaths[0].length-1])
+        // faultedge.unshift(allPaths[0][allPaths[0].length-2])
+        for(let i=0;i<allPaths.length;i++){
+            let temp1 = allPaths[i][allPaths[i].length-1]
+            let temp2 = allPaths[i][allPaths[i].length-2]
+            let temp = []
+            temp.unshift(temp1)
+            temp.unshift(temp2)
+            faultedge.push(temp)
+        }
         //console.log(allPaths)
         //console.log(faultedge)
         return faultedge
@@ -286,80 +294,97 @@ class Graph{
     * Don't touch a single code
     * */
     findAltPaths(faultEdges){
-        let start = this.getVertex(0)
-        let end1 = faultEdges[0]
-        let end2 = faultEdges[1]
-        let en2adjacent = end2.getAdjacent()
-        let validAdjacent = []
-        for(let i=0;i<en2adjacent.length;i++){
-            let temp = en2adjacent[i][0]
-            if(end2.getLineCurrent(temp)!==0){
-                //console.log(temp.getNodeId()+","+end2.getLineCurrent(temp))
-                validAdjacent.push(temp)
-            }
-        }
-
-        for(let i=0;i<validAdjacent.length;i++){
-            let tempN = validAdjacent[i]
-            if(tempN.getSwitchType()==="Closed"){
-                return []
-            }
-        }
-
-        //console.log(validAdjacent[0])
-        let paths=[]
-        for(let i=0;i<validAdjacent.length;i++){
-            let temppaths = this.getAllPathsNew(start,validAdjacent[i])
-            paths.push(temppaths)
-        }
-
-
-        //console.log(paths[0])
-       // console.log(paths[1])
-        let tempValid = []
-        for(let l=0;l<paths.length;l++){
-            for(let i=0;i<paths[l].length;i++){
-                let path = paths[l][i]
-                let found = false;
-                for(let j=0;j<path.length;j++){
-                    let adjacent = path[j].getAdjacent()
-                    for(let k=0;k<adjacent.length;k++){
-                        let adjacentNode = adjacent[k][0]
-                        if((adjacentNode.getNodeId()===end1.getNodeId())||(adjacentNode.getNodeId()===end2.getNodeId())){
-                            found = true
-                            break;
-                        }
-                    }
-
-                }
-                if(!found){
-                    path.push(validAdjacent[l])
-                    tempValid.push(path)
-                }
-            }
-
-            //console.log(tempValid)
-            //console.log("++++++++++++++++++++++++++++")
-        }
-
         let valid = []
-        //console.log(tempValid.length)
-        for(let i=0;i<tempValid.length;i++){
-            let founds = false;
-            //console.log(tempValid[i].length)
-            for(let j=2;j<tempValid[i].length-1;j++){
-                let tmp1 = tempValid[i][j]
-                let tmp2 = tempValid[i][j+1]
-                //console.log(tmp1.getLineCurrent(tmp2)+","+tmp1.getNodeId()+","+tmp2.getNodeId())
-                if(tmp1.getLineCurrent(tmp2)===0){
-                    founds = true;
-                    break;
+        for(let k=0;k<faultEdges.length;k++){
+            let start = this.getVertex(0)
+            let end1 = faultEdges[k][0]
+            let end2 = faultEdges[k][1]
+            let en2adjacent = end2.getAdjacent()
+            let validAdjacent = []
+            for(let i=0;i<en2adjacent.length;i++){
+                let temp = en2adjacent[i][0]
+                if(end2.getLineCurrent(temp)!==0){
+                    //console.log(temp.getNodeId()+","+end2.getLineCurrent(temp))
+                    validAdjacent.push(temp)
                 }
             }
-            if(!founds){
-                valid.push(tempValid[i])
+
+            for(let i=0;i<validAdjacent.length;i++){
+                let tempN = validAdjacent[i]
+                if(tempN.getSwitchType()==="Closed"){
+                    return []
+                }
+            }
+
+            //console.log(validAdjacent[0])
+            let paths=[]
+            for(let i=0;i<validAdjacent.length;i++){
+                let temppaths = this.getAllPathsNew(start,validAdjacent[i])
+                paths.push(temppaths)
+            }
+
+
+            //console.log(paths[0])
+            // console.log(paths[1])
+            let tempValid = []
+            for(let l=0;l<paths.length;l++){
+                for(let i=0;i<paths[l].length;i++){
+                    let path = paths[l][i]
+                    let found = false;
+                    for(let j=0;j<path.length;j++){
+                        let adjacent = path[j].getAdjacent()
+                        for(let k=0;k<adjacent.length;k++){
+                            let adjacentNode = adjacent[k][0]
+                            if((adjacentNode.getNodeId()===end1.getNodeId())||(adjacentNode.getNodeId()===end2.getNodeId())){
+                                found = true
+                                break;
+                            }
+                        }
+
+                    }
+                    if(!found){
+                        path.push(validAdjacent[l])
+                        tempValid.push(path)
+                    }
+                }
+
+                //console.log(tempValid)
+                //console.log("++++++++++++++++++++++++++++")
+            }
+
+
+            //console.log(tempValid.length)
+            for(let i=0;i<tempValid.length;i++){
+                let founds = false;
+                let found2 = false;
+                //console.log(tempValid[i].length)
+                for(let j=2;j<tempValid[i].length-1;j++){
+                    let tmp1 = tempValid[i][j]
+                    let tmp2 = tempValid[i][j+1]
+                    //console.log(tmp1.getLineCurrent(tmp2)+","+tmp1.getNodeId()+","+tmp2.getNodeId())
+                    if(tmp1.getLineCurrent(tmp2)===0){
+                        founds = true;
+                        break;
+                    }
+                }
+                //checking that last node does not connected to a fault edge's node
+                let last = tempValid[i][tempValid[i].length-1]
+                let lastAdjacent = last.getAdjacent()
+                console.log(last.getNodeId())
+                console.log(lastAdjacent)
+                console.log(faultEdges[k][0])
+                for(let j=0;j<lastAdjacent.length;j++){
+                    if(faultEdges[k][0]===lastAdjacent[j][0]){
+                        console.log("Mathed")
+                        found2=true;
+                    }
+                }
+                if(!founds && !found2){
+                    valid.push(tempValid[i])
+                }
             }
         }
+
 
         console.log("++++++++++Valid recovery paths before checking Max current capacity++++++++++++++")
         console.log(valid)

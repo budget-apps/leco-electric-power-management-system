@@ -30,7 +30,8 @@ class Dashboard extends Component {
         paths: [],
         isSelect: false,
         faultSwitch: "",
-        show:false
+        show:false,
+        hasFaults: false,
     }
 
     /*Find recovery paths*/
@@ -87,31 +88,43 @@ class Dashboard extends Component {
         let graph=this.state.graph;
         let faultLoc = this.state.faultSwitch
         let faultEdges = graph.getAllPathsTo(faultLoc);
-       // console.log(faultEdges)
-        let faultNodeData = []
-        let loc =["-100 0","50 0"]
-        for(let i=0;i<2;i++){
-            let tempNode = faultEdges[i]
-            let nodeID= tempNode.getNodeId()
-            let nodeType= tempNode.getNodeType()
-            let switchType = tempNode.getSwitchType()
-            let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType
-            let faultNodeDataRow = {key: nodeID,text: text,"loc": loc[i]}
-            faultNodeData.push(faultNodeDataRow)
+
+        let allPathNodeData = []
+        let allPathLinkData = []
+        for(let i=0;i<faultEdges.length;i++){
+            let pathNodeSet = []
+            let pathLinkSet = []
+            let locX = -100
+            let locY= 0
+            for(let j=0;j<faultEdges[i].length;j++){
+                let tempNode = faultEdges[i][j]
+                let nodeID= tempNode.getNodeId()
+                let nodeType= tempNode.getNodeType()
+                let switchType = tempNode.getSwitchType()
+                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType
+                let pathNodeDataRow = {key: nodeID,text: text,"loc": locX+" "+locY}
+                locX+=200;
+                pathNodeSet.push(pathNodeDataRow)
+                let pathNodeLinkRow= {}
+                if(j!==faultEdges[i].length-1){
+                    let lineCapacity = faultEdges[i][j].getLineCurrent(faultEdges[i][j+1])
+                    let lineLength = faultEdges[i][j].getLineLength(faultEdges[i][j+1])
+                    let lineConduct = faultEdges[i][j].getLineConductivity(faultEdges[i][j+1])
+                    let text2 = "Current power: "+lineCapacity+"\nLength: "+lineLength+"\nCapacity: "+lineConduct
+                    pathNodeLinkRow = {"from": faultEdges[i][j].getNodeId(),"to": faultEdges[i][j+1].getNodeId(),"text": text2}
+                }
+                pathLinkSet.push(pathNodeLinkRow)
+            }
+            allPathNodeData.push(pathNodeSet)
+            allPathLinkData.push(pathLinkSet)
         }
-        let faultNodeLink = [];
-        let lineCapacity = faultEdges[0].getLineCurrent(faultEdges[1])
-        let lineLength = faultEdges[0].getLineLength(faultEdges[1])
-        let lineConduct = faultEdges[0].getLineConductivity(faultEdges[1])
-        let text2 = "Current power: "+lineCapacity+"\nLength: "+lineLength+"\nCapacity: "+lineConduct
-        let faultNodeLinkRow = {"from": faultEdges[0].getNodeId(),"to": faultEdges[1].getNodeId(),"text": text2}
-        faultNodeLink.push(faultNodeLinkRow)
         this.setState({
             faultEdges: faultEdges,
-            faultNodeArray: faultNodeData,
-            faultLinkArray: faultNodeLink,
+            faultNodeArray: allPathNodeData,
+            faultLinkArray: allPathLinkData,
         })
-        //console.log(this.state.graph)
+        //console.log(this.state.faultNodeArray)
+        //console.log(this.state.faultLinkArray)
     }
 
     /*Generate graph from db data*/
@@ -286,18 +299,23 @@ class Dashboard extends Component {
             this.generateLinkDataArray()
             this.generateNodeDataArray()
             this.checkingFaults()
-            this.findFaultEdges()
-            this.findFaultPaths()
-            console.log("++++++++++Graph+++++++++++++++")
-            console.log(this.state.graph)
-            console.log("++++++++++Tipped Switch+++++++++++++++")
-            console.log(this.state.faultSwitch)
-            console.log("++++++++++Fault Edge+++++++++++++++")
-            console.log(this.state.faultEdges)
-            console.log("++++++++++Raw Data Map+++++++++++++++")
-            console.log(this.state.electricMap)
-            console.log("++++++++++Recovery Paths+++++++++++++++")
-            console.log(this.state.paths)
+            //console.log(this.state.hasFaults)
+            if(this.state.hasFaults){
+                //console.log(this.state.hasFaults)
+                this.findFaultEdges()
+                this.findFaultPaths()
+                console.log("++++++++++Graph+++++++++++++++")
+                console.log(this.state.graph)
+                console.log("++++++++++Tipped Switch+++++++++++++++")
+                console.log(this.state.faultSwitch)
+                console.log("++++++++++Fault Edge+++++++++++++++")
+                console.log(this.state.faultEdges)
+                console.log("++++++++++Raw Data Map+++++++++++++++")
+                console.log(this.state.electricMap)
+                console.log("++++++++++Recovery Paths+++++++++++++++")
+                console.log(this.state.paths)
+            }
+
         })
         .catch((e) => {
             console.log(e)
@@ -313,15 +331,27 @@ class Dashboard extends Component {
     /*Find fault location*/
     checkingFaults(){
         let vertices = this.state.graph.getVertices()
+        let found = false;
         for(let i=0;i<vertices.length;i++){
             let tempNode = vertices[i]
+            //console.log(tempNode.getIsTripped())
             if(tempNode.getIsTripped()){
+                found = true;
                 this.setState(
                     {
-                        faultSwitch: tempNode.getNodeId()
+                        faultSwitch: tempNode.getNodeId(),
+                        hasFaults: true,
                     }
                 )
+               // console.log("has faults")
             }
+        }
+        if(!found){
+            this.setState(
+                {
+                    hasFaults: false,
+                }
+            )
         }
     }
     showmap=()=>{
@@ -363,7 +393,7 @@ class Dashboard extends Component {
                                 <Map isTipped={this.state.faultSwitch} branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
                             </div>
                             <div className="col-md-3">
-                                <FaultEdge nodeDataArray={this.state.faultNodeArray} linkDataArray={this.state.faultLinkArray}/>
+                                <FaultEdge nodeDataArrayFault={this.state.faultNodeArray} linkDataArrayFault={this.state.faultLinkArray}/>
 
                             </div>
                             </div>

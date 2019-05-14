@@ -6,10 +6,13 @@ class faultEdge extends Component{
 
     state = {
         hasFaults: false,
+        component: []
     }
 
     faultSwitchInputHandler = () => {
         try{
+            //console.log(this.props.nodeDataArrayFault)
+            this.generateComponents()
             this.setState({
                 hasFaults: true
             })
@@ -21,7 +24,7 @@ class faultEdge extends Component{
 
     }
 
-    disconnectEventHandler = () =>{
+    disconnectEventHandler = () => {
         Swal.fire({
             title: 'Are you sure to disconnect the fault edge?',
             text: "You won't be able to revert this!",
@@ -33,21 +36,36 @@ class faultEdge extends Component{
         })
     }
 
+    generateComponents(){
+        let component = []
+        //console.log(this.props.linkDataArrayFault[1])
+        for(let i=0;i<this.props.nodeDataArrayFault.length;i++){
+            //console.log(this.props.nodeDataArrayFault[i])
+            component.push(
+                <div key={i+100}><MiniGoJs nodes={this.props.nodeDataArrayFault[i]} links={this.props.linkDataArrayFault[i]}/><button onClick={this.disconnectEventHandler} style={{width: "90%"}} className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button></div>
+            )
+        }
+        this.setState({
+            component: component
+        })
+    }
+
+
     render() {
         return (
             <div className="bg-default" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
                 {
-                    (this.state.hasFaults)
+                    (this.state.hasFaults && this.props.nodeDataArrayFault !==undefined)
                         ? <div>
-                             <MiniGoJs nodes={this.props.nodeDataArray} links={this.props.linkDataArray}/>
-                             <button onClick={this.disconnectEventHandler} className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button>
-                             <button
+                            {this.state.component}
+
+                            <button
                                 className="btn btn-primary"
                                 type="submit"
                                 value="Find faults"
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.faultSwitchInputHandler}
-                             ><i className="fa fa-search"></i> Search faults</button>
+                            ><i className="fa fa-search"></i> Search faults</button>
                         </div>
                         : <div>
                             <button
@@ -57,7 +75,7 @@ class faultEdge extends Component{
                                 style={{padding: "9px",width: "90%"}}
                                 onClick={this.faultSwitchInputHandler}
                             ><i className="fa fa-search"></i> Search faults</button>
-                    </div>
+                        </div>
                 }
             </div>
         )
