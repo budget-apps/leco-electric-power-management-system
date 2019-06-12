@@ -16,7 +16,8 @@ class   sideMenu extends React.Component {
             <div className="sidebar-heading">LECO</div>
             <div className="list-group list-group-flush">
                 <a onClick={this.props.hidemap} className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"marginBottom": 0}}>Dashboard</label></a>
-                <a onClick={this.props.changevalue} className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"marginBottom": 0}}>Maps</label></a>
+                <a onClick={this.props.changevalue} className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"marginBottom": 0}}>Switches</label></a>
+                <a onClick={this.props.changevalue} className="list-group-item list-group-item-action bg-light"><label className="float-left" style={{"padding": 0,"marginBottom": 0}}>Lines</label></a>
             </div>
         </div>
     )

@@ -19,7 +19,7 @@ class Dashboard extends Component {
     state = {
         electricMap:[],
         graph: new Graph(),
-        branch: "No ",
+        branch: "No Branch",
         nodeDataArray: [],
         linkDataArray: [],
         faultNodeArray: [],
@@ -209,20 +209,70 @@ class Dashboard extends Component {
             let faultCurrent = tempNode.getFaultCurrent()
             let currentPower = tempNode.getCurrentPower()
             let capacity = tempNode.getCapacity()
-            if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && isNormal){
-                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
-                let nodeDataRow={ key: nodeID, text: text,"loc": placex+" "+placey}
-                placex+=100;
-                placey=100;
-                isNormal = false;
-                nodeData.push(nodeDataRow)
-            }else  if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary") && !isNormal){
-                let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
-                let nodeDataRow={ key: nodeID, text: text,"loc": (placex-100)+" "+placey}
-                placex+=100;
-                placey=-100;
-                isNormal = true;
-                nodeData.push(nodeDataRow)
+            if(!(nodeType==="Start" || nodeType==="End" || nodeType==="Primary")){
+                if(tempNode.getNodeId()===2){
+                    let locXY="-100 -240"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===3){
+                    let locXY="-100 -120"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }
+                else if(tempNode.getNodeId()===7){
+                    let locXY="-100 0"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===8){
+                    let locXY="-100 120"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===9){
+                    let locXY= "-100 240"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===4){
+                    let locXY="200 -300"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===5){
+                    let locXY="900 -240"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===10){
+                    let locXY="200 0"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===14){
+                    let locXY="200 240"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===13){
+                    let locXY="900 240"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===11){
+                    let locXY="600 -120"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }else if(tempNode.getNodeId()===12){
+                    let locXY="600 60"
+                    let text = "ID: "+nodeID+"\nType: "+nodeType+"\nStatus: "+switchType+"\nisTipped: "+isTripped+"\nFault Current: "+faultCurrent+"\nCurrent Power: "+currentPower
+                    let nodeDataRow={ key: nodeID, text: text,"loc": locXY}
+                    nodeData.push(nodeDataRow)
+                }
+
             }else if(nodeType==="Primary" && isPrimary){
                 //console.log("Primary")
                 let text = "ID: "+nodeID+"\nType: "+nodeType+"\nTotal Feeder Capcity: "+capacity
@@ -299,6 +349,8 @@ class Dashboard extends Component {
             this.generateLinkDataArray()
             this.generateNodeDataArray()
             this.checkingFaults()
+            // console.log(this.state.graph.getVertex(0))
+            // this.state.graph.BFS(this.state.graph.getVertex(0))
             //console.log(this.state.hasFaults)
             if(this.state.hasFaults){
                 //console.log(this.state.hasFaults)
@@ -389,19 +441,21 @@ class Dashboard extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-md-9">
+                            <div className="col-md-12">
                                 <Map isTipped={this.state.faultSwitch} branch={this.state.branch} dataNodes={this.state.nodeDataArray} dataLinks={this.state.linkDataArray}/>
-                            </div>
-                            <div className="col-md-3">
-                                <FaultEdge nodeDataArrayFault={this.state.faultNodeArray} linkDataArrayFault={this.state.faultLinkArray}/>
+                                    <div className="row">
+                                    <div className="col-md-9">
+                                        <Path nodeDataArray={this.state.pathNodeArray} linkDataArray={this.state.pathLinkArray}/>
+                                    </div>
+                                    <div className="col-md-3">
+                                        <FaultEdge nodeDataArrayFault={this.state.faultNodeArray} linkDataArrayFault={this.state.faultLinkArray}/>
+                                    </div>
+                                    </div>
 
                             </div>
+
                             </div>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <Path nodeDataArray={this.state.pathNodeArray} linkDataArray={this.state.pathLinkArray}/>
-                            </div>
-                        </div>
+
                             </div>
                          :
                          <div>

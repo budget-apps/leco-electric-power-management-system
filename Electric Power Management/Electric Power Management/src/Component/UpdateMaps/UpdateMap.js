@@ -189,7 +189,7 @@ export default class UpdateComponent extends Component {
                         <thead>
                             <tr>
                                 <th className="btn-light">ID</th>
-                                <th className="btn-light">Adjacent<br></br><small>(Connected Node, Current power, Line length, Conductivity)</small></th>
+                                {/*<th className="btn-light">Adjacent<br></br><small>(Connected Node, Current power, Line length, Conductivity)</small></th>*/}
                                 <th className="btn-light">Type</th>
                                 <th className="btn-light">Switch Type</th>
                                 <th className="btn-light">Fault Current</th>
@@ -204,7 +204,7 @@ export default class UpdateComponent extends Component {
                             {this.state.electricMap.map(element =>
                                 <tr   className={element.currentPower===0 && element.switchType!=="Open"?"bg-warning":""}>
                                     <td name="id" value={element.id}>{element.id}</td>
-                                    <td name="adjecent" value={element.adjecent} >{element.adjecent}</td>
+                                    {/*<td name="adjecent" value={element.adjecent} >{element.adjecent}</td>*/}
                                     <td name="type" value={element.type} >{element.type}</td>
                                     <td name="switchType" value={element.switchType} >{element.switchType}</td>
                                     <td name="faultCurrent" className={element.faultCurrent?"bg-danger":""} value={element.faultCurrent} >{element.faultCurrent.toString()}</td>
@@ -229,11 +229,11 @@ export default class UpdateComponent extends Component {
                                     <Form.Control readOnly name="id" onChange={this.onchangetableField} value={this.state.id} type="text" />
 
                                 </Form.Group>
-                                <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>adjecent <br></br>[Connected Node, Current power, Line length, Conductivity]</Form.Label>
-                                    <Form.Control value={this.state.adjecent} name="adjecent" onChange={this.onchangetableField} type="text" />
+                                {/*<Form.Group controlId="formBasicEmail">*/}
+                                    {/*<Form.Label>adjecent <br></br>[Connected Node, Current power, Line length, Conductivity]</Form.Label>*/}
+                                    {/*<Form.Control value={this.state.adjecent} name="adjecent" onChange={this.onchangetableField} type="text" />*/}
 
-                                </Form.Group>
+                                {/*</Form.Group>*/}
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label>switchType</Form.Label>
                                     <Form.Control value={this.state.switchType} name="switchType" onChange={this.onchangetableField} type="text" />

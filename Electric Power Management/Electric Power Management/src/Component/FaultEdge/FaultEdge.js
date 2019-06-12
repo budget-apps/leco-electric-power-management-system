@@ -42,7 +42,10 @@ class faultEdge extends Component{
         for(let i=0;i<this.props.nodeDataArrayFault.length;i++){
             //console.log(this.props.nodeDataArrayFault[i])
             component.push(
-                <div key={i+100}><MiniGoJs nodes={this.props.nodeDataArrayFault[i]} links={this.props.linkDataArrayFault[i]}/><button onClick={this.disconnectEventHandler} style={{width: "90%"}} className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button></div>
+                <div key={i+100}>
+                    <MiniGoJs nodes={this.props.nodeDataArrayFault[i]} links={this.props.linkDataArrayFault[i]}/>
+                    {/*<button onClick={this.disconnectEventHandler} style={{width: "90%"}} className="btn btn-danger btn-sm"><i className="fa fa-ban"></i> Disconnect</button>*/}
+                </div>
             )
         }
         this.setState({
@@ -53,7 +56,7 @@ class faultEdge extends Component{
 
     render() {
         return (
-            <div className="bg-default" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
+            <div style={{margin: "0 0 5px 0", borderRadius: "20px",border:"solid grey 2px"}}>
                 {
                     (this.state.hasFaults && this.props.nodeDataArrayFault !==undefined)
                         ? <div>

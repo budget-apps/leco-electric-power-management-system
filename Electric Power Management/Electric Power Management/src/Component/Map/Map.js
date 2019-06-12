@@ -4,8 +4,8 @@ import GoJs from "../GoJs/GoJs";
 class map extends Component{
     render(){
         return (
-            <div className="" style={{width: "100%",padding: 0,borderRadius: "10px",marginBottom: "5px"}}>
-                <h2 className="btn-default" style={{padding: "10px",borderRadius: "10px"}}>{this.props.branch} Branch</h2>
+            <div className="" style={{width: "100%",padding: 0,borderRadius: "20px",marginBottom: "5px",border:"solid grey 2px"}}>
+                <h2 style={{padding: "10px",borderRadius: "10px"}}>{this.props.branch}</h2>
                 {this.props.isTipped!==""?
                     <div className="alert alert-danger alert-dismissible">
                         <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>

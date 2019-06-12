@@ -46,15 +46,15 @@ class path extends Component{
         for(let i=0;i<this.state.nodeDataArray.length;i++){
             componentRow.push(
                 <div key={i} style={{marginBottom: "5px",display: "flex"}} className="row align-items-center">
-                    <div className="col-md-10">
+                    <div className="col-md-12">
                         <MiniGoJsSuccess nodes={this.state.nodeDataArray[i]} links={this.state.linkDataArray[i]}/>
                     </div>
-                    <div className="col-md-1">
-                        <button onClick={this.applyButtonClickEventHandler} style={{width:"100%"}} className="btn btn-primary">Apply</button>
-                    </div>
-                    <div className="col-md-1">
-                        <button onClick={this.closeButtonClickEventHandler} style={{width:"100%"}} className="btn btn-danger">Revert</button>
-                    </div>
+                    {/*<div className="col-md-1">*/}
+                        {/*<button onClick={this.applyButtonClickEventHandler} style={{width:"100%"}} className="btn btn-primary">Apply</button>*/}
+                    {/*</div>*/}
+                    {/*<div className="col-md-1">*/}
+                        {/*<button onClick={this.closeButtonClickEventHandler} style={{width:"100%"}} className="btn btn-danger">Revert</button>*/}
+                    {/*</div>*/}
                 </div>)
         }
         this.setState({
@@ -85,12 +85,12 @@ class path extends Component{
 
     render() {
         return (
-            <div className="bg-default" style={{margin: "0 0 5px 0", borderRadius: "10px"}}>
+            <div style={{margin: "0 0 5px 0", borderRadius: "20px",border:"solid grey 2px"}}>
                 {
                     (this.state.showPath)
                         ? <div>
-                            <div className="row">
-                                <div className="col-md-9"> <h2 className="btn-default" style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
+                            <div className="row" >
+                                <div className="col-md-9"> <h2 style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
                                 <div className="col-md-3">
                                     <button
                                         className="btn btn-primary"
@@ -107,8 +107,8 @@ class path extends Component{
                                 {this.state.componentRow}
                             </div>
                         </div>
-                        : <div className="row">
-                            <div className="col-md-9"> <h2 className="btn-default" style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
+                        : <div className="row" >
+                            <div className="col-md-9"> <h2 style={{padding: "9px",borderRadius: "10px",marginBottom: "0"}}>Reconfiguration</h2></div>
                             <div className="col-md-3">
                                 <button
                                     className="btn btn-primary"

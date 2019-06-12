@@ -250,6 +250,48 @@ class Graph{
         return min;
     }
 
+    BFS(start){
+        let V = this.getVertices().length
+        let visited = []
+        for(let i=0;i<V;i++){
+            visited[i]=false
+        }
+        let queue = []
+        let startLoc = this.getVertexLocation(start)
+        visited[startLoc]=true
+        let final = []
+        final.push(start)
+        final.push(-5)
+        queue.push(start)
+        while(queue.length!==0){
+            start = queue.shift()
+            console.log(start.getNodeId())
+            let tempAdjacents = start.getAdjacent()
+            for(let j=0;j<tempAdjacents.length;j++){
+                let tempNode = tempAdjacents[j][0]
+                let tempLoc = this.getVertexLocation(tempNode)
+                if(visited[tempLoc]!==true){
+                    visited[tempLoc]=true
+                    queue.push(tempNode)
+                    final.push(tempNode)
+                }
+            }
+            final.push(-5)
+        }
+        for(let i=0;i<final.length;i++){
+            console.log(final[i])
+        }
+    }
+
+    getVertexLocation(vertex){
+        for(let i=0;i<this.getVertices().length;i++){
+            if(vertex.getNodeId()==this.getVertices()[i].getNodeId()){
+                return i
+            }
+        }
+        return 0;
+    }
+
     getAllPathsNew(start, end){
         let allPaths = []
         let queue = []
@@ -370,12 +412,12 @@ class Graph{
                 //checking that last node does not connected to a fault edge's node
                 let last = tempValid[i][tempValid[i].length-1]
                 let lastAdjacent = last.getAdjacent()
-                console.log(last.getNodeId())
-                console.log(lastAdjacent)
-                console.log(faultEdges[k][0])
+                //console.log(last.getNodeId())
+                //console.log(lastAdjacent)
+               // console.log(faultEdges[k][0])
                 for(let j=0;j<lastAdjacent.length;j++){
                     if(faultEdges[k][0]===lastAdjacent[j][0]){
-                        console.log("Mathed")
+                        //console.log("Mathed")
                         found2=true;
                     }
                 }
