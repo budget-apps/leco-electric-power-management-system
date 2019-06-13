@@ -420,7 +420,7 @@ class Dashboard extends Component {
                 <div id="page-content-wrapper" style={{padding: "0"}}>
                     <Header/>
                     <div className="container-fluid">
-                    {!this.state.show ?
+             
                     <div>
                     <div>
                         <div className="row btn-default">
@@ -457,11 +457,7 @@ class Dashboard extends Component {
                             </div>
 
                             </div>
-                         :
-                         <div>
-                             <UpdateComponent></UpdateComponent>
-                        </div>
-                        }
+                        
                     </div>
 
                 </div>
