@@ -10,9 +10,9 @@ import {
 import * as routes from './constants/routes';
 import SignIn from './Login/SignIn';
 import Dashboard from './Component/Dashboard/Dashboard'
-
+import UpdateMap from './Component/UpdateMaps/UpdateMap'
 import { firebase, auth } from './firebase';
-
+import Lines from './Component/Lines/lines'
 const UnauthenticatedHomeContent = () => {
   return (
     <React.Fragment>
@@ -146,6 +146,10 @@ class App extends Component {
             <Navigation />
             <Switch>
               <Route exact path={routes.HOME_PATH} component={Home} />
+              <Route exact path={'/switches'} component={UpdateMap} />
+              <Route exact path={'/dashboard'} component={Dashboard} />
+              <Route exact path={'/lines'} component={Lines} />
+
               <Route exact path={routes.SIGN_IN_PATH} component={SignIn} />
               <Route exact path={routes.SIGN_OUT_PATH} component={SignOut} />
             </Switch>

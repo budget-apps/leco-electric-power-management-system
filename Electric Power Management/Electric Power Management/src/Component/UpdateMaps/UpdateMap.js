@@ -5,12 +5,15 @@ import Swal from "sweetalert2";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-
+import Header from '../Header/Header'
+import SideMenu from '../SideMenu/SideMenu'
 var firebase = require("firebase");
 
 
 
-export default class UpdateComponent extends Component {
+export default class UpdateComponent extends Component 
+{
+
     constructor(props) {
         super(props)
         this.state = {
@@ -165,7 +168,11 @@ export default class UpdateComponent extends Component {
        // console.log(this.state)
 
         return (
-            <div>
+            <div className="d-flex" id="wrapper">
+                <SideMenu  changevalue={this.showmap} hidemap={this.hidemap}/>
+                <div id="page-content-wrapper" style={{padding: "0"}}>
+                    <Header/>
+            <div className="container-fluid">
                 <div>
                     <div className="row btn-info">
                         <h2 className="" style={{ padding: "5px" }}>Maps</h2>
@@ -280,6 +287,8 @@ export default class UpdateComponent extends Component {
                         </Modal.Footer>
                     </Modal>
                 </div>
+            </div>
+            </div>
             </div>
         );
     }
