@@ -423,8 +423,8 @@ class Dashboard extends Component {
              
                     <div>
                     <div>
-                        <div className="row btn-default">
-                            <h2 className="" style={{padding: "5px"}}>Dashboard</h2>
+                        <div className="row bg-default">
+                            <h2 className="btn btn warning" style={{padding: "5px"}}>Electric Grid</h2>
                         </div>
                         </div>
                         <div className="row">

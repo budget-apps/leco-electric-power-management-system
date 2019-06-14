@@ -175,7 +175,7 @@ export default class UpdateComponent extends Component
             <div className="container-fluid">
                 <div>
                     <div className="row btn-info">
-                        <h2 className="" style={{ padding: "5px" }}>Maps</h2>
+                        <h2 className="btn warning" style={{ padding: "5px" }}>Switches Table</h2>
                     </div>
                 </div>
                 <div className="row">
@@ -191,20 +191,20 @@ export default class UpdateComponent extends Component
                     </div>
                 </div>
 
-                <div className="container-fluid row">
+                <div className="container-fluid row" style={{width: "100%",padding: "20px",borderRadius: "20px",marginBottom: "5px",marginLeft: "2px",border:"solid grey 2px"}}>
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th className="btn-light">ID</th>
+                                <th className="btn-light">Switch ID</th>
                                 {/*<th className="btn-light">Adjacent<br></br><small>(Connected Node, Current power, Line length, Conductivity)</small></th>*/}
-                                <th className="btn-light">Type</th>
+                                <th className="btn-light">Basic Type</th>
                                 <th className="btn-light">Switch Type</th>
-                                <th className="btn-light">Fault Current</th>
-                                <th className="btn-light">Current Power</th>
-                                <th className="btn-light">Capacity</th>
+                                <th className="btn-light">Fault Current Status</th>
+                                <th className="btn-light">Switch Current Power</th>
+                                <th className="btn-light">Switch Total Capacity</th>
                                 <th className="btn-light">Branch</th>
                                 <th className="btn-light">Tipped Status</th>
-                                <th className="btn-light">Action</th>
+                                <th style={{width: "10%"}} className="btn-light">Action</th>
                             </tr>
                         </thead>
                         <tbody>
