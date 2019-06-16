@@ -357,9 +357,9 @@ export default class Lines extends Component {
                                     <tr>
                                         <th className="btn-light">Switch ID</th>
                                         <th className="btn-light">Connected Switch ID</th>
-                                        <th className="btn-light">Current power</th>
+                                        <th className="btn-light">Line Current power</th>
                                         <th className="btn-light">Line length</th>
-                                        <th className="btn-light">Conductivity</th>
+                                        <th className="btn-light">Line Conductivity</th>
                                         <th style={{ width: "10%" }} className="btn-light">Action</th>
                                     </tr>
                                 </thead>
@@ -410,7 +410,7 @@ export default class Lines extends Component {
                                                     {this.state.currentSwitch.adjecent.length > 0 ?
                                                         <div>
                                                             {this.state.currentSwitch.adjecent[0].map((ele, index) =>
-                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" />
+                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" style={{marginBottom: "2px"}} />
                                                             )}
 
                                                         </div>
@@ -425,7 +425,7 @@ export default class Lines extends Component {
                                                     {this.state.currentSwitch.adjecent.length > 0 ?
                                                         <div>
                                                             {this.state.currentSwitch.adjecent[1].map((ele, index) =>
-                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" />
+                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" style={{marginBottom: "2px"}}/>
                                                             )}
 
                                                         </div>
@@ -443,7 +443,7 @@ export default class Lines extends Component {
                                                         <div>
                                                             <br />
                                                             {this.state.currentSwitch.adjecent[2].map((ele, index) =>
-                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" />
+                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" style={{marginBottom: "2px"}}/>
                                                             )}
 
                                                         </div>
@@ -461,7 +461,7 @@ export default class Lines extends Component {
                                                         <div>
                                                             <br />
                                                             {this.state.currentSwitch.adjecent[3].map((ele, index) =>
-                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" />
+                                                                <Form.Control value={ele} name={index} onChange={this.onchangeFormfield} type="text" style={{marginBottom: "2px"}}/>
 
 
                                                             )
