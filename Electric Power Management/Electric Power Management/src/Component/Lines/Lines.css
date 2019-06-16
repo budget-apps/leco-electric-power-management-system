@@ -42,3 +42,6 @@ body {
         margin-left: -15rem;
     }
 }
+
+.custom-dialog {width:1000px; top:10%;  margin: auto;
+}
